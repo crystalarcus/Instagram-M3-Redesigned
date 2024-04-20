@@ -1,0 +1,45 @@
+name: redesigned
+description: "Instagram Redesigned with Material You."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+
+dependencies:
+  animations: ^2.0.11
+  collection: ^1.18.0
+  flutter:
+    sdk: flutter
+  flutter_bounceable: ^1.1.0
+  flutter_carousel_widget: ^2.2.0
+  flutter_masonry_view: ^0.0.2
+  flutter_staggered_grid_view: ^0.7.0
+  go_router: ^13.2.1
+  google_fonts: ^6.2.1
+  http: ^1.2.1
+  m3_carousel: ^1.0.2
+  material_color_utilities: ^0.8.0
+  material_design_icons_flutter: ^7.0.7296
+  material_symbols_icons: ^4.2719.3
+  morpheus: ^1.2.3
+  msix: ^3.16.7
+  path_provider: ^2.1.3
+  permission_handler: ^11.3.1
+  scrollable_positioned_list: ^0.3.8
+  side_sheet: ^1.0.4
+  transparent_image: ^2.0.1
+  video_player: ^2.8.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  assets:
+    - images/
+    - images/post/
+    - stories/
+    - reels/
+  uses-material-design: true
