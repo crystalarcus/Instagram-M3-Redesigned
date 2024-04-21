@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
@@ -189,9 +188,10 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             Post p = posts[index];
-                            return p.type == PostType.carosel
-                                ? CarouselPost(post: p as CarouselPostObject)
-                                : ImagePost(postObject: p as ImagePostObject);
+                            return MobilePost(
+                                post: p.type == PostType.image
+                                    ? p as ImagePostObject
+                                    : p as CarouselPostObject);
                           }
                           // posts
                           //     .map((e) => e.type == PostType.carosel
@@ -277,87 +277,90 @@ class _DesktopHomeScreenState extends State<DesktopHomeScreen> {
                                         color: MainApp.of(context).getSurface(),
                                         borderRadius:
                                             BorderRadius.circular(14)),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            const Text("Explore",
-                                                style: TextStyle(
-                                                    fontSize: 22,
-                                                    fontWeight:
-                                                        FontWeight.w600)),
-                                            constarintss.maxWidth < 1000
-                                                ? SizedBox(
-                                                    height: 40,
-                                                    child: TextButton.icon(
-                                                        onPressed: () =>
-                                                            SideSheet.right(
-                                                                width: 400,
-                                                                sheetBorderRadius:
-                                                                    14,
-                                                                context:
-                                                                    context,
-                                                                body: storiesSheet(
-                                                                    context)),
-                                                        icon: const Icon(
-                                                            Icons.chevron_left),
-                                                        label: const Text(
-                                                            "Stories")))
-                                                : const SizedBox()
-                                          ],
-                                        ),
-                                        const SizedBox(height: 14),
-                                        Wrap(
-                                            spacing: 8,
-                                            children: Filters.values
-                                                .map((e) => FilterChip(
-                                                    color:
-                                                        const MaterialStatePropertyAll(
-                                                            Colors.transparent),
-                                                    shape: RoundedRectangleBorder(
-                                                        side: BorderSide(
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .colorScheme
-                                                                .outlineVariant),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20)),
-                                                    label: Text(e.name),
-                                                    selected:
-                                                        filters.contains(e),
-                                                    onSelected: (selected) {
-                                                      setState(() {
-                                                        selected
-                                                            ? filters.add(e)
-                                                            : filters.remove(e);
-                                                      });
-                                                    }))
-                                                .toList()),
-                                        const SizedBox(height: 22),
-                                        Expanded(
-                                            child: MasonryGridView.count(
-                                                crossAxisCount: 2,
-                                                crossAxisSpacing: 8,
-                                                mainAxisSpacing: 8,
-                                                itemCount: posts.length,
-                                                itemBuilder: ((context,
-                                                        index) =>
-                                                    posts[index].type ==
-                                                            PostType.image
-                                                        ? ImagePost(
-                                                            postObject: posts[
-                                                                    index]
-                                                                as ImagePostObject)
-                                                        : CarouselPost(
-                                                            post: posts[index]
-                                                                as CarouselPostObject))))
-                                      ],
-                                    ))),
+                                    child: ListView.separated(
+                                        separatorBuilder: (context, index) =>
+                                            const SizedBox(height: 8),
+                                        itemCount: posts.length,
+                                        itemBuilder: ((context, index) =>
+                                            index == 0
+                                                ? Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          const Text("Explore",
+                                                              style: TextStyle(
+                                                                  fontSize: 22,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600)),
+                                                          constarintss.maxWidth <
+                                                                  1000
+                                                              ? SizedBox(
+                                                                  height: 40,
+                                                                  child: TextButton.icon(
+                                                                      onPressed: () => SideSheet.right(
+                                                                          width:
+                                                                              400,
+                                                                          sheetBorderRadius:
+                                                                              14,
+                                                                          context:
+                                                                              context,
+                                                                          body: storiesSheet(
+                                                                              context)),
+                                                                      icon: const Icon(
+                                                                          Icons
+                                                                              .chevron_left),
+                                                                      label: const Text(
+                                                                          "Stories")))
+                                                              : const SizedBox()
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 14),
+                                                      Wrap(
+                                                          spacing: 8,
+                                                          children: Filters
+                                                              .values
+                                                              .map((e) =>
+                                                                  FilterChip(
+                                                                      color: const MaterialStatePropertyAll(
+                                                                          Colors
+                                                                              .transparent),
+                                                                      shape: RoundedRectangleBorder(
+                                                                          side: BorderSide(
+                                                                              color: Theme.of(context)
+                                                                                  .colorScheme
+                                                                                  .outlineVariant),
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              20)),
+                                                                      label: Text(e
+                                                                          .name),
+                                                                      selected:
+                                                                          filters
+                                                                              .contains(e),
+                                                                      onSelected: (selected) {
+                                                                        setState(
+                                                                            () {
+                                                                          selected
+                                                                              ? filters.add(e)
+                                                                              : filters.remove(e);
+                                                                        });
+                                                                      }))
+                                                              .toList()),
+                                                      const SizedBox(
+                                                          height: 22),
+                                                    ],
+                                                  )
+                                                : DesktopPost(
+                                                    post: posts[index]))))),
                             const SizedBox(width: 12),
                             constarintss.maxWidth > 1000
                                 ? storiesSheet(context)

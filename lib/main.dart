@@ -119,7 +119,7 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
-  Color seedColor = Colors.black;
+  Color seedColor = const Color.fromARGB(255, 111, 82, 138);
   bool isDark() {
     if (themeMode == ThemeMode.dark) {
       return true;
@@ -365,8 +365,8 @@ class _RootScreenState extends State<RootScreen>
                   container_transform.ContainerTransitionType.fadeThrough,
               transitionDuration: Durations.medium4,
               reverseTransitionDuration: Durations.short4,
-              openColor: MainApp.of(context).getSurfaceContainerLowest(),
-              middleColor: MainApp.of(context).getSurfaceContainer(),
+              openColor: MainApp.of(context).getSurface(),
+              middleColor: Theme.of(context).colorScheme.primaryContainer,
               closedColor: Theme.of(context).colorScheme.primaryContainer,
               openElevation: 0,
               clipBehavior: Clip.none,

@@ -216,7 +216,7 @@ List<Account> accounts = [
           pfpPath: 'images/fischl.png'),
       followers: [],
       following: [],
-      posts: [posts[0]]),
+      posts: []),
   Account(
       person: Person(
           name: "Furina de Fontaine",
@@ -226,7 +226,7 @@ List<Account> accounts = [
       pronouns: "she/her",
       followers: ['cook.with.shogun', 'please_die_soon', 'princess_purple'],
       following: ['cook.with.shogun'],
-      posts: [posts[1]]),
+      posts: []),
   Account(
       person: Person(
           name: "Director  Hu",
@@ -234,7 +234,7 @@ List<Account> accounts = [
           pfpPath: 'images/hutao.png'),
       followers: [],
       following: [],
-      posts: [posts[3]]),
+      posts: []),
   Account(
       person: Person(
           name: "Arataki Itto",
@@ -300,7 +300,7 @@ List<Account> accounts = [
           pfpPath: 'images/raiden.png'),
       followers: ['please_die_soon', 'princess_purple', 'furina_sunshine'],
       following: ['furina_sunshine'],
-      posts: [posts[2]]),
+      posts: []),
   Account(
       person: Person(
           name: "Kujou Sara",
