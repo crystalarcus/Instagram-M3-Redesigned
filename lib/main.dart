@@ -220,6 +220,7 @@ class _MainAppState extends State<MainApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: seedColor),
       ),
       darkTheme: ThemeData.from(
+          textTheme: GoogleFonts.manropeTextTheme(textTheme),
           colorScheme: ColorScheme.fromSeed(
               seedColor: seedColor, brightness: Brightness.dark)),
       themeMode: themeMode,
@@ -388,28 +389,30 @@ class _RootScreenState extends State<RootScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: AnimatedSwitcher(
-        switchInCurve: Easing.emphasizedDecelerate,
-        switchOutCurve: Easing.emphasizedAccelerate,
-        duration: Durations.medium3,
-        transitionBuilder: (child, animation) => FadeTransition(
-          opacity: animation,
-          child: ScaleTransition(
-            alignment: Alignment.bottomRight,
-            scale: animation,
-            child: child,
-          ),
-        ),
-        layoutBuilder: (currentChild, previousChildren) => Stack(
-          alignment: Alignment.bottomRight,
-          children: [currentChild!, ...previousChildren],
-        ),
-        child: currentIndex == 0
-            ? homeScreenFAB()
-            : currentIndex == 2
-                ? messageFAB()
-                : const SizedBox(),
-      ),
+      floatingActionButton: MediaQuery.sizeOf(context).width > 600
+          ? null
+          : AnimatedSwitcher(
+              switchInCurve: Easing.emphasizedDecelerate,
+              switchOutCurve: Easing.emphasizedAccelerate,
+              duration: Durations.medium3,
+              transitionBuilder: (child, animation) => FadeTransition(
+                opacity: animation,
+                child: ScaleTransition(
+                  alignment: Alignment.bottomRight,
+                  scale: animation,
+                  child: child,
+                ),
+              ),
+              layoutBuilder: (currentChild, previousChildren) => Stack(
+                alignment: Alignment.bottomRight,
+                children: [currentChild!, ...previousChildren],
+              ),
+              child: currentIndex == 0
+                  ? homeScreenFAB()
+                  : currentIndex == 2
+                      ? messageFAB()
+                      : const SizedBox(),
+            ),
       bottomNavigationBar: DisappearingBottomNavigationBar(
         barAnimation: _barAnimation,
         selectedIndex: currentIndex,

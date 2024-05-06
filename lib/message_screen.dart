@@ -7,11 +7,23 @@ import 'package:redesigned/chat_screen.dart';
 import 'package:redesigned/main.dart';
 import 'package:redesigned/search_message_screen.dart';
 
-class MessageScreen extends StatefulWidget {
+class MessageScreen extends StatelessWidget {
   const MessageScreen({super.key});
 
   @override
-  State<MessageScreen> createState() => _MessageScreenState();
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+        builder: ((context, constraints) => constraints.maxWidth > 840
+            ? const MessageScreenDesktop()
+            : const MessageScreenMobile()));
+  }
+}
+
+class MessageScreenMobile extends StatefulWidget {
+  const MessageScreenMobile({super.key});
+
+  @override
+  State<MessageScreenMobile> createState() => _MessageScreenMobileState();
 }
 
 class MessageSearchAnchor extends StatefulWidget {
@@ -47,7 +59,7 @@ class _MessageSearchAnchorState extends State<MessageSearchAnchor> {
   }
 }
 
-class _MessageScreenState extends State<MessageScreen> {
+class _MessageScreenMobileState extends State<MessageScreenMobile> {
   Set<String> currentFilters = {};
   List<Chat> chatData = chats;
   List<String> newChatSelected = [];
@@ -174,11 +186,222 @@ class _MessageScreenState extends State<MessageScreen> {
                       _();
                     },
                   ),
-              openBuilder: (context, _) => ChatScreen(
+              openBuilder: (context, _) => MobileChatScreen(
                     person: e.person,
                   ))),
           const SizedBox(height: 120)
         ],
+      ),
+    );
+  }
+}
+
+class MessageScreenDesktop extends StatefulWidget {
+  const MessageScreenDesktop({super.key});
+
+  @override
+  State<MessageScreenDesktop> createState() => _MessageScreenDesktopState();
+}
+
+class _MessageScreenDesktopState extends State<MessageScreenDesktop> {
+  List<String> currentFilters = [];
+  List chatData = [];
+  Person? currectActive;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: MainApp.of(context).getSurfaceContainerLowest(),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 8, bottom: 8),
+        child: Row(
+          children: <Widget>[
+            const SizedBox(width: 8),
+            Container(
+              decoration: BoxDecoration(
+                  color: MainApp.of(context).getSurface(),
+                  borderRadius: BorderRadius.circular(14)),
+              width: MediaQuery.sizeOf(context).width / 3.5,
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: SearchBar(
+                      backgroundColor: MaterialStatePropertyAll(
+                          MainApp.of(context).getSurfaceContainerHigh()),
+                      leading: const SizedBox(
+                        height: 40,
+                        width: 40,
+                        child: Icon(Symbols.search),
+                      ),
+                      hintText: "Search messages",
+                      onTap: () {},
+                      elevation: const MaterialStatePropertyAll(0),
+                      trailing: <Widget>[
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Stack(
+                            children: <Widget>[
+                              Image.asset(
+                                "images/prof.png",
+                                height: 36,
+                                width: 36,
+                              ),
+                              Positioned.fill(
+                                  child: Material(
+                                      color: Colors.transparent,
+                                      child: InkWell(
+                                        onTap: () {},
+                                      )))
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 55,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        const SizedBox(width: 8),
+                        ...filters.map((e) => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4),
+                              child: FilterChip(
+                                side: BorderSide(
+                                    color: currentFilters.contains(e)
+                                        ? Theme.of(context)
+                                            .colorScheme
+                                            .primaryContainer
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .outlineVariant),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30)),
+                                label: Text(e),
+                                labelPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 2),
+                                selected: currentFilters.contains(e),
+                                onSelected: (bool isSelected) {
+                                  setState(() {
+                                    isSelected
+                                        ? currentFilters.add(e)
+                                        : currentFilters.remove(e);
+                                    currentFilters.isEmpty
+                                        ? chatData = chats
+                                        : chatData = chats.where((element) {
+                                            if (element.newMessage > 0 &&
+                                                currentFilters
+                                                    .contains('Unread')) {
+                                              return true;
+                                            } else if (element.newMessage ==
+                                                    0 &&
+                                                currentFilters
+                                                    .contains('Read')) {
+                                              return true;
+                                            } else if (element.isActive &&
+                                                currentFilters
+                                                    .contains('Active')) {
+                                              return true;
+                                            } else {
+                                              return false;
+                                            }
+                                          }).toList();
+                                  });
+                                },
+                              ),
+                            ))
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                      child: ListView(
+                    children: chats
+                        .map((e) => ChatWidgetDesktop(
+                            chat: e,
+                            onPressed: () {
+                              setState(() {
+                                currectActive = e.person;
+                              });
+                            }))
+                        .toList(),
+                  ))
+                ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+                child: ClipRRect(
+              borderRadius: BorderRadius.circular(14),
+              child: currectActive != null
+                  ? DesktopChatScreen(person: currectActive!)
+                  : Container(
+                      decoration: BoxDecoration(
+                          color: MainApp.of(context).getSurface()),
+                      padding: const EdgeInsets.symmetric(),
+                      child: const Center(
+                        child: Text("Messages"),
+                      ),
+                    ),
+            )),
+            const SizedBox(width: 12),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ChatWidgetDesktop extends StatelessWidget {
+  const ChatWidgetDesktop(
+      {super.key, required this.chat, required this.onPressed});
+  final Chat chat;
+  final Function onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(8),
+        onTap: () {
+          onPressed();
+        },
+        title: Text(
+          chat.person.name,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+        ),
+        leading: CircleAvatar(
+          radius: 28,
+          child: Image.asset(chat.person.pfpPath),
+        ),
+        subtitle: Text(
+          maxLines: 1,
+          chat.lastMessageState == LastMessageState.sentByUserAndSeen
+              ? "Seen"
+              : chat.lastMessageState == LastMessageState.sentByUserAndUnseen
+                  ? "Sent"
+                  : chat.newMessage > 1
+                      ? "${chat.newMessage} new messages"
+                      : chat.lastMessage,
+          style: TextStyle(
+              fontSize: 14,
+              fontWeight:
+                  chat.newMessage == 0 ? FontWeight.w500 : FontWeight.w700,
+              letterSpacing: 0),
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              chat.lastTime,
+              style: TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontWeight: FontWeight.w600),
+            ),
+            // IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
+          ],
+        ),
       ),
     );
   }
@@ -387,8 +610,6 @@ class PfpView extends StatelessWidget {
     );
   }
 }
-
-
 
 // Padding(
 //     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

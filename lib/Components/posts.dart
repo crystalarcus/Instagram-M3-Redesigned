@@ -364,6 +364,7 @@ class _DesktopPostState extends State<DesktopPost> {
                       const SizedBox(height: 16),
                       Expanded(
                         child: ListView(
+                          physics: const ClampingScrollPhysics(),
                           children: [
                             Row(
                               mainAxisSize: MainAxisSize.min,

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+// import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
 import 'package:redesigned/main.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key, required this.person});
+class MobileChatScreen extends StatefulWidget {
+  const MobileChatScreen({super.key, required this.person});
   final Person person;
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<MobileChatScreen> createState() => _MobileChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _MobileChatScreenState extends State<MobileChatScreen> {
   late final ItemScrollController controller;
   bool isScrolling = false;
 
@@ -101,18 +103,18 @@ class _ChatScreenState extends State<ChatScreen> {
                     //     borderRadius: BorderRadius.only(
                     //       topLeft: chatTexts[index].sentByUser ||
                     //               (index > 0 && chatTexts[index - 1].sentByUser)
-                    //           ? const Radius.circular(22)
-                    //           : Radius.zero,
+                    //           ? const Radius.circular(24)
+                    //           : const Radius.circular(8),
                     //       topRight: chatTexts[index].sentByUser &&
                     //               (index > 0 && chatTexts[index - 1].sentByUser)
-                    //           ? Radius.zero
-                    //           : const Radius.circular(22),
+                    //           ? const Radius.circular(8)
+                    //           : const Radius.circular(24),
                     //       bottomLeft: chatTexts[index].sentByUser
-                    //           ? const Radius.circular(22)
-                    //           : Radius.zero,
+                    //           ? const Radius.circular(24)
+                    //           : const Radius.circular(8),
                     //       bottomRight: chatTexts[index].sentByUser
-                    //           ? Radius.zero
-                    //           : const Radius.circular(22),
+                    //           ? const Radius.circular(8)
+                    //           : const Radius.circular(24),
                     //     ),
                     //     vertPadding: EdgeInsets.only(
                     //       top: (index > 0 &&
@@ -128,6 +130,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     //     ),
                     //   )
                     : InterlocutorChat(
+                        isBottomSame:
+                            index > 1 && !chatTexts[index - 1].sentByUser,
+                        pfpPath: widget.person.pfpPath,
                         chatText: chatTexts[index],
                         isTopSame: index < chatTexts.length - 1 &&
                             !chatTexts[index + 1].sentByUser,
@@ -140,10 +145,13 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: TextField(
                     decoration: InputDecoration(
                         filled: true,
+                        fillColor:
+                            MainApp.of(context).getSurfaceContainerHigh(),
                         isDense: true,
                         hintText: "Message...",
                         hintStyle: TextStyle(
-                            color: Theme.of(context).colorScheme.outline),
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant),
                         prefixIcon: SizedBox(
                           height: 48,
                           width: 54,
@@ -196,6 +204,220 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 }
 
+class DesktopChatScreen extends StatefulWidget {
+  const DesktopChatScreen({super.key, required this.person});
+  final Person person;
+  @override
+  State<DesktopChatScreen> createState() => _DesktopChatScreenState();
+}
+
+class _DesktopChatScreenState extends State<DesktopChatScreen> {
+  late final ItemScrollController controller;
+  bool isScrolling = false;
+  String text = "";
+  void goToChat(int id) {
+    controller.scrollTo(index: id, duration: Durations.medium1);
+  }
+
+  @override
+  void initState() {
+    controller = ItemScrollController();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: MainApp.of(context).getSurface(),
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        toolbarHeight: 64,
+        titleSpacing: 0,
+        title: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                border: Border.all(
+                    width: 1.8,
+                    color: widget.person.isStoryVisible
+                        ? widget.person.newStory
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.outlineVariant
+                        : Colors.transparent),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: Image.asset(
+                    widget.person.pfpPath,
+                    height: 40,
+                    width: 40,
+                  )),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.person.name,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  widget.person.userName,
+                  style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w500),
+                )
+              ],
+            )
+          ],
+        ),
+        actions: <Widget>[
+          IconButton(
+              onPressed: () {}, icon: const Icon(Icons.videocam_outlined)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.phone_outlined)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+        ],
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: ScrollablePositionedList.builder(
+                reverse: true,
+                itemScrollController: controller,
+                itemCount: chatTexts.length,
+                itemBuilder: (context, index) => chatTexts[index].sentByUser
+                    ? UserChat(
+                        isTopSame: index < chatTexts.length - 1 &&
+                            chatTexts[index + 1].sentByUser,
+                        chatText: chatTexts[index],
+                      )
+                    // ChatTextWidget(
+                    //     scrollTo: goToChat,
+                    //     chatText: chatTexts[index],
+                    //     borderRadius: BorderRadius.only(
+                    //       topLeft: chatTexts[index].sentByUser ||
+                    //               (index > 0 && chatTexts[index - 1].sentByUser)
+                    //           ? const Radius.circular(24)
+                    //           : const Radius.circular(8),
+                    //       topRight: chatTexts[index].sentByUser &&
+                    //               (index > 0 && chatTexts[index - 1].sentByUser)
+                    //           ? const Radius.circular(8)
+                    //           : const Radius.circular(24),
+                    //       bottomLeft: chatTexts[index].sentByUser
+                    //           ? const Radius.circular(24)
+                    //           : const Radius.circular(8),
+                    //       bottomRight: chatTexts[index].sentByUser
+                    //           ? const Radius.circular(8)
+                    //           : const Radius.circular(24),
+                    //     ),
+                    //     vertPadding: EdgeInsets.only(
+                    //       top: (index > 0 &&
+                    //               chatTexts[index - 1].sentByUser ==
+                    //                   chatTexts[index].sentByUser)
+                    //           ? 1
+                    //           : 12,
+                    //       bottom: (index < chatTexts.length - 1 &&
+                    //               chatTexts[index + 1].sentByUser ==
+                    //                   chatTexts[index].sentByUser)
+                    //           ? 1
+                    //           : 12,
+                    //     ),
+                    //   )
+                    : InterlocutorChat(
+                        isBottomSame:
+                            index > 1 && !chatTexts[index - 1].sentByUser,
+                        pfpPath: widget.person.pfpPath,
+                        chatText: chatTexts[index],
+                        isTopSame: index < chatTexts.length - 1 &&
+                            !chatTexts[index + 1].sentByUser,
+                      )),
+          )),
+          Padding(
+              padding: const EdgeInsets.all(6),
+              child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxHeight: 120),
+                  child: TextField(
+                    maxLines: null,
+                    onChanged: (value) {
+                      setState(() {
+                        text = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                        filled: true,
+                        isDense: false,
+                        fillColor:
+                            MainApp.of(context).getSurfaceContainerHigh(),
+                        hintText: "Message...",
+                        hintStyle: GoogleFonts.manrope(
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant),
+                        prefixIcon: SizedBox(
+                          height: 48,
+                          width: 54,
+                          child: Align(
+                              alignment: Alignment.center,
+                              child: IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.camera_alt,
+                                    size: 24,
+                                  ))),
+                        ),
+                        suffixIcon: text.isEmpty
+                            ? Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.attach_file_outlined,
+                                      size: 24,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.emoji_emotions_outlined,
+                                      size: 24,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.mic,
+                                      size: 24,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 4)
+                                ],
+                              )
+                            : Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: TextButton(
+                                    onPressed: () {},
+                                    child: const Text(
+                                      "Send",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700),
+                                    ))),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide.none),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide.none)),
+                  )))
+        ],
+      ),
+    );
+  }
+}
+
 List<String> emojis = [
   "❤️",
   "👍",
@@ -218,10 +440,17 @@ List<String> emojis = [
 ];
 
 class InterlocutorChat extends StatefulWidget {
-  const InterlocutorChat(
-      {super.key, required this.chatText, required this.isTopSame});
+  const InterlocutorChat({
+    super.key,
+    required this.chatText,
+    required this.isTopSame,
+    required this.pfpPath,
+    required this.isBottomSame,
+  });
   final ChatText chatText;
+  final String pfpPath;
   final bool isTopSame;
+  final bool isBottomSame;
   @override
   State<InterlocutorChat> createState() => _InterlocutorChatState();
 }
@@ -229,40 +458,52 @@ class InterlocutorChat extends StatefulWidget {
 class _InterlocutorChatState extends State<InterlocutorChat> {
   @override
   Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      SizedBox(
-        height: widget.isTopSame ? 2 : 16,
-      ),
-      widget.chatText.repliedTo != null
-          ? ReplyWidget(reply: widget.chatText.repliedTo)
-          : const SizedBox(),
-      Row(
+    return Row(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ConstrainedBox(
-            constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width - 120),
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: widget.isTopSame
-                        ? Radius.zero
-                        : const Radius.circular(22),
-                    bottomLeft: Radius.zero,
-                    topRight: const Radius.circular(22),
-                    bottomRight: const Radius.circular(22),
-                  ),
-                  color: Theme.of(context).colorScheme.surfaceVariant),
-              child: Text(
-                widget.chatText.text,
-                style: chatTextStyle,
+          !widget.isTopSame
+              ? CircleAvatar(
+                  radius: 20,
+                  backgroundImage: AssetImage(widget.pfpPath),
+                )
+              : const SizedBox(width: 40),
+          const SizedBox(width: 6),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: widget.isTopSame ? 2 : 16,
               ),
-            ),
-          ),
-        ],
-      )
-    ]);
+              widget.chatText.repliedTo != null
+                  ? ReplyWidget(reply: widget.chatText.repliedTo)
+                  : const SizedBox(),
+              SizedBox(height: widget.chatText.repliedTo != null ? 4 : 0),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width - 120),
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: widget.isBottomSame
+                            ? const Radius.circular(8)
+                            : const Radius.circular(24),
+                        topLeft: const Radius.circular(8),
+                        topRight: const Radius.circular(24),
+                        bottomRight: const Radius.circular(24),
+                      ),
+                      color: Theme.of(context).colorScheme.secondaryContainer),
+                  child: Text(
+                    widget.chatText.text,
+                    style: chatTextStyle,
+                  ),
+                ),
+              ),
+            ],
+          )
+        ]);
   }
 }
 
@@ -295,12 +536,12 @@ class _UserChatState extends State<UserChat> {
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(22),
-                        bottomLeft: const Radius.circular(22),
+                        topLeft: const Radius.circular(24),
+                        bottomLeft: const Radius.circular(24),
                         topRight: widget.isTopSame
-                            ? Radius.zero
-                            : const Radius.circular(22),
-                        bottomRight: Radius.zero,
+                            ? const Radius.circular(8)
+                            : const Radius.circular(24),
+                        bottomRight: const Radius.circular(8),
                       ),
                       color: Theme.of(context).colorScheme.primary),
                   child: Text(
