@@ -440,7 +440,7 @@ class _DesktopPostState extends State<DesktopPost> {
                                               color: Colors.transparent)),
                                       backgroundColor: Theme.of(context)
                                           .colorScheme
-                                          .surfaceVariant,
+                                          .surfaceContainerHighest,
                                       onPressed: () {},
                                       label: Text(e)))
                                   .toList(),

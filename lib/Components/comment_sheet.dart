@@ -146,7 +146,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                     children: [
                       TextButton.icon(
                           style: ButtonStyle(
-                              iconColor: MaterialStatePropertyAll(
+                              iconColor: WidgetStatePropertyAll(
                             widget.comment.isLiked
                                 ? Colors.red
                                 : Theme.of(context).colorScheme.onSurface,
@@ -173,7 +173,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                       const SizedBox(width: 8),
                       TextButton.icon(
                           style: ButtonStyle(
-                              iconColor: MaterialStatePropertyAll(
+                              iconColor: WidgetStatePropertyAll(
                             Theme.of(context).colorScheme.onSurface,
                           )),
                           label: Text(widget.comment.replies.length.toString(),

@@ -24,7 +24,7 @@ class ImagePostViewer extends StatelessWidget {
               child: IconButton(
                   color: const Color.fromARGB(255, 212, 212, 212),
                   style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(
+                      backgroundColor: WidgetStatePropertyAll(
                           Color.fromARGB(136, 59, 59, 59))),
                   onPressed: () {
                     Navigator.pop(context);
@@ -67,7 +67,7 @@ class CarouselPostViewer extends StatelessWidget {
               child: IconButton(
                   color: const Color.fromARGB(255, 212, 212, 212),
                   style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(
+                      backgroundColor: WidgetStatePropertyAll(
                           Color.fromARGB(136, 59, 59, 59))),
                   onPressed: () {
                     Navigator.pop(context);

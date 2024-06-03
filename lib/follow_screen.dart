@@ -36,7 +36,7 @@ class _FollowScreenState extends State<FollowScreen> {
         length: 3,
         child: Scaffold(
             appBar: AppBar(
-              backgroundColor: colorScheme.surfaceVariant,
+              backgroundColor: colorScheme.surfaceContainerHighest,
               title: Text(widget.name),
               leading: IconButton(
                   onPressed: () {

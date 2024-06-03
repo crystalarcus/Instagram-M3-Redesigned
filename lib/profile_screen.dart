@@ -281,9 +281,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           ? FilledButton.tonalIcon(
                                               style: ButtonStyle(
                                                   backgroundColor:
-                                                      MaterialStatePropertyAll(
+                                                      WidgetStatePropertyAll(
                                                           colorScheme
-                                                              .surfaceVariant)),
+                                                              .surfaceContainerHighest)),
                                               icon: const Icon(
                                                   Icons.remove_circle_outline),
                                               onPressed: () {
@@ -406,7 +406,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 child: TabBarView(controller: tabController, children: [
                   dummyPost(Theme.of(context).colorScheme.primaryContainer),
                   dummyPost(Theme.of(context).colorScheme.outlineVariant),
-                  dummyPost(Theme.of(context).colorScheme.surfaceVariant),
+                  dummyPost(Theme.of(context).colorScheme.surfaceContainerHighest),
                 ]))));
   }
 }

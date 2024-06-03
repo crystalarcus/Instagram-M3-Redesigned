@@ -458,7 +458,11 @@ class InterlocutorChat extends StatefulWidget {
 class _InterlocutorChatState extends State<InterlocutorChat> {
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      children: [
+        SizedBox(
+          height: widget.isTopSame ? 2 : 16,
+        ),Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -473,7 +477,7 @@ class _InterlocutorChatState extends State<InterlocutorChat> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: widget.isTopSame ? 2 : 16,
+                height: widget.isTopSame ? 2 : 8,
               ),
               widget.chatText.repliedTo != null
                   ? ReplyWidget(reply: widget.chatText.repliedTo)
@@ -503,7 +507,9 @@ class _InterlocutorChatState extends State<InterlocutorChat> {
               ),
             ],
           )
-        ]);
+        ])
+      ],
+    );
   }
 }
 
@@ -876,4 +882,4 @@ var menuItemTextStyle = const TextStyle(
   fontWeight: FontWeight.w600,
 );
 const ButtonStyle menuItemButtonStyle = ButtonStyle(
-    padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 12)));
+    padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 12)));

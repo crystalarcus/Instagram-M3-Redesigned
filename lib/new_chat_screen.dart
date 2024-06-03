@@ -98,7 +98,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
                         size: 22,
                       )),
                   shadowColor:
-                      const MaterialStatePropertyAll(Colors.transparent),
+                      const WidgetStatePropertyAll(Colors.transparent),
                   hintText: "Search people")),
         ),
       ),

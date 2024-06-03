@@ -47,10 +47,10 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                   child: SizedBox(
                       height: 50,
                       child: SearchBar(
-                        elevation: MaterialStateProperty.all(0),
-                        backgroundColor: MaterialStatePropertyAll(
+                        elevation: WidgetStateProperty.all(0),
+                        backgroundColor: WidgetStatePropertyAll(
                             MainApp.of(context).getSurfaceContainerHigh()),
-                        padding: const MaterialStatePropertyAll(
+                        padding: const WidgetStatePropertyAll(
                             EdgeInsets.symmetric(horizontal: 12)),
                         leading: const Icon(
                           Symbols.search,
@@ -77,7 +77,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                               ))
                         ],
                         hintText: "Search",
-                        textStyle: const MaterialStatePropertyAll(
+                        textStyle: const WidgetStatePropertyAll(
                             TextStyle(height: 1.2)),
                         onTap: () => {},
                       )),
@@ -228,7 +228,7 @@ class _DesktopHomeScreenState extends State<DesktopHomeScreen> {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Expanded(
                   child: SearchBar(
-                shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+                shadowColor: const WidgetStatePropertyAll(Colors.transparent),
                 leading: IconButton(
                   onPressed: null,
                   icon: const Icon(
@@ -331,7 +331,7 @@ class _DesktopHomeScreenState extends State<DesktopHomeScreen> {
                                                               .values
                                                               .map((e) =>
                                                                   FilterChip(
-                                                                      color: const MaterialStatePropertyAll(
+                                                                      color: const WidgetStatePropertyAll(
                                                                           Colors
                                                                               .transparent),
                                                                       shape: RoundedRectangleBorder(

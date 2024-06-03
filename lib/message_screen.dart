@@ -226,7 +226,7 @@ class _MessageScreenDesktopState extends State<MessageScreenDesktop> {
                   Padding(
                     padding: const EdgeInsets.all(12),
                     child: SearchBar(
-                      backgroundColor: MaterialStatePropertyAll(
+                      backgroundColor: WidgetStatePropertyAll(
                           MainApp.of(context).getSurfaceContainerHigh()),
                       leading: const SizedBox(
                         height: 40,
@@ -235,7 +235,7 @@ class _MessageScreenDesktopState extends State<MessageScreenDesktop> {
                       ),
                       hintText: "Search messages",
                       onTap: () {},
-                      elevation: const MaterialStatePropertyAll(0),
+                      elevation: const WidgetStatePropertyAll(0),
                       trailing: <Widget>[
                         ClipRRect(
                           borderRadius: BorderRadius.circular(30),
@@ -567,7 +567,7 @@ class NoteWidget extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 120),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceVariant,
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(12)),
             child: Text(
               note.note,

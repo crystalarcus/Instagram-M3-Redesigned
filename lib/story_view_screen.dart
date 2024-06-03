@@ -156,11 +156,11 @@ class _StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                   SizedBox(
                       width: MediaQuery.of(context).size.width - 90,
                       child: SearchBar(
-                        textStyle: const MaterialStatePropertyAll(
+                        textStyle: const WidgetStatePropertyAll(
                             TextStyle(height: 1.2)),
                         shadowColor:
-                            const MaterialStatePropertyAll(Colors.transparent),
-                        padding: const MaterialStatePropertyAll(
+                            const WidgetStatePropertyAll(Colors.transparent),
+                        padding: const WidgetStatePropertyAll(
                             EdgeInsets.symmetric(horizontal: 12)),
                         leading: Icon(MdiIcons.replyOutline),
                         hintText: "Reply to this story",
