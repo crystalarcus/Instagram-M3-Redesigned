@@ -37,10 +37,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: MainApp.of(context).getSurface(),
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
           toolbarHeight: 64,
-          backgroundColor: MainApp.of(context).getSurface(),
+          backgroundColor: Theme.of(context).colorScheme.surface,
           title: const Text(
             "Notifications",
             style:
@@ -59,7 +59,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: FilterChip(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
-                        backgroundColor: MainApp.of(context).getSurface(),
+                        backgroundColor: Theme.of(context).colorScheme.surface,
                         selected: filters.contains(e),
                         onSelected: (value) {
                           setState(() {
@@ -142,7 +142,7 @@ class _NotifWidgetState extends State<NotifWidget> {
                       padding: const EdgeInsets.fromLTRB(12, 8, 8, 8),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(14),
-                          color: MainApp.of(context).getSurfaceContainer()),
+                          color: Theme.of(context).colorScheme.surfaceContainer),
                       child: Row(
                         children: [
                           Expanded(

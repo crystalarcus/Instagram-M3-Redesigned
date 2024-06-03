@@ -41,5 +41,4 @@ flutter:
     - images/
     - images/post/
     - stories/
-    - reels/
   uses-material-design: true

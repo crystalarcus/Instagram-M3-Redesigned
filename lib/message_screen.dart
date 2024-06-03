@@ -4,7 +4,6 @@ import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
 import 'package:redesigned/Components/Utils/open_container.dart';
 import 'package:redesigned/chat_screen.dart';
-import 'package:redesigned/main.dart';
 import 'package:redesigned/search_message_screen.dart';
 
 class MessageScreen extends StatelessWidget {
@@ -38,7 +37,7 @@ class _MessageSearchAnchorState extends State<MessageSearchAnchor> {
   Widget build(BuildContext context) {
     return OpenContainer(
         transitionType: ContainerTransitionType.fadeThrough,
-        middleColor: MainApp.of(context).getSurface(),
+        middleColor: Theme.of(context).colorScheme.surface,
         closedShape: const CircleBorder(),
         closedColor: Colors.transparent,
         openElevation: 0,
@@ -69,7 +68,7 @@ class _MessageScreenMobileState extends State<MessageScreenMobile> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 64,
-        backgroundColor: MainApp.of(context).getSurface(),
+        backgroundColor: Theme.of(context).colorScheme.surface,
         title: const Text(
           "Messages",
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
@@ -88,7 +87,7 @@ class _MessageScreenMobileState extends State<MessageScreenMobile> {
           const SizedBox(width: 16)
         ],
       ),
-      backgroundColor: MainApp.of(context).getSurface(),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: ListView(
         children: [
           // Subheader Notes
@@ -132,7 +131,7 @@ class _MessageScreenMobileState extends State<MessageScreenMobile> {
                       child: FilterChip(
                         side: BorderSide.none,
                         backgroundColor:
-                            MainApp.of(context).getSurfaceContainerHigh(),
+                            Theme.of(context).colorScheme.surfaceContainerHigh,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),
                         label: Text(e),
@@ -174,9 +173,9 @@ class _MessageScreenMobileState extends State<MessageScreenMobile> {
               transitionType: ContainerTransitionType.fade,
               transitionDuration: Durations.medium3,
               reverseTransitionDuration: Durations.short4,
-              middleColor: MainApp.of(context).getSurface(),
-              closedColor: MainApp.of(context).getSurface(),
-              openColor: MainApp.of(context).getSurface(),
+              middleColor: Theme.of(context).colorScheme.surface,
+              closedColor: Theme.of(context).colorScheme.surface,
+              openColor: Theme.of(context).colorScheme.surface,
               openElevation: 0,
               closedElevation: 0,
               clipBehavior: Clip.none,
@@ -210,7 +209,7 @@ class _MessageScreenDesktopState extends State<MessageScreenDesktop> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MainApp.of(context).getSurfaceContainerLowest(),
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
       body: Padding(
         padding: const EdgeInsets.only(top: 8, bottom: 8),
         child: Row(
@@ -218,7 +217,7 @@ class _MessageScreenDesktopState extends State<MessageScreenDesktop> {
             const SizedBox(width: 8),
             Container(
               decoration: BoxDecoration(
-                  color: MainApp.of(context).getSurface(),
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(14)),
               width: MediaQuery.sizeOf(context).width / 3.5,
               child: Column(
@@ -227,7 +226,7 @@ class _MessageScreenDesktopState extends State<MessageScreenDesktop> {
                     padding: const EdgeInsets.all(12),
                     child: SearchBar(
                       backgroundColor: WidgetStatePropertyAll(
-                          MainApp.of(context).getSurfaceContainerHigh()),
+                          Theme.of(context).colorScheme.surfaceContainerHigh),
                       leading: const SizedBox(
                         height: 40,
                         width: 40,
@@ -337,7 +336,7 @@ class _MessageScreenDesktopState extends State<MessageScreenDesktop> {
                   ? DesktopChatScreen(person: currectActive!)
                   : Container(
                       decoration: BoxDecoration(
-                          color: MainApp.of(context).getSurface()),
+                          color: Theme.of(context).colorScheme.surface),
                       padding: const EdgeInsets.symmetric(),
                       child: const Center(
                         child: Text("Messages"),
@@ -630,7 +629,7 @@ class PfpView extends StatelessWidget {
 //             const MaterialStatePropertyAll(Colors.transparent),
 //         elevation: const MaterialStatePropertyAll(0),
 //         backgroundColor: MaterialStatePropertyAll(
-//             MainApp.of(context).getSurfaceContainerHigh()),
+//             Theme.of(context).colorScheme.surfaceContainerHigh),
 //         trailing: [
 //           IconButton(onPressed: () {}, icon: const Icon(Icons.mic)),
 //           ClipRRect(

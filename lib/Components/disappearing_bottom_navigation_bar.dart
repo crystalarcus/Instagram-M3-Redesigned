@@ -4,7 +4,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:redesigned/Components/Utils/data.dart';
-import 'package:redesigned/main.dart';
 
 import 'Utils/animations.dart';
 import 'Utils/bottom_bar_transition.dart';
@@ -28,7 +27,7 @@ class DisappearingBottomNavigationBar extends StatelessWidget {
       backgroundColor: Colors.white,
       child: NavigationBar(
           elevation: 0,
-          backgroundColor: MainApp.of(context).getSurfaceContainerLow(),
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
           onDestinationSelected: onDestinationSelected,
           indicatorColor: Theme.of(context).colorScheme.secondaryContainer,
           labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,

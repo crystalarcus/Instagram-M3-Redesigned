@@ -35,7 +35,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: null,
-        backgroundColor: MainApp.of(context).getSurfaceContainerLowest(),
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
         body: SafeArea(
           child: CustomScrollView(slivers: [
             SliverAppBar(
@@ -49,7 +49,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                       child: SearchBar(
                         elevation: WidgetStateProperty.all(0),
                         backgroundColor: WidgetStatePropertyAll(
-                            MainApp.of(context).getSurfaceContainerHigh()),
+                            Theme.of(context).colorScheme.surfaceContainerHigh),
                         padding: const WidgetStatePropertyAll(
                             EdgeInsets.symmetric(horizontal: 12)),
                         leading: const Icon(
@@ -221,7 +221,7 @@ class _DesktopHomeScreenState extends State<DesktopHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: MainApp.of(context).getSurfaceContainerLowest(),
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
         body: Padding(
           padding: const EdgeInsets.fromLTRB(8, 12, 8, 0),
           child: Column(children: [
@@ -274,7 +274,7 @@ class _DesktopHomeScreenState extends State<DesktopHomeScreen> {
                                     padding: const EdgeInsets.fromLTRB(
                                         16, 18, 16, 0),
                                     decoration: BoxDecoration(
-                                        color: MainApp.of(context).getSurface(),
+                                        color: Theme.of(context).colorScheme.surface,
                                         borderRadius:
                                             BorderRadius.circular(14)),
                                     child: ListView.separated(
@@ -377,7 +377,7 @@ Widget storiesSheet(context) => SizedBox(
       child: Container(
           padding: const EdgeInsets.fromLTRB(16, 18, 16, 0),
           decoration: BoxDecoration(
-              color: MainApp.of(context).getSurface(),
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(13),
                   bottomLeft: Radius.circular(13))),

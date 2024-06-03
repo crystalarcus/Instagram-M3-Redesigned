@@ -8,7 +8,6 @@ import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
 import 'package:redesigned/Components/comment_sheet.dart';
 import 'package:redesigned/Components/post_viewer.dart';
-import 'package:redesigned/main.dart';
 
 class MobilePost extends StatefulWidget {
   const MobilePost({super.key, required this.post});
@@ -26,7 +25,7 @@ class _MobilePostState extends State<MobilePost> {
         borderRadius: const BorderRadius.all(Radius.circular(14)),
         child: Container(
             width: double.infinity,
-            color: MainApp.of(context).getSurfaceContainerLow(),
+            color: Theme.of(context).colorScheme.surfaceContainerLow,
             child: Padding(
               padding: const EdgeInsets.only(top: 8, bottom: 16),
               child: Column(
@@ -310,7 +309,7 @@ class _DesktopPostState extends State<DesktopPost> {
               (2.5 * widget.post.aspectRatio)),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: MainApp.of(context).getSurfaceContainer(),
+        color: Theme.of(context).colorScheme.surfaceContainer,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

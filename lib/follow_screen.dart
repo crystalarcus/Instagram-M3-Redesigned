@@ -51,7 +51,7 @@ class _FollowScreenState extends State<FollowScreen> {
             ),
             body: Container(
               decoration: BoxDecoration(
-                  color: MainApp.of(context).getSurfaceContainerLowest()),
+                  color: Theme.of(context).colorScheme.surfaceContainerLowest),
               child: TabBarView(children: [
                 ListView(
                   children: widget.followers

@@ -157,9 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                                 .width /
                                                             2),
                                                 elevation: 10,
-                                                backgroundColor: MainApp.of(
-                                                        context)
-                                                    .getSurfaceContainerLowest(),
+                                                backgroundColor: colorScheme.surfaceContainerLowest,
                                                 title: const Text("Followers"),
                                                 children: [
                                                   SizedBox(
@@ -224,8 +222,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                       context: context,
                                       builder: (BuildContext context) =>
                                           SimpleDialog(
-                                            backgroundColor: MainApp.of(context)
-                                                .getSurfaceContainerLow(),
+                                            backgroundColor: colorScheme.surfaceContainerLow,
                                             title: const Text("Following"),
                                             children: [
                                               LimitedBox(

@@ -3,7 +3,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
-import 'package:redesigned/main.dart';
 
 class CommentSheet extends StatelessWidget {
   const CommentSheet({super.key});
@@ -48,7 +47,7 @@ class CommentSheet extends StatelessWidget {
                 ),
               ),
               Container(
-                color: MainApp.of(context).getSurfaceContainerHigh(),
+                color: Theme.of(context).colorScheme.surfaceContainerHigh,
                 child: Row(
                   children: <Widget>[
                     const SizedBox(width: 12),

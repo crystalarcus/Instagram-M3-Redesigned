@@ -20,7 +20,6 @@ import 'package:redesigned/settings_screen.dart';
 import 'package:redesigned/stories_screen.dart';
 import 'package:redesigned/story_view_screen.dart';
 import 'home_screen.dart';
-import 'package:material_color_utilities/material_color_utilities.dart';
 // import 'package:permission_handler/permission_handler.dart';
 
 final _router = GoRouter(routes: [
@@ -132,45 +131,7 @@ class _MainAppState extends State<MainApp> {
     return false;
   }
 
-  Color getSurface() {
-    CorePalette p = CorePalette.of(seedColor.value);
-    return Color(p.neutral.get(isDark() ? 6 : 98));
-  }
-
-  Color getSurfaceDim() {
-    CorePalette p = CorePalette.of(seedColor.value);
-    return Color(p.neutral.get(isDark() ? 6 : 87));
-  }
-
-  Color getSurfaceBright() {
-    CorePalette p = CorePalette.of(seedColor.value);
-    return Color(p.neutral.get(isDark() ? 24 : 98));
-  }
-
-  Color getSurfaceContainerLowest() {
-    CorePalette p = CorePalette.of(seedColor.value);
-    return Color(p.neutral.get(isDark() ? 4 : 100));
-  }
-
-  Color getSurfaceContainerLow() {
-    CorePalette p = CorePalette.of(seedColor.value);
-    return Color(p.neutral.get(isDark() ? 10 : 96));
-  }
-
-  Color getSurfaceContainer() {
-    CorePalette p = CorePalette.of(seedColor.value);
-    return Color(p.neutral.get(isDark() ? 12 : 94));
-  }
-
-  Color getSurfaceContainerHigh() {
-    CorePalette p = CorePalette.of(seedColor.value);
-    return Color(p.neutral.get(isDark() ? 17 : 92));
-  }
-
-  Color getSurfaceContainerHighest() {
-    CorePalette p = CorePalette.of(seedColor.value);
-    return Color(p.neutral.get(isDark() ? 22 : 90));
-  }
+  
 
   bool isSearchFloating = true;
   List<Person> myFollower = myFollowersConst;
@@ -353,7 +314,7 @@ class _RootScreenState extends State<RootScreen>
         children: [
           FloatingActionButton.small(
             heroTag: "fab2",
-            backgroundColor: MainApp.of(context).getSurfaceContainerHigh(),
+            backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
             onPressed: () {},
             child: Icon(
               Icons.videocam_outlined,
@@ -366,7 +327,7 @@ class _RootScreenState extends State<RootScreen>
                   container_transform.ContainerTransitionType.fadeThrough,
               transitionDuration: Durations.medium4,
               reverseTransitionDuration: Durations.short4,
-              openColor: MainApp.of(context).getSurface(),
+              openColor: Theme.of(context).colorScheme.surface,
               middleColor: Theme.of(context).colorScheme.primaryContainer,
               closedColor: Theme.of(context).colorScheme.primaryContainer,
               openElevation: 0,
@@ -520,3 +481,43 @@ List<Person> myFollowersConst = [
   accounts[19].person,
   accounts[24].person,
 ];
+
+// Color getsurface {
+  //   CorePalette p = CorePalette.of(seedColor.value);
+  //   return Color(p.neutral.get(isDark() ? 6 : 98));
+  // }
+
+  // Color getSurfaceDim() {
+  //   CorePalette p = CorePalette.of(seedColor.value);
+  //   return Color(p.neutral.get(isDark() ? 6 : 87));
+  // }
+
+  // Color getSurfaceBright() {
+  //   CorePalette p = CorePalette.of(seedColor.value);
+  //   return Color(p.neutral.get(isDark() ? 24 : 98));
+  // }
+
+  // Color getsurfaceContainerLowest {
+  //   CorePalette p = CorePalette.of(seedColor.value);
+  //   return Color(p.neutral.get(isDark() ? 4 : 100));
+  // }
+
+  // Color getsurfaceContainerLow {
+  //   CorePalette p = CorePalette.of(seedColor.value);
+  //   return Color(p.neutral.get(isDark() ? 10 : 96));
+  // }
+
+  // Color getsurfaceContainer {
+  //   CorePalette p = CorePalette.of(seedColor.value);
+  //   return Color(p.neutral.get(isDark() ? 12 : 94));
+  // }
+
+  // Color getsurfaceContainerHigh {
+  //   CorePalette p = CorePalette.of(seedColor.value);
+  //   return Color(p.neutral.get(isDark() ? 17 : 92));
+  // }
+
+  // Color getsurfaceContainerHighest {
+  //   CorePalette p = CorePalette.of(seedColor.value);
+  //   return Color(p.neutral.get(isDark() ? 22 : 90));
+  // }

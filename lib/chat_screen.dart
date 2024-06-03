@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 // import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
-import 'package:redesigned/main.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class MobileChatScreen extends StatefulWidget {
@@ -30,7 +29,7 @@ class _MobileChatScreenState extends State<MobileChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MainApp.of(context).getSurface(),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         toolbarHeight: 64,
         titleSpacing: 0,
@@ -146,7 +145,7 @@ class _MobileChatScreenState extends State<MobileChatScreen> {
                     decoration: InputDecoration(
                         filled: true,
                         fillColor:
-                            MainApp.of(context).getSurfaceContainerHigh(),
+                            Theme.of(context).colorScheme.surfaceContainerHigh,
                         isDense: true,
                         hintText: "Message...",
                         hintStyle: TextStyle(
@@ -228,7 +227,7 @@ class _DesktopChatScreenState extends State<DesktopChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MainApp.of(context).getSurface(),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         forceMaterialTransparency: true,
         toolbarHeight: 64,
@@ -350,7 +349,7 @@ class _DesktopChatScreenState extends State<DesktopChatScreen> {
                         filled: true,
                         isDense: false,
                         fillColor:
-                            MainApp.of(context).getSurfaceContainerHigh(),
+                            Theme.of(context).colorScheme.surfaceContainerHigh,
                         hintText: "Message...",
                         hintStyle: GoogleFonts.manrope(
                             color:
@@ -575,7 +574,7 @@ class ReplyWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(22),
-          color: MainApp.of(context).getSurfaceContainer()),
+          color: Theme.of(context).colorScheme.surfaceContainer),
       child: Text(chatTexts[reply].text),
     );
   }
@@ -655,7 +654,7 @@ const chatTextStyle = TextStyle(
 //                                     child: Container(
 //                                         decoration: BoxDecoration(
 //                                           color: MainApp.of(context)
-//                                               .getSurfaceContainer(),
+//                                               .getsurfaceContainer,
 //                                           borderRadius:
 //                                               BorderRadius.circular(30),
 //                                         ),
