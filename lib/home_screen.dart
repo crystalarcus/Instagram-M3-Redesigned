@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
+import 'package:redesigned/Components/Utils/open_container.dart';
 import 'package:redesigned/Components/posts.dart';
 import 'package:redesigned/main.dart';
+import 'package:redesigned/search_insta_screen.dart';
 import 'package:redesigned/stories_screen.dart';
 import 'package:side_sheet/side_sheet.dart';
 import 'Components/story_widget.dart';
@@ -46,8 +48,13 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                   padding: const EdgeInsets.only(top: 8),
                   child: SizedBox(
                       height: 50,
-                      child: SearchBar(
-                        elevation: WidgetStateProperty.all(0),
+                      child: OpenContainer(
+                        closedColor: Theme.of(context).colorScheme.surfaceContainerHigh,
+                        openColor: Theme.of(context).colorScheme.surfaceContainerLow,
+                        closedShape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(55)),
+                        useRootNavigator: true,
+                        closedBuilder: (context, action) => SearchBar(
+                          shadowColor:const WidgetStatePropertyAll(Colors.transparent),
                         backgroundColor: WidgetStatePropertyAll(
                             Theme.of(context).colorScheme.surfaceContainerHigh),
                         padding: const WidgetStatePropertyAll(
@@ -79,8 +86,8 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                         hintText: "Search",
                         textStyle: const WidgetStatePropertyAll(
                             TextStyle(height: 1.2)),
-                        onTap: () => {},
-                      )),
+                        onTap: () => {action()},
+                      ) , openBuilder:(context, action) =>const SearchInstaScreen(),)),
                 )),
             SliverToBoxAdapter(
                 child: Container(

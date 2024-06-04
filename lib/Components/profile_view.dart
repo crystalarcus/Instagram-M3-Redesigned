@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+import 'package:redesigned/Components/Utils/classes.dart';
+
+class ProfileView extends StatelessWidget {
+  const ProfileView({super.key, required this.person, this.size});
+  final Person person;
+  final double? size;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(size ?? 76),
+          child: Image.asset(
+            person.pfpPath,
+            height: size ?? 76,
+            width: size ?? 76,
+          ),
+        ),
+        const SizedBox(height: 4),
+        ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: size ?? 76),
+            child: Text(
+              overflow: TextOverflow.ellipsis,
+              person.name,
+              style: const TextStyle(fontSize: 14),
+            ))
+      ],
+    );
+  }
+}
+
+class ProfileViewTouchable extends StatelessWidget {
+  const ProfileViewTouchable({
+    super.key,
+    required this.person,
+    required this.onTap,
+    this.size,
+  });
+  final void Function() onTap;
+  final Person person;
+  final double? size;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: ProfileView(
+        person: person,
+        size: size,
+      ),
+    );
+  }
+}
