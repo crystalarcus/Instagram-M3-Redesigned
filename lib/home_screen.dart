@@ -49,45 +49,56 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                   child: SizedBox(
                       height: 50,
                       child: OpenContainer(
-                        closedColor: Theme.of(context).colorScheme.surfaceContainerHigh,
-                        openColor: Theme.of(context).colorScheme.surfaceContainerLow,
-                        closedShape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(55)),
+                        closedElevation: 0,
+                        closedColor:
+                            Theme.of(context).colorScheme.surfaceContainerHigh,
+                        openColor:
+                            Theme.of(context).colorScheme.surfaceContainerLow,
+                        closedShape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(55)),
                         useRootNavigator: true,
                         closedBuilder: (context, action) => SearchBar(
-                          shadowColor:const WidgetStatePropertyAll(Colors.transparent),
-                        backgroundColor: WidgetStatePropertyAll(
-                            Theme.of(context).colorScheme.surfaceContainerHigh),
-                        padding: const WidgetStatePropertyAll(
-                            EdgeInsets.symmetric(horizontal: 12)),
-                        leading: const Icon(
-                          Symbols.search,
-                          opticalSize: 24,
-                          weight: 400,
-                        ),
-                        trailing: <Widget>[
-                          Tooltip(
-                            message: 'Change brightness mode',
-                            child: IconButton(
-                              icon: const Icon(Icons.mic_none_outlined),
-                              onPressed: () {},
-                              selectedIcon:
-                                  const Icon(Icons.brightness_2_outlined),
-                            ),
+                          elevation: const WidgetStatePropertyAll(0),
+                          shadowColor:
+                              const WidgetStatePropertyAll(Colors.transparent),
+                          backgroundColor: WidgetStatePropertyAll(
+                              Theme.of(context)
+                                  .colorScheme
+                                  .surfaceContainerHigh),
+                          padding: const WidgetStatePropertyAll(
+                              EdgeInsets.symmetric(horizontal: 12)),
+                          leading: const Icon(
+                            Symbols.search,
+                            opticalSize: 24,
+                            weight: 400,
                           ),
-                          const ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              child: Image(
-                                image: AssetImage('images/prof.png'),
-                                height: 32,
-                                width: 32,
-                              ))
-                        ],
-                        hintText: "Search",
-                        textStyle: const WidgetStatePropertyAll(
-                            TextStyle(height: 1.2)),
-                        onTap: () => {action()},
-                      ) , openBuilder:(context, action) =>const SearchInstaScreen(),)),
+                          trailing: <Widget>[
+                            Tooltip(
+                              message: 'Change brightness mode',
+                              child: IconButton(
+                                icon: const Icon(Icons.mic_none_outlined),
+                                onPressed: () {},
+                                selectedIcon:
+                                    const Icon(Icons.brightness_2_outlined),
+                              ),
+                            ),
+                            const ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                child: Image(
+                                  image: AssetImage('images/prof.png'),
+                                  height: 32,
+                                  width: 32,
+                                ))
+                          ],
+                          hintText: "Search Instagram",
+                          textStyle: const WidgetStatePropertyAll(
+                              TextStyle(height: 1.2)),
+                          onTap: () => {action()},
+                        ),
+                        openBuilder: (context, action) =>
+                            const SearchInstaScreen(),
+                      )),
                 )),
             SliverToBoxAdapter(
                 child: Container(
@@ -281,7 +292,9 @@ class _DesktopHomeScreenState extends State<DesktopHomeScreen> {
                                     padding: const EdgeInsets.fromLTRB(
                                         16, 18, 16, 0),
                                     decoration: BoxDecoration(
-                                        color: Theme.of(context).colorScheme.surface,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .surface,
                                         borderRadius:
                                             BorderRadius.circular(14)),
                                     child: ListView.separated(

@@ -29,34 +29,47 @@ class _SearchInstaScreenState extends State<SearchInstaScreen> {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
         backgroundColor: colorScheme.surface,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
-          child: TextField(
-            controller: controller,
-            onChanged: (value) {
-              if (value.isEmpty) {}
-            },
-            decoration: InputDecoration(
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 22, horizontal: 4),
-                filled: true,
-                fillColor: colorScheme.surfaceContainer,
-                prefixIcon: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.arrow_back)),
-                hintText: "Search Instagram",
-                suffixIcon: IconButton(
-                    onPressed: () {
-                      controller.clear();
-                    },
-                    icon: const Icon(Icons.clear))),
-          ),
-        ),
         body: ListView(
           children: [
-            const SizedBox(height: 12),
+            TextField(
+              controller: controller,
+              onChanged: (value) {
+                if (value.isEmpty) {}
+              },
+              decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 22, horizontal: 4),
+                  filled: true,
+                  fillColor: colorScheme.surfaceContainer,
+                  prefixIcon: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.arrow_back)),
+                  hintText: "Search Instagram",
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        controller.clear();
+                      },
+                      icon: const Icon(Icons.clear))),
+            ),
+            const SizedBox(height: 16),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  const SizedBox(width: 6),
+                  ...filterItems.map((element) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: FilterChip(
+                          label: Text(element),
+                          onSelected: (value) {},
+                        ),
+                      ))
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
             const Header(text: "Recent"),
             const SizedBox(height: 4),
             Padding(
@@ -96,14 +109,36 @@ class _SearchInstaScreenState extends State<SearchInstaScreen> {
             const Header(text: "Posts"),
             const SizedBox(height: 8),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: GridView.count(
                   crossAxisSpacing: 6,
                   mainAxisSpacing: 6,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   crossAxisCount: 3,
-                  children: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,14,15,16,17,18,19,20,21]
+                  children: [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21
+                  ]
                       .map((e) => SizedBox.square(
                           child: GestureDetector(
                               onTap: () {},
@@ -154,6 +189,8 @@ class Header extends StatelessWidget {
     );
   }
 }
+
+const filterItems = <String>["Profiles", "Posts", "Reels", "Photos"];
 
 const recentSearchs = <String>[
   "furina_sunshine",
