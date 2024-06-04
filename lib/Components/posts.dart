@@ -227,63 +227,96 @@ class _MobilePostState extends State<MobilePost> {
                   const SizedBox(
                     height: 12,
                   ),
-                  SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          const SizedBox(width: 8),
-                          SelectButton(
-                            isSelected: liked,
-                            selectedColor: Colors.red,
-                            onPressed: () {
-                              setState(() {
-                                liked = !liked;
-                              });
-                            },
-                            title: "2.3K",
-                            selectedIcon: Icons.favorite,
-                            unselectedIcon: Icons.favorite_outline,
+                  Row(
+                    children: [
+                      TextButton.icon(
+                          onPressed: () {},
+                          icon: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(24),
+                                child: Image.asset(accounts[21].person.pfpPath,
+                                    height: 24, width: 24),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 3, left: 3),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(24),
+                                  child: Image.asset(
+                                      accounts[21].person.pfpPath,
+                                      height: 24,
+                                      width: 24),
+                                ),
+                              )
+                            ],
                           ),
-                          const SizedBox(width: 8),
-                          SizedBox(
-                              height: 40,
-                              child: FilledButton.tonalIcon(
-                                  onPressed: () {
-                                    showModalBottomSheet(
-                                        context: context,
-                                        enableDrag: true,
-                                        useRootNavigator: true,
-                                        useSafeArea: true,
-                                        showDragHandle: true,
-                                        isScrollControlled: true,
-                                        builder: (BuildContext context) =>
-                                            const CommentSheet());
-                                  },
-                                  label: const Text("2.3K"),
-                                  icon: Icon(MdiIcons.replyOutline))),
-                          const SizedBox(width: 8),
-                          SizedBox(
-                              height: 40,
-                              child: FilledButton.tonalIcon(
-                                  onPressed: () {},
-                                  label: const Text("Share"),
-                                  icon: Icon(MdiIcons.sendVariantOutline))),
-                          const SizedBox(width: 8),
-                          SizedBox(
-                              height: 40,
-                              child: SelectButton(
-                                isSelected: saved,
-                                title: "Save",
-                                onPressed: () {
-                                  setState(() {
-                                    saved = !saved;
-                                  });
-                                },
-                                selectedIcon: Icons.bookmark,
-                                unselectedIcon: Icons.bookmark_outline,
-                              ))
-                        ],
-                      ))
+                          label: const Text("Liked 14K")),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      const SizedBox(width: 8),
+                      SelectButton(
+                        isSelected: liked,
+                        selectedColor: Colors.red,
+                        onPressed: () {
+                          setState(() {
+                            liked = !liked;
+                          });
+                        },
+                        title: "2.3K",
+                        selectedIcon: Icons.favorite,
+                        unselectedIcon: Icons.favorite_outline,
+                      ),
+                      const SizedBox(width: 8),
+                      SizedBox(
+                          height: 40,
+                          child: IconButton.filledTonal(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                    context: context,
+                                    enableDrag: true,
+                                    useRootNavigator: true,
+                                    useSafeArea: true,
+                                    showDragHandle: true,
+                                    isScrollControlled: true,
+                                    builder: (BuildContext context) =>
+                                        const CommentSheet());
+                              },
+                              // label: const Text("2.3K"),
+                              icon: Icon(MdiIcons.commentTextOutline))),
+                      const SizedBox(width: 8),
+                      SizedBox(
+                          height: 40,
+                          child: IconButton.filledTonal(
+                              onPressed: () {},
+                              // label: const Text("Share"),
+                              icon: Icon(MdiIcons.sendVariantOutline))),
+                      const SizedBox(width: 8),
+                      const Spacer(),
+                      SizedBox(
+                          height: 40,
+                          child: IconButton.filledTonal(
+                            onPressed: () {},
+                            icon: const Icon(Icons.bookmark_outline),
+                          )
+                          //  SelectButton(
+                          //   isSelected: saved,
+                          //   title: "Save",
+                          //   onPressed: () {
+                          //     setState(() {
+                          //       saved = !saved;
+                          //     });
+                          //   },
+                          //   selectedIcon: Icons.bookmark,
+                          //   unselectedIcon: Icons.bookmark_outline,
+                          // )
+                          ),
+                      const SizedBox(width: 12)
+                    ],
+                  )
                 ],
               ),
             )));

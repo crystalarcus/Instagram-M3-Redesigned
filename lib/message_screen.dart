@@ -179,10 +179,10 @@ class _MessageScreenMobileState extends State<MessageScreenMobile> {
               openElevation: 0,
               closedElevation: 0,
               clipBehavior: Clip.none,
-              closedBuilder: (context, _) => ChatWidget(
+              closedBuilder: (context, close) => ChatWidget(
                     chat: e,
                     openChat: () {
-                      _();
+                      close();
                     },
                   ),
               openBuilder: (context, _) => MobileChatScreen(

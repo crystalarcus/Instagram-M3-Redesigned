@@ -51,7 +51,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                       child: OpenContainer(
                         closedElevation: 0,
                         closedColor:
-                            Theme.of(context).colorScheme.surfaceContainerHigh,
+                            Theme.of(context).colorScheme.primaryContainer,
                         openColor:
                             Theme.of(context).colorScheme.surfaceContainerLow,
                         closedShape: RoundedRectangleBorder(
@@ -64,7 +64,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                           backgroundColor: WidgetStatePropertyAll(
                               Theme.of(context)
                                   .colorScheme
-                                  .surfaceContainerHigh),
+                                  .surfaceContainerHighest),
                           padding: const WidgetStatePropertyAll(
                               EdgeInsets.symmetric(horizontal: 12)),
                           leading: const Icon(
