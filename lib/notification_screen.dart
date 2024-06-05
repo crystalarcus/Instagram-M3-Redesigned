@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
@@ -43,8 +44,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           backgroundColor: Theme.of(context).colorScheme.surface,
           title: const Text(
             "Notifications",
-            style:
-                TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
           ),
         ),
         body: ListView(children: [
@@ -128,10 +128,16 @@ class _NotifWidgetState extends State<NotifWidget> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(40),
-                child: Image.asset(
-                  widget.notification.notifier.pfpPath,
-                  height: 40,
-                  width: 40,
+                child: CachedNetworkImage(
+                  height: 50,
+                  width: 50,
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  placeholderFadeInDuration: Durations.short1,
+                  placeholder: (context, url) => Icon(
+                      Icons.account_circle_rounded,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant),
+                  fit: BoxFit.contain,
+                  imageUrl: widget.notification.notifier.pfpPath,
                 ),
               ),
               const SizedBox(
@@ -142,7 +148,8 @@ class _NotifWidgetState extends State<NotifWidget> {
                       padding: const EdgeInsets.fromLTRB(12, 8, 8, 8),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(14),
-                          color: Theme.of(context).colorScheme.surfaceContainer),
+                          color:
+                              Theme.of(context).colorScheme.surfaceContainer),
                       child: Row(
                         children: [
                           Expanded(
@@ -237,12 +244,24 @@ class _NotifWidgetState extends State<NotifWidget> {
                                       icon: const Icon(Icons.expand_more))
                                   : ClipRRect(
                                       borderRadius: BorderRadius.circular(12),
-                                      child: Image.asset(
-                                        fit: BoxFit.cover,
-                                        widget.notification.contextImagePath,
-                                        height: 50,
-                                        width: 50,
-                                      ),
+                                      child: CachedNetworkImage(
+                                          height: 50,
+                                          width: 50,
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
+                                          placeholderFadeInDuration:
+                                              Durations.short1,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                        value: downloadProgress
+                                                            .progress),
+                                              ),
+                                          fit: BoxFit.cover,
+                                          imageUrl:
+                                              "https://drive.google.com/uc?export=view&id=${widget.notification.contextImagePath}"),
                                     )
                         ],
                       ))),

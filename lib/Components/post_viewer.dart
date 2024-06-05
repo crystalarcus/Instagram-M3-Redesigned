@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
@@ -32,11 +33,18 @@ class ImagePostViewer extends StatelessWidget {
                   icon: const Icon(Icons.close))),
           Center(
               child: Hero(
-                  tag: imageTag,
-                  child: Image.asset(
-                    image,
-                    fit: BoxFit.contain,
-                  )))
+            tag: imageTag,
+            child: CachedNetworkImage(
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                placeholderFadeInDuration: Durations.short1,
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Center(
+                      child: CircularProgressIndicator(
+                          value: downloadProgress.progress),
+                    ),
+                fit: BoxFit.contain,
+                imageUrl: "https://drive.google.com/uc?export=view&id=$image"),
+          ))
         ],
       ),
     ));
@@ -80,10 +88,18 @@ class CarouselPostViewer extends StatelessWidget {
               items: post.imagePaths
                   .map((e) => Builder(
                       builder: (BuildContext context) => ClipRRect(
-                            child: Image(
-                              image: AssetImage(e),
-                              fit: BoxFit.cover,
-                            ),
+                            child: CachedNetworkImage(
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                placeholderFadeInDuration: Durations.short1,
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) => Center(
+                                          child: CircularProgressIndicator(
+                                              value: downloadProgress.progress),
+                                        ),
+                                fit: BoxFit.contain,
+                                imageUrl:
+                                    "https://drive.google.com/uc?export=view&id=$e"),
                           )))
                   .toList(),
               options: CarouselOptions(

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
 
@@ -11,10 +12,15 @@ class ProfileView extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(size ?? 76),
-          child: Image.asset(
-            person.pfpPath,
+          child: CachedNetworkImage(
             height: size ?? 76,
             width: size ?? 76,
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+            placeholderFadeInDuration: Durations.short1,
+            placeholder: (context, url) => Icon(Icons.account_circle_rounded,
+                color: Theme.of(context).colorScheme.onSurfaceVariant),
+            fit: BoxFit.contain,
+            imageUrl: person.pfpPath,
           ),
         ),
         const SizedBox(height: 4),

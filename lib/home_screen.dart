@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
+import 'package:redesigned/Components/Utils/data.dart';
 import 'package:redesigned/Components/Utils/open_container.dart';
 import 'package:redesigned/Components/posts.dart';
 import 'package:redesigned/main.dart';
@@ -82,14 +84,21 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                                     const Icon(Icons.brightness_2_outlined),
                               ),
                             ),
-                            const ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                child: Image(
-                                  image: AssetImage('images/prof.png'),
-                                  height: 32,
-                                  width: 32,
-                                ))
+                            ClipRRect(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(20)),
+                              child: CachedNetworkImage(
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                  placeholderFadeInDuration: Durations.short1,
+                                  placeholder: (context, url) => Icon(
+                                      Icons.account_circle_rounded,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurfaceVariant),
+                                  fit: BoxFit.contain,
+                                  imageUrl: linkToPfp),
+                            )
                           ],
                           hintText: "Search Instagram",
                           textStyle: const WidgetStatePropertyAll(
@@ -102,7 +111,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                 )),
             SliverToBoxAdapter(
                 child: Container(
-              padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -150,13 +159,25 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                                                           .colorScheme
                                                           .primary)),
                                               child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                  child: Image.asset(
-                                                    'images/prof.png',
-                                                    height: 65,
-                                                    width: 65,
-                                                  )),
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                child: CachedNetworkImage(
+                                                    errorWidget: (context, url,
+                                                            error) =>
+                                                        const Icon(Icons.error),
+                                                    placeholderFadeInDuration:
+                                                        Durations.short1,
+                                                    placeholder:
+                                                        (context, url) => Icon(
+                                                            Icons
+                                                                .account_circle_rounded,
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .onSurfaceVariant),
+                                                    fit: BoxFit.contain,
+                                                    imageUrl: linkToPfp),
+                                              ),
                                             )),
                                         const Text("Your Story")
                                       ],
@@ -198,8 +219,9 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                       ]),
                       const SizedBox(height: 12),
                       ListView.separated(
-                          separatorBuilder: (context, index) => const SizedBox(
-                                height: 12,
+                          separatorBuilder: (context, index) => const Padding(
+                                padding: EdgeInsets.only(top: 12),
+                                child: Divider(),
                               ),
                           itemCount: posts.length,
                           physics: const NeverScrollableScrollPhysics(),
@@ -274,11 +296,16 @@ class _DesktopHomeScreenState extends State<DesktopHomeScreen> {
                         label: const Text("Switch"))),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(30),
-                  child: Image.asset(
-                    'images/prof.png',
-                    height: 45,
-                    width: 45,
-                  ),
+                  child: CachedNetworkImage(
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      placeholderFadeInDuration: Durations.short1,
+                      placeholder: (context, url) => Icon(
+                          Icons.account_circle_rounded,
+                          color:
+                              Theme.of(context).colorScheme.onSurfaceVariant),
+                      fit: BoxFit.contain,
+                      imageUrl: linkToPfp),
                 )
               ]))
             ]),
@@ -411,12 +438,18 @@ Widget storiesSheet(context) => SizedBox(
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: Row(children: [
                   ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
-                      child: Image.asset(
-                        "images/prof.png",
-                        height: 65,
-                        width: 65,
-                      )),
+                    borderRadius: BorderRadius.circular(40),
+                    child: CachedNetworkImage(
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        placeholderFadeInDuration: Durations.short1,
+                        placeholder: (context, url) => Icon(
+                            Icons.account_circle_rounded,
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant),
+                        fit: BoxFit.contain,
+                        imageUrl: linkToPfp),
+                  ),
                   const SizedBox(width: 8),
                   const Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

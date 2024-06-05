@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
@@ -88,7 +89,18 @@ class _SearchScreeMessagenState extends State<SearchMessageScreen> {
                 title: Text(e.name),
                 subtitle: Text(e.userName),
                 leading: CircleAvatar(
-                  child: Image.asset(e.pfpPath),
+                  child: CachedNetworkImage(
+                    height: 50,
+                    width: 50,
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                    placeholderFadeInDuration: Durations.short1,
+                    placeholder: (context, url) => Icon(
+                        Icons.account_circle_rounded,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant),
+                    fit: BoxFit.contain,
+                    imageUrl: e.pfpPath,
+                  ),
                 ),
                 trailing: selected.contains(e.userName)
                     ? const CircleAvatar(
@@ -119,12 +131,18 @@ class SuggestedWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ClipRRect(
-              borderRadius: BorderRadius.circular(size),
-              child: Image.asset(
-                person.pfpPath,
-                height: size,
-                width: size,
-              )),
+            borderRadius: BorderRadius.circular(size),
+            child: CachedNetworkImage(
+              height: size,
+              width: size,
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              placeholderFadeInDuration: Durations.short1,
+              placeholder: (context, url) => Icon(Icons.account_circle_rounded,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant),
+              fit: BoxFit.contain,
+              imageUrl: person.pfpPath,
+            ),
+          ),
           const SizedBox(height: 6),
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: size),

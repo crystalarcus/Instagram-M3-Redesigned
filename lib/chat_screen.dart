@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -53,12 +54,20 @@ class _MobileChatScreenState extends State<MobileChatScreen> {
                 borderRadius: BorderRadius.circular(30),
               ),
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Image.asset(
-                    widget.person.pfpPath,
-                    height: 40,
-                    width: 40,
-                  )),
+                borderRadius: BorderRadius.circular(30),
+                child: CachedNetworkImage(
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                    placeholderFadeInDuration: Durations.short1,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Center(
+                              child: CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                            ),
+                    fit: BoxFit.contain,
+                    imageUrl:
+                        "https://drive.google.com/uc?export=view&id=${widget.person.pfpPath}"),
+              ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -247,12 +256,17 @@ class _DesktopChatScreenState extends State<DesktopChatScreen> {
                 borderRadius: BorderRadius.circular(30),
               ),
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Image.asset(
-                    widget.person.pfpPath,
-                    height: 40,
-                    width: 40,
-                  )),
+                borderRadius: BorderRadius.circular(30),
+                child: CachedNetworkImage(
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                    placeholderFadeInDuration: Durations.short1,
+                    placeholder: (context, url) => Icon(
+                        Icons.account_circle_rounded,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant),
+                    fit: BoxFit.contain,
+                    imageUrl: widget.person.pfpPath),
+              ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -461,52 +475,54 @@ class _InterlocutorChatState extends State<InterlocutorChat> {
       children: [
         SizedBox(
           height: widget.isTopSame ? 2 : 16,
-        ),Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          !widget.isTopSame
-              ? CircleAvatar(
-                  radius: 20,
-                  backgroundImage: AssetImage(widget.pfpPath),
-                )
-              : const SizedBox(width: 40),
-          const SizedBox(width: 6),
-          Column(
+        ),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: widget.isTopSame ? 2 : 8,
-              ),
-              widget.chatText.repliedTo != null
-                  ? ReplyWidget(reply: widget.chatText.repliedTo)
-                  : const SizedBox(),
-              SizedBox(height: widget.chatText.repliedTo != null ? 4 : 0),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width - 120),
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: widget.isBottomSame
-                            ? const Radius.circular(8)
-                            : const Radius.circular(24),
-                        topLeft: const Radius.circular(8),
-                        topRight: const Radius.circular(24),
-                        bottomRight: const Radius.circular(24),
-                      ),
-                      color: Theme.of(context).colorScheme.secondaryContainer),
-                  child: Text(
-                    widget.chatText.text,
-                    style: chatTextStyle,
+              !widget.isTopSame
+                  ? CircleAvatar(
+                      radius: 20,
+                      backgroundImage: AssetImage(widget.pfpPath),
+                    )
+                  : const SizedBox(width: 40),
+              const SizedBox(width: 6),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: widget.isTopSame ? 2 : 8,
                   ),
-                ),
-              ),
-            ],
-          )
-        ])
+                  widget.chatText.repliedTo != null
+                      ? ReplyWidget(reply: widget.chatText.repliedTo)
+                      : const SizedBox(),
+                  SizedBox(height: widget.chatText.repliedTo != null ? 4 : 0),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width - 120),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 16),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: widget.isBottomSame
+                                ? const Radius.circular(8)
+                                : const Radius.circular(24),
+                            topLeft: const Radius.circular(8),
+                            topRight: const Radius.circular(24),
+                            bottomRight: const Radius.circular(24),
+                          ),
+                          color:
+                              Theme.of(context).colorScheme.secondaryContainer),
+                      child: Text(
+                        widget.chatText.text,
+                        style: chatTextStyle,
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ])
       ],
     );
   }

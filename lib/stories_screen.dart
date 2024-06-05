@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
+import 'package:redesigned/Components/Utils/data.dart';
 
 class StoriesScreen extends StatefulWidget {
   const StoriesScreen({super.key});
@@ -51,12 +53,18 @@ class _StoriesScreenState extends State<StoriesScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: Row(children: [
                   ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
-                      child: Image.asset(
-                        "images/prof.png",
-                        height: 65,
-                        width: 65,
-                      )),
+                    borderRadius: BorderRadius.circular(40),
+                    child: CachedNetworkImage(
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        placeholderFadeInDuration: Durations.short1,
+                        placeholder: (context, url) => Icon(
+                            Icons.account_circle_rounded,
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant),
+                        fit: BoxFit.contain,
+                        imageUrl: linkToPfp),
+                  ),
                   const SizedBox(width: 8),
                   const Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -124,16 +132,22 @@ class _StoryWidget extends State<StoryTile> {
                   ]));
         },
         leading: Container(
-            padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40),
-                border: Border.all(
-                    width: 2.2, color: Theme.of(context).colorScheme.primary)),
-            child: Image.asset(
-              widget.person.pfpPath,
-              height: 55,
-              width: 55,
-            )),
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40),
+              border: Border.all(
+                  width: 2.2, color: Theme.of(context).colorScheme.primary)),
+          child: CachedNetworkImage(
+            height: 55,
+            width: 55,
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+            placeholderFadeInDuration: Durations.short1,
+            placeholder: (context, url) => Icon(Icons.account_circle_rounded,
+                color: Theme.of(context).colorScheme.onSurfaceVariant),
+            fit: BoxFit.contain,
+            imageUrl: widget.person.pfpPath,
+          ),
+        ),
         title: Text(widget.person.name,
             style: const TextStyle(
                 fontSize: 16, fontWeight: FontWeight.w600, letterSpacing: 0)),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
@@ -78,11 +79,16 @@ class _MessageScreenMobileState extends State<MessageScreenMobile> {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
-                color: Colors.black,
-                child: Image.asset(
-                  'images/prof.png',
-                  height: 30,
-                )),
+              color: Colors.black,
+              child: CachedNetworkImage(
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  placeholderFadeInDuration: Durations.short1,
+                  placeholder: (context, url) => Icon(
+                      Icons.account_circle_rounded,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant),
+                  fit: BoxFit.contain,
+                  imageUrl: linkToPfp),
+            ),
           ),
           const SizedBox(width: 16)
         ],
@@ -240,11 +246,17 @@ class _MessageScreenDesktopState extends State<MessageScreenDesktop> {
                           borderRadius: BorderRadius.circular(30),
                           child: Stack(
                             children: <Widget>[
-                              Image.asset(
-                                "images/prof.png",
-                                height: 36,
-                                width: 36,
-                              ),
+                              CachedNetworkImage(
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                  placeholderFadeInDuration: Durations.short1,
+                                  placeholder: (context, url) => Icon(
+                                      Icons.account_circle_rounded,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurfaceVariant),
+                                  fit: BoxFit.contain,
+                                  imageUrl: linkToPfp),
                               Positioned.fill(
                                   child: Material(
                                       color: Colors.transparent,
@@ -371,7 +383,13 @@ class ChatWidgetDesktop extends StatelessWidget {
         ),
         leading: CircleAvatar(
           radius: 28,
-          child: Image.asset(chat.person.pfpPath),
+          child: CachedNetworkImage(
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              placeholderFadeInDuration: Durations.short1,
+              placeholder: (context, url) => Icon(Icons.account_circle_rounded,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant),
+              fit: BoxFit.contain,
+              imageUrl: chat.person.pfpPath),
         ),
         subtitle: Text(
           maxLines: 1,
@@ -459,7 +477,16 @@ class ChatWidget extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 child: CircleAvatar(
                   radius: 24,
-                  child: Image.asset(chat.person.pfpPath),
+                  child: CachedNetworkImage(
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      placeholderFadeInDuration: Durations.short1,
+                      placeholder: (context, url) => Icon(
+                          Icons.account_circle_rounded,
+                          color:
+                              Theme.of(context).colorScheme.onSurfaceVariant),
+                      fit: BoxFit.contain,
+                      imageUrl: chat.person.pfpPath),
                 ),
               ),
               const SizedBox(width: 8),
@@ -590,13 +617,15 @@ class PfpView extends StatelessWidget {
     return Column(
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-          child: Image.asset(
-            p.pfpPath,
-            height: size,
-            width: size,
-          ),
-        ),
+            borderRadius: BorderRadius.circular(30),
+            child: CachedNetworkImage(
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                placeholderFadeInDuration: Durations.short1,
+                placeholder: (context, url) => Icon(
+                    Icons.account_circle_rounded,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant),
+                fit: BoxFit.contain,
+                imageUrl: p.pfpPath)),
         Container(
             alignment: Alignment.center,
             width: size + 40,
@@ -634,10 +663,14 @@ class PfpView extends StatelessWidget {
 //           IconButton(onPressed: () {}, icon: const Icon(Icons.mic)),
 //           ClipRRect(
 //             borderRadius: BorderRadius.circular(20),
-//             child: Image.asset(
-//               'images/prof.png',
-//               height: 30,
-//             ),
+//             child: CachedNetworkImage(
+                  // errorWidget: (context, url, error) => const Icon(Icons.error),
+                  // placeholderFadeInDuration: Durations.short1,
+                  // placeholder: (context, url) => Icon(
+                  //     Icons.account_circle_rounded,
+                  //     color: Theme.of(context).colorScheme.onSurfaceVariant),
+                  // fit: BoxFit.contain,
+                  // imageUrl: linkToPfp),
 //           ),
 //         ],
 //       ),

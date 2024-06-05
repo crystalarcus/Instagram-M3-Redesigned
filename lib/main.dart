@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:redesigned/Components/Utils/animations.dart';
@@ -131,8 +132,6 @@ class _MainAppState extends State<MainApp> {
     return false;
   }
 
-  
-
   bool isSearchFloating = true;
   List<Person> myFollower = myFollowersConst;
   List<Person> myFriends = myFollowersConst.sublist(1, 5);
@@ -172,6 +171,7 @@ class _MainAppState extends State<MainApp> {
     labelMedium: TextStyle(fontWeight: FontWeight.w500),
     labelLarge: TextStyle(fontWeight: FontWeight.w500),
   );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
@@ -211,6 +211,17 @@ class _RootScreenState extends State<RootScreen>
 
   int selectedIndex = 0;
   bool controllerInitialized = false;
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.transparent,
+      statusBarColor: Colors.transparent,
+      systemNavigationBarContrastEnforced: false,
+      systemStatusBarContrastEnforced: false,
+    ));
+  }
 
   @override
   void didChangeDependencies() {

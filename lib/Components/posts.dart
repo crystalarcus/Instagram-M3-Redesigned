@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:go_router/go_router.dart';
@@ -22,304 +23,308 @@ class _MobilePostState extends State<MobilePost> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(14)),
-        child: Container(
-            width: double.infinity,
-            color: Theme.of(context).colorScheme.surfaceContainerLow,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 16),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                    ),
+      borderRadius: const BorderRadius.all(Radius.circular(14)),
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      Account acc =
+                          getAccountFromUserName(widget.post.person.userName);
+                      context.push('/profile/true', extra: acc);
+                    },
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        GestureDetector(
-                            onTap: () {
-                              Account acc = getAccountFromUserName(
-                                  widget.post.person.userName);
-                              context.push('/profile/true', extra: acc);
-                            },
-                            child: Row(
-                              children: [
-                                Image(
-                                  image: AssetImage(widget.post.person.pfpPath),
-                                  height: 36,
-                                  width: 36,
-                                ),
-                                const SizedBox(width: 8),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      widget.post.person.name,
-                                      style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      widget.post.person.userName,
-                                      style: const TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600),
-                                    )
-                                  ],
-                                )
-                              ],
-                            )),
-                        Row(
+                        Image(
+                          image: AssetImage(widget.post.person.pfpPath),
+                          height: 36,
+                          width: 36,
+                        ),
+                        const SizedBox(width: 8),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "3 hrs",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  color: Theme.of(context).colorScheme.outline),
+                              widget.post.person.name,
+                              style: const TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w600),
                             ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            IconButton(
-                                onPressed: () {
-                                  showModalBottomSheet<void>(
-                                      context: context,
-                                      isScrollControlled: true,
-                                      useRootNavigator: true,
-                                      backgroundColor:
-                                          Theme.of(context).colorScheme.surface,
-                                      showDragHandle: true,
-                                      builder: (BuildContext context) {
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 12,
-                                                        vertical: 8),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: [
-                                                    SizedBox(
-                                                        height: 50,
-                                                        width: 150,
-                                                        child: FilledButton.tonalIcon(
-                                                            onPressed: () {},
-                                                            icon: const Icon(Icons
-                                                                .play_circle_outline),
-                                                            label: const Text(
-                                                                "Remix"))),
-                                                    const SizedBox(
-                                                      width: 16,
-                                                    ),
-                                                    SizedBox(
-                                                        height: 50,
-                                                        width: 150,
-                                                        child: FilledButton.tonalIcon(
-                                                            onPressed: () {},
-                                                            icon: const Icon(
-                                                                Icons.qr_code),
-                                                            label: const Text(
-                                                                "QR Code"))),
-                                                  ],
-                                                )),
-                                            const Divider(),
-                                            ListTile(
-                                              titleTextStyle: const TextStyle(
-                                                  fontWeight: FontWeight.w600),
-                                              textColor: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSecondaryContainer,
-                                              leading: const Icon(
-                                                  Icons.info_outline),
-                                              title: const Text(
-                                                  "Why your're seeing this post"),
-                                              onTap: () {},
-                                            ),
-                                            ListTile(
-                                              titleTextStyle: const TextStyle(
-                                                  fontWeight: FontWeight.w600),
-                                              textColor: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSecondaryContainer,
-                                              leading: const Icon(Icons
-                                                  .visibility_off_outlined),
-                                              title:
-                                                  const Text("Not interested"),
-                                              onTap: () {},
-                                            ),
-                                            ListTile(
-                                              titleTextStyle: const TextStyle(
-                                                  fontWeight: FontWeight.w600),
-                                              textColor: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSecondaryContainer,
-                                              leading: const Icon(Icons
-                                                  .account_circle_outlined),
-                                              title: const Text(
-                                                  "About this account"),
-                                              onTap: () {},
-                                            ),
-                                            ListTile(
-                                              titleTextStyle: const TextStyle(
-                                                  fontWeight: FontWeight.w600),
-                                              textColor: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSecondaryContainer,
-                                              leading: const Icon(
-                                                  Icons.tune_outlined),
-                                              title: const Text(
-                                                  "Manage suggested content"),
-                                              onTap: () {},
-                                            ),
-                                            ListTile(
-                                              titleTextStyle: const TextStyle(
-                                                  fontWeight: FontWeight.w600),
-                                              iconColor: Theme.of(context)
-                                                  .colorScheme
-                                                  .error,
-                                              textColor: Theme.of(context)
-                                                  .colorScheme
-                                                  .error,
-                                              leading: const Icon(
-                                                  Icons.warning_amber_sharp),
-                                              title: const Text(
-                                                  "Report this post"),
-                                              onTap: () {},
-                                            ),
-                                          ],
-                                        );
-                                      });
-                                },
-                                icon: const Icon(Icons.more_vert))
+                            Text(
+                              widget.post.person.userName,
+                              style: const TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.w600),
+                            )
                           ],
                         )
                       ],
+                    )),
+                Row(
+                  children: [
+                    Text(
+                      "3 hrs",
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.outline),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  widget.post.type == PostType.image
-                      ? ImagePostDesktop(
-                          imagePost: widget.post as ImagePostObject)
-                      : CarouselPostDesktop(
-                          imagePost: widget.post as CarouselPostObject),
-                  const SizedBox(height: 10),
-                  Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: Text(
-                        textAlign: TextAlign.left,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        widget.post.subTitle,
-                        style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 0),
-                      )),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    children: [
-                      TextButton.icon(
-                          onPressed: () {},
-                          icon: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(24),
-                                child: Image.asset(accounts[21].person.pfpPath,
-                                    height: 24, width: 24),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 3, left: 3),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(24),
-                                  child: Image.asset(
-                                      accounts[21].person.pfpPath,
-                                      height: 24,
-                                      width: 24),
-                                ),
-                              )
-                            ],
-                          ),
-                          label: const Text("Liked 14K")),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      const SizedBox(width: 8),
-                      SelectButton(
-                        isSelected: liked,
-                        selectedColor: Colors.red,
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    IconButton(
                         onPressed: () {
-                          setState(() {
-                            liked = !liked;
-                          });
+                          showModalBottomSheet<void>(
+                              context: context,
+                              isScrollControlled: true,
+                              useRootNavigator: true,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.surface,
+                              showDragHandle: true,
+                              builder: (BuildContext context) {
+                                return ListView(
+                                  shrinkWrap: true,
+                                  children: [
+                                    Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12, vertical: 8),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            SizedBox(
+                                                height: 50,
+                                                width: 150,
+                                                child: FilledButton.tonalIcon(
+                                                    onPressed: () {},
+                                                    icon: const Icon(Icons
+                                                        .play_circle_outline),
+                                                    label:
+                                                        const Text("Remix"))),
+                                            const SizedBox(
+                                              width: 16,
+                                            ),
+                                            SizedBox(
+                                                height: 50,
+                                                width: 150,
+                                                child: FilledButton.tonalIcon(
+                                                    onPressed: () {},
+                                                    icon: const Icon(
+                                                        Icons.qr_code),
+                                                    label:
+                                                        const Text("QR Code"))),
+                                          ],
+                                        )),
+                                    const Divider(),
+                                    ListTile(
+                                      titleTextStyle: const TextStyle(
+                                          fontWeight: FontWeight.w600),
+                                      textColor: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondaryContainer,
+                                      leading: const Icon(Icons.info_outline),
+                                      title: const Text(
+                                          "Why your're seeing this post"),
+                                      onTap: () {},
+                                    ),
+                                    ListTile(
+                                      titleTextStyle: const TextStyle(
+                                          fontWeight: FontWeight.w600),
+                                      textColor: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondaryContainer,
+                                      leading: const Icon(
+                                          Icons.visibility_off_outlined),
+                                      title: const Text("Not interested"),
+                                      onTap: () {},
+                                    ),
+                                    ListTile(
+                                      titleTextStyle: const TextStyle(
+                                          fontWeight: FontWeight.w600),
+                                      textColor: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondaryContainer,
+                                      leading: const Icon(
+                                          Icons.account_circle_outlined),
+                                      title: const Text("About this account"),
+                                      onTap: () {},
+                                    ),
+                                    ListTile(
+                                      titleTextStyle: const TextStyle(
+                                          fontWeight: FontWeight.w600),
+                                      textColor: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondaryContainer,
+                                      leading: const Icon(Icons.tune_outlined),
+                                      title: const Text(
+                                          "Manage suggested content"),
+                                      onTap: () {},
+                                    ),
+                                    ListTile(
+                                      titleTextStyle: const TextStyle(
+                                          fontWeight: FontWeight.w600),
+                                      iconColor:
+                                          Theme.of(context).colorScheme.error,
+                                      textColor:
+                                          Theme.of(context).colorScheme.error,
+                                      leading:
+                                          const Icon(Icons.warning_amber_sharp),
+                                      title: const Text("Report this post"),
+                                      onTap: () {},
+                                    ),
+                                  ],
+                                );
+                              });
                         },
-                        title: "2.3K",
-                        selectedIcon: Icons.favorite,
-                        unselectedIcon: Icons.favorite_outline,
-                      ),
-                      const SizedBox(width: 8),
-                      SizedBox(
-                          height: 40,
-                          child: IconButton.filledTonal(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                    context: context,
-                                    enableDrag: true,
-                                    useRootNavigator: true,
-                                    useSafeArea: true,
-                                    showDragHandle: true,
-                                    isScrollControlled: true,
-                                    builder: (BuildContext context) =>
-                                        const CommentSheet());
-                              },
-                              // label: const Text("2.3K"),
-                              icon: Icon(MdiIcons.commentTextOutline))),
-                      const SizedBox(width: 8),
-                      SizedBox(
-                          height: 40,
-                          child: IconButton.filledTonal(
-                              onPressed: () {},
-                              // label: const Text("Share"),
-                              icon: Icon(MdiIcons.sendVariantOutline))),
-                      const SizedBox(width: 8),
-                      const Spacer(),
-                      SizedBox(
-                          height: 40,
-                          child: IconButton.filledTonal(
-                            onPressed: () {},
-                            icon: const Icon(Icons.bookmark_outline),
-                          )
-                          //  SelectButton(
-                          //   isSelected: saved,
-                          //   title: "Save",
-                          //   onPressed: () {
-                          //     setState(() {
-                          //       saved = !saved;
-                          //     });
-                          //   },
-                          //   selectedIcon: Icons.bookmark,
-                          //   unselectedIcon: Icons.bookmark_outline,
-                          // )
-                          ),
-                      const SizedBox(width: 12)
-                    ],
-                  )
-                ],
+                        icon: const Icon(Icons.more_vert))
+                  ],
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 4,
+          ),
+          widget.post.type == PostType.image
+              ? ImagePostWidget(imagePost: widget.post as ImagePostObject)
+              : CarouselPostWidget(
+                  imagePost: widget.post as CarouselPostObject),
+          const SizedBox(height: 10),
+          Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Text(
+                textAlign: TextAlign.left,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                widget.post.subTitle,
+                style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0),
+              )),
+          const SizedBox(
+            height: 12,
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              const SizedBox(width: 8),
+              SelectButton(
+                isSelected: liked,
+                selectedColor: Colors.red,
+                onPressed: () {
+                  setState(() {
+                    liked = !liked;
+                  });
+                },
+                title: "2.3K",
+                selectedIcon: Icons.favorite,
+                unselectedIcon: Icons.favorite_outline,
               ),
-            )));
+              const SizedBox(width: 8),
+              SizedBox(
+                  height: 40,
+                  child: IconButton.filledTonal(
+                      onPressed: () {
+                        showModalBottomSheet(
+                            context: context,
+                            enableDrag: true,
+                            useRootNavigator: true,
+                            useSafeArea: true,
+                            showDragHandle: true,
+                            isScrollControlled: true,
+                            builder: (BuildContext context) =>
+                                const CommentSheet());
+                      },
+                      // label: const Text("2.3K"),
+                      icon: Icon(MdiIcons.commentTextOutline))),
+              const SizedBox(width: 8),
+              SizedBox(
+                  height: 40,
+                  child: IconButton.filledTonal(
+                      onPressed: () {},
+                      // label: const Text("Share"),
+                      icon: Icon(MdiIcons.sendVariantOutline))),
+              const SizedBox(width: 8),
+              const Spacer(),
+              SizedBox(
+                  height: 40,
+                  child: IconButton.filledTonal(
+                    onPressed: () {},
+                    icon: const Icon(Icons.bookmark_outline),
+                  )
+                  //  SelectButton(
+                  //   isSelected: saved,
+                  //   title: "Save",
+                  //   onPressed: () {
+                  //     setState(() {
+                  //       saved = !saved;
+                  //     });
+                  //   },
+                  //   selectedIcon: Icons.bookmark,
+                  //   unselectedIcon: Icons.bookmark_outline,
+                  // )
+                  ),
+              const SizedBox(width: 12)
+            ],
+          ),
+          Row(
+            children: [
+              TextButton.icon(
+                  onPressed: () {},
+                  icon: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(24),
+                        child: CachedNetworkImage(
+                          height: 24,
+                          width: 24,
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          placeholderFadeInDuration: Durations.short1,
+                          placeholder: (context, url) => Icon(
+                              Icons.account_circle_rounded,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant),
+                          fit: BoxFit.contain,
+                          imageUrl: accounts[21].person.pfpPath,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 3, left: 3),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(24),
+                          child: CachedNetworkImage(
+                            height: 24,
+                            width: 24,
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                            placeholderFadeInDuration: Durations.short1,
+                            placeholder: (context, url) => Icon(
+                                Icons.account_circle_rounded,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant),
+                            fit: BoxFit.contain,
+                            imageUrl: accounts[24].person.pfpPath,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  label: const Text("See who liked")),
+              const Text("6.4K Replies")
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -350,10 +355,10 @@ class _DesktopPostState extends State<DesktopPost> {
           SizedBox(
             width: MediaQuery.sizeOf(context).width / 2.5,
             child: widget.post.type == PostType.image
-                ? ImagePostDesktop(
+                ? ImagePostWidget(
                     imagePost: widget.post as ImagePostObject,
                   )
-                : CarouselPostDesktop(
+                : CarouselPostWidget(
                     imagePost: widget.post as CarouselPostObject),
           ),
           Expanded(
@@ -488,14 +493,14 @@ class _DesktopPostState extends State<DesktopPost> {
   }
 }
 
-class CarouselPostDesktop extends StatefulWidget {
-  const CarouselPostDesktop({super.key, required this.imagePost});
+class CarouselPostWidget extends StatefulWidget {
+  const CarouselPostWidget({super.key, required this.imagePost});
   final CarouselPostObject imagePost;
   @override
-  State<CarouselPostDesktop> createState() => _CarouselPostDesktopState();
+  State<CarouselPostWidget> createState() => _CarouselPostWidgetState();
 }
 
-class _CarouselPostDesktopState extends State<CarouselPostDesktop> {
+class _CarouselPostWidgetState extends State<CarouselPostWidget> {
   int currentPage = 0;
   @override
   Widget build(BuildContext context) {
@@ -514,45 +519,64 @@ class _CarouselPostDesktopState extends State<CarouselPostDesktop> {
         },
         child: Hero(
             tag: widget.imagePost.postId.toString(),
-            child: FlutterCarousel(
-              items: widget.imagePost.imagePaths
-                  .map((e) => Builder(
-                        builder: (BuildContext context) => Image(
-                          image: AssetImage(e),
-                          fit: BoxFit.contain,
-                        ),
-                      ))
-                  .toList(),
-              options: CarouselOptions(
-                initialPage: currentPage,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    currentPage = index;
-                  });
-                },
-                viewportFraction: 1,
-                aspectRatio: widget.imagePost.aspectRatio,
-                slideIndicator: CircularWaveSlideIndicator(
-                  indicatorRadius: 4,
-                  indicatorBackgroundColor:
-                      Theme.of(context).colorScheme.outlineVariant,
-                  currentIndicatorColor: Theme.of(context).colorScheme.primary,
+            child: Stack(
+              children: [
+                FlutterCarousel(
+                  items: widget.imagePost.imagePaths
+                      .map((e) => Builder(
+                            builder: (BuildContext context) =>
+                                CachedNetworkImage(
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                    placeholderFadeInDuration: Durations.short1,
+                                    progressIndicatorBuilder: (context, url,
+                                            downloadProgress) =>
+                                        Center(
+                                          child: CircularProgressIndicator(
+                                              value: downloadProgress.progress),
+                                        ),
+                                    fit: BoxFit.contain,
+                                    imageUrl:
+                                        "https://drive.google.com/uc?export=view&id=$e"),
+                          ))
+                      .toList(),
+                  options: CarouselOptions(
+                    initialPage: currentPage,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        currentPage = index;
+                      });
+                    },
+                    viewportFraction: 1,
+                    aspectRatio: widget.imagePost.aspectRatio,
+                    indicatorMargin: 4,
+                    slideIndicator: CircularWaveSlideIndicator(
+                      indicatorRadius: 3,
+                      itemSpacing: 12,
+                      indicatorBackgroundColor:
+                          Theme.of(context).colorScheme.surfaceContainerHigh,
+                      currentIndicatorColor:
+                          Theme.of(context).colorScheme.primary,
+                    ),
+                    floatingIndicator: true,
+                    showIndicator: true,
+                  ),
                 ),
-                floatingIndicator: false,
-                showIndicator: true,
-              ),
+                // const Align(
+                // alignment: Alignment.bottomRight, child: Text("2/3")),
+              ],
             )));
   }
 }
 
-class ImagePostDesktop extends StatefulWidget {
-  const ImagePostDesktop({super.key, required this.imagePost});
+class ImagePostWidget extends StatefulWidget {
+  const ImagePostWidget({super.key, required this.imagePost});
   final ImagePostObject imagePost;
   @override
-  State<ImagePostDesktop> createState() => _ImagePostDesktopState();
+  State<ImagePostWidget> createState() => _ImagePostWidgetState();
 }
 
-class _ImagePostDesktopState extends State<ImagePostDesktop> {
+class _ImagePostWidgetState extends State<ImagePostWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -567,11 +591,19 @@ class _ImagePostDesktopState extends State<ImagePostDesktop> {
                 )));
       },
       child: Hero(
-          tag: widget.imagePost.postId.toString(),
-          child: Image.asset(
-            widget.imagePost.imagePath,
+        tag: widget.imagePost.postId.toString(),
+        child: CachedNetworkImage(
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+            placeholderFadeInDuration: Durations.short1,
+            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                Center(
+                  child: CircularProgressIndicator(
+                      value: downloadProgress.progress),
+                ),
             fit: BoxFit.contain,
-          )),
+            imageUrl:
+                "https://drive.google.com/uc?export=view&id=${widget.imagePost.imagePath}"),
+      ),
     );
   }
 }
@@ -635,3 +667,17 @@ class _SelectButtonState extends State<SelectButton>
         ));
   }
 }
+
+// https://drive.google.com/uc?export=view&id=1NzFWd6g29p7n-96bOBQFagS6Q1NlGviL
+// https://drive.google.com/file/d/1JpcQdKOF3N2MJe00fSvvjSxAvhdbLAo4/view?usp=drive_link
+
+// class imgData {
+//   imgData({required this.name, required this.id});
+//   final String name;
+//   final String id;
+// }
+
+// var imgDataList = <imgData>[
+//   imgData(name: "raiden", id: "1NzFWd6g29p7n-96bOBQFagS6Q1NlGviL"),
+//   imgData(name: "furina", id: "1JpcQdKOF3N2MJe00fSvvjSxAvhdbLAo4")
+// ];

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
@@ -51,12 +52,20 @@ class StoryWidget extends StatelessWidget {
                         width: 2.8,
                         color: Theme.of(context).colorScheme.primary)),
                 child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Image.asset(
-                      person.pfpPath,
-                      height: 65,
-                      width: 65,
-                    )),
+                  borderRadius: BorderRadius.circular(30),
+                  child: CachedNetworkImage(
+                    height: 65,
+                    width: 65,
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                    placeholderFadeInDuration: Durations.short1,
+                    placeholder: (context, url) => Icon(
+                        Icons.account_circle_rounded,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant),
+                    fit: BoxFit.contain,
+                    imageUrl: person.pfpPath,
+                  ),
+                ),
               )),
           Text(
             overflow: TextOverflow.ellipsis,

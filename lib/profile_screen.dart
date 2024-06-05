@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -72,8 +73,20 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           color: widget.newStories
                                               ? colorScheme.primary
                                               : colorScheme.outlineVariant)),
-                                  child: Image.asset(widget.acc.person.pfpPath,
-                                      height: 50, width: 50),
+                                  child: CachedNetworkImage(
+                                    height: 50,
+                                    width: 50,
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                    placeholderFadeInDuration: Durations.short1,
+                                    placeholder: (context, url) => Icon(
+                                        Icons.account_circle_rounded,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurfaceVariant),
+                                    fit: BoxFit.contain,
+                                    imageUrl: widget.acc.person.pfpPath,
+                                  ),
                                 ),
                                 const SizedBox(width: 8),
                                 Column(
@@ -157,7 +170,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                                 .width /
                                                             2),
                                                 elevation: 10,
-                                                backgroundColor: colorScheme.surfaceContainerLowest,
+                                                backgroundColor: colorScheme
+                                                    .surfaceContainerLowest,
                                                 title: const Text("Followers"),
                                                 children: [
                                                   SizedBox(
@@ -222,7 +236,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                       context: context,
                                       builder: (BuildContext context) =>
                                           SimpleDialog(
-                                            backgroundColor: colorScheme.surfaceContainerLow,
+                                            backgroundColor:
+                                                colorScheme.surfaceContainerLow,
                                             title: const Text("Following"),
                                             children: [
                                               LimitedBox(
@@ -403,7 +418,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                 child: TabBarView(controller: tabController, children: [
                   dummyPost(Theme.of(context).colorScheme.primaryContainer),
                   dummyPost(Theme.of(context).colorScheme.outlineVariant),
-                  dummyPost(Theme.of(context).colorScheme.surfaceContainerHighest),
+                  dummyPost(
+                      Theme.of(context).colorScheme.surfaceContainerHighest),
                 ]))));
   }
 }
@@ -501,12 +517,20 @@ class _FollowsState extends State<Follows> {
             Row(
               children: [
                 ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Image.asset(
-                      widget.person.pfpPath,
-                      height: 40,
-                      width: 40,
-                    )),
+                  borderRadius: BorderRadius.circular(30),
+                  child: CachedNetworkImage(
+                    height: 50,
+                    width: 50,
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                    placeholderFadeInDuration: Durations.short1,
+                    placeholder: (context, url) => Icon(
+                        Icons.account_circle_rounded,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant),
+                    fit: BoxFit.contain,
+                    imageUrl: widget.person.pfpPath,
+                  ),
+                ),
                 const SizedBox(width: 8),
                 SizedBox(
                     width: 110,

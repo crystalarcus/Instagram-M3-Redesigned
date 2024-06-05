@@ -40,7 +40,7 @@ class _SearchInstaScreenState extends State<SearchInstaScreen> {
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 22, horizontal: 4),
                   filled: true,
-                  fillColor: colorScheme.surfaceContainer,
+                  fillColor: colorScheme.surface,
                   prefixIcon: IconButton(
                       onPressed: () {
                         Navigator.pop(context);
@@ -159,7 +159,7 @@ class RecentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+      contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
       onTap: () {},
       title: Text(title),
       leading: const Icon(Icons.history),
@@ -202,8 +202,8 @@ const recentSearchs = <String>[
 var searchAccounts = <Account>[
   accounts[3],
   accounts[6],
-  accounts[12],
-  accounts[14],
+  accounts[19],
+  accounts[15],
   accounts[23],
   accounts[16],
   accounts[7],

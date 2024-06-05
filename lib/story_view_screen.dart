@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -83,8 +84,18 @@ class _StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                     _controller.forward();
                   },
                   child: Center(
-                      child: Image.asset(
-                          widget.story.stories[currentIndex].pathToMedia)))),
+                    child: CachedNetworkImage(
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      placeholderFadeInDuration: Durations.short1,
+                      placeholder: (context, url) => Icon(
+                          Icons.account_circle_rounded,
+                          color:
+                              Theme.of(context).colorScheme.onSurfaceVariant),
+                      fit: BoxFit.contain,
+                      imageUrl: widget.story.stories[currentIndex].pathToMedia,
+                    ),
+                  ))),
           Column(
             children: [
               Row(
@@ -98,10 +109,18 @@ class _StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                   const SizedBox(width: 8),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(18),
-                    child: Image.asset(
-                      widget.story.person.pfpPath,
+                    child: CachedNetworkImage(
                       height: 45,
                       width: 45,
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      placeholderFadeInDuration: Durations.short1,
+                      placeholder: (context, url) => Icon(
+                          Icons.account_circle_rounded,
+                          color:
+                              Theme.of(context).colorScheme.onSurfaceVariant),
+                      fit: BoxFit.contain,
+                      imageUrl: widget.story.person.pfpPath,
                     ),
                   ),
                   const SizedBox(width: 8),

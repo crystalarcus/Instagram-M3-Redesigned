@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
@@ -97,8 +98,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
                         weight: 600,
                         size: 22,
                       )),
-                  shadowColor:
-                      const WidgetStatePropertyAll(Colors.transparent),
+                  shadowColor: const WidgetStatePropertyAll(Colors.transparent),
                   hintText: "Search people")),
         ),
       ),
@@ -122,8 +122,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
                               duration: Durations.medium3,
                               builder: (context, double size, child) =>
                                   ConstrainedBox(
-                                    constraints: BoxConstraints(
-                                        maxWidth: size),
+                                    constraints: BoxConstraints(maxWidth: size),
                                     child: Chip(
                                       deleteIcon: const Icon(
                                         Icons.close,
@@ -142,11 +141,22 @@ class _NewChatScreenState extends State<NewChatScreen> {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       avatar: CircleAvatar(
-                                        child: Image.asset(
-                                            getAccountFromUserName(e)
-                                                .person
-                                                .pfpPath),
-                                      ),
+                                          child: CachedNetworkImage(
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      const Icon(Icons.error),
+                                              placeholderFadeInDuration:
+                                                  Durations.short1,
+                                              placeholder: (context, url) => Icon(
+                                                  Icons.account_circle_rounded,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSurfaceVariant),
+                                              fit: BoxFit.contain,
+                                              imageUrl:
+                                                  getAccountFromUserName(e)
+                                                      .person
+                                                      .pfpPath)),
                                     ),
                                   )),
                         )
@@ -167,10 +177,16 @@ class _NewChatScreenState extends State<NewChatScreen> {
                 title: Text(e.name),
                 subtitle: Text(e.userName),
                 leading: CircleAvatar(
-                  child: Image.asset(
-                    e.pfpPath,
-                  ),
-                ),
+                    child: CachedNetworkImage(
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        placeholderFadeInDuration: Durations.short1,
+                        placeholder: (context, url) => Icon(
+                            Icons.account_circle_rounded,
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant),
+                        fit: BoxFit.contain,
+                        imageUrl: e.pfpPath)),
                 trailing: selected.contains(e.userName)
                     ? const CircleAvatar(
                         radius: 16,
@@ -271,11 +287,14 @@ class MemberWidget extends StatelessWidget {
         children: [
           ClipRRect(
               borderRadius: BorderRadius.circular(size),
-              child: Image.asset(
-                person.pfpPath,
-                height: size,
-                width: size,
-              )),
+              child: CachedNetworkImage(
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  placeholderFadeInDuration: Durations.short1,
+                  placeholder: (context, url) => Icon(
+                      Icons.account_circle_rounded,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant),
+                  fit: BoxFit.contain,
+                  imageUrl: person.pfpPath)),
           const SizedBox(height: 6),
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: size),

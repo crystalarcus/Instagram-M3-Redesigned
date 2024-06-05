@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -53,11 +54,17 @@ class CommentSheet extends StatelessWidget {
                     const SizedBox(width: 12),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(30),
-                      child: Image.asset(
-                        'images/prof.png',
-                        height: 30,
-                        width: 30,
-                      ),
+                      child: CachedNetworkImage(
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          placeholderFadeInDuration: Durations.short1,
+                          placeholder: (context, url) => Icon(
+                              Icons.account_circle_rounded,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant),
+                          fit: BoxFit.contain,
+                          imageUrl: linkToPfp),
                     ),
                     const SizedBox(width: 12),
                     const Expanded(
@@ -101,10 +108,17 @@ class _CommentWidgetState extends State<CommentWidget> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(25),
-                  child: Image.asset(
-                    widget.comment.person.pfpPath,
+                  child: CachedNetworkImage(
                     height: 45,
                     width: 45,
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                    placeholderFadeInDuration: Durations.short1,
+                    placeholder: (context, url) => Icon(
+                        Icons.account_circle_rounded,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant),
+                    fit: BoxFit.contain,
+                    imageUrl: widget.comment.person.pfpPath,
                   ),
                 )),
             Expanded(

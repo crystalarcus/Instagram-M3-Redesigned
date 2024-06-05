@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
@@ -102,7 +103,20 @@ class _ReelWidgetState extends State<ReelWidget> {
                       child: Row(
                         children: [
                           CircleAvatar(
-                            child: Image.asset(widget.reel.person.pfpPath),
+                            child: CachedNetworkImage(
+                              height: 50,
+                              width: 50,
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                              placeholderFadeInDuration: Durations.short1,
+                              placeholder: (context, url) => Icon(
+                                  Icons.account_circle_rounded,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant),
+                              fit: BoxFit.contain,
+                              imageUrl: widget.reel.person.pfpPath,
+                            ),
                           ),
                           const SizedBox(width: 12),
                           Column(
