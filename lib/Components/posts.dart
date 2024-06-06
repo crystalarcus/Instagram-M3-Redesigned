@@ -184,7 +184,6 @@ class _MobilePostState extends State<MobilePost> {
           Row(
             mainAxisSize: MainAxisSize.max,
             children: [
-              const SizedBox(width: 8),
               SelectButton(
                 isSelected: liked,
                 selectedColor: Colors.red,
@@ -197,10 +196,9 @@ class _MobilePostState extends State<MobilePost> {
                 selectedIcon: Icons.favorite,
                 unselectedIcon: Icons.favorite_outline,
               ),
-              const SizedBox(width: 8),
               SizedBox(
                   height: 40,
-                  child: IconButton.filledTonal(
+                  child: IconButton(
                       onPressed: () {
                         showModalBottomSheet(
                             context: context,
@@ -214,18 +212,16 @@ class _MobilePostState extends State<MobilePost> {
                       },
                       // label: const Text("2.3K"),
                       icon: Icon(MdiIcons.commentTextOutline))),
-              const SizedBox(width: 8),
               SizedBox(
                   height: 40,
-                  child: IconButton.filledTonal(
+                  child: IconButton(
                       onPressed: () {},
                       // label: const Text("Share"),
                       icon: Icon(MdiIcons.sendVariantOutline))),
-              const SizedBox(width: 8),
               const Spacer(),
               SizedBox(
                   height: 40,
-                  child: IconButton.filledTonal(
+                  child: IconButton(
                     onPressed: () {},
                     icon: const Icon(Icons.bookmark_outline),
                   )
@@ -290,7 +286,8 @@ class _MobilePostState extends State<MobilePost> {
                       )
                     ],
                   ),
-                  label: const Text("See who liked")),
+                  label: const Text("23.5K Likes")),
+              const SizedBox(height: 4),
               const Text("6.4K Replies")
             ],
           ),
@@ -642,14 +639,13 @@ class _SelectButtonState extends State<SelectButton>
   Widget build(BuildContext context) {
     return SizedBox(
         height: 40,
-        child: FilledButton.tonalIcon(
+        child: IconButton(
           onPressed: onTap,
-          label: Text(widget.title),
+          // label: Text(widget.title),
           icon: AnimatedScale(
               duration: Durations.short3,
               scale: scaleValue,
               child: Icon(
-                size: 22,
                 widget.isSelected ? widget.selectedIcon : widget.unselectedIcon,
                 color: widget.isSelected
                     ? widget.selectedColor
