@@ -81,8 +81,10 @@ class _MessageScreenMobileState extends State<MessageScreenMobile> {
             child: Container(
               color: Colors.black,
               child: CachedNetworkImage(
+                  height: 40,
+                  width: 40,
                   errorWidget: (context, url, error) => const Icon(Icons.error),
-                  placeholderFadeInDuration: Durations.short1,
+                  placeholderFadeInDuration: const Duration(seconds: 0),
                   placeholder: (context, url) => Icon(
                       Icons.account_circle_rounded,
                       color: Theme.of(context).colorScheme.onSurfaceVariant),
@@ -247,9 +249,11 @@ class _MessageScreenDesktopState extends State<MessageScreenDesktop> {
                           child: Stack(
                             children: <Widget>[
                               CachedNetworkImage(
+                                  height: 40,
+                                  width: 40,
                                   errorWidget: (context, url, error) =>
                                       const Icon(Icons.error),
-                                  placeholderFadeInDuration: Durations.short1,
+                                  placeholderFadeInDuration: const Duration(seconds: 0),
                                   placeholder: (context, url) => Icon(
                                       Icons.account_circle_rounded,
                                       color: Theme.of(context)
@@ -385,7 +389,7 @@ class ChatWidgetDesktop extends StatelessWidget {
           radius: 28,
           child: CachedNetworkImage(
               errorWidget: (context, url, error) => const Icon(Icons.error),
-              placeholderFadeInDuration: Durations.short1,
+              placeholderFadeInDuration: const Duration(seconds: 0),
               placeholder: (context, url) => Icon(Icons.account_circle_rounded,
                   color: Theme.of(context).colorScheme.onSurfaceVariant),
               fit: BoxFit.contain,
@@ -480,7 +484,7 @@ class ChatWidget extends StatelessWidget {
                   child: CachedNetworkImage(
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
-                      placeholderFadeInDuration: Durations.short1,
+                      placeholderFadeInDuration: const Duration(seconds: 0),
                       placeholder: (context, url) => Icon(
                           Icons.account_circle_rounded,
                           color:
@@ -619,8 +623,10 @@ class PfpView extends StatelessWidget {
         ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: CachedNetworkImage(
+                height: 75,
+                width: 75,
                 errorWidget: (context, url, error) => const Icon(Icons.error),
-                placeholderFadeInDuration: Durations.short1,
+                placeholderFadeInDuration: const Duration(seconds: 0),
                 placeholder: (context, url) => Icon(
                     Icons.account_circle_rounded,
                     color: Theme.of(context).colorScheme.onSurfaceVariant),
@@ -638,40 +644,3 @@ class PfpView extends StatelessWidget {
     );
   }
 }
-
-// Padding(
-//     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-//     child:
-//      SizedBox(
-//       height: 56,
-//       child:
-//        SearchBar(
-//         padding: const MaterialStatePropertyAll(
-//             EdgeInsets.symmetric(horizontal: 14)),
-//         leading: const Icon(
-//           Symbols.search,
-//           size: 22,
-//           weight: 600,
-//         ),
-//         hintText: "Search Messages",
-//         shadowColor:
-//             const MaterialStatePropertyAll(Colors.transparent),
-//         elevation: const MaterialStatePropertyAll(0),
-//         backgroundColor: MaterialStatePropertyAll(
-//             Theme.of(context).colorScheme.surfaceContainerHigh),
-//         trailing: [
-//           IconButton(onPressed: () {}, icon: const Icon(Icons.mic)),
-//           ClipRRect(
-//             borderRadius: BorderRadius.circular(20),
-//             child: CachedNetworkImage(
-                  // errorWidget: (context, url, error) => const Icon(Icons.error),
-                  // placeholderFadeInDuration: Durations.short1,
-                  // placeholder: (context, url) => Icon(
-                  //     Icons.account_circle_rounded,
-                  //     color: Theme.of(context).colorScheme.onSurfaceVariant),
-                  // fit: BoxFit.contain,
-                  // imageUrl: linkToPfp),
-//           ),
-//         ],
-//       ),
-//     )),

@@ -27,8 +27,8 @@ class _MobilePostState extends State<MobilePost> {
       child: Column(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
+            padding: const EdgeInsets.only(
+              left: 8,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,10 +41,19 @@ class _MobilePostState extends State<MobilePost> {
                     },
                     child: Row(
                       children: [
-                        Image(
-                          image: AssetImage(widget.post.person.pfpPath),
+                        CachedNetworkImage(
                           height: 36,
                           width: 36,
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          placeholderFadeInDuration: const Duration(seconds: 0),
+                          placeholder: (context, url) => Icon(
+                              Icons.account_circle_rounded,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant),
+                          fit: BoxFit.contain,
+                          imageUrl: widget.post.person.pfpPath,
                         ),
                         const SizedBox(width: 8),
                         Column(
@@ -121,52 +130,30 @@ class _MobilePostState extends State<MobilePost> {
                                         )),
                                     const Divider(),
                                     ListTile(
-                                      titleTextStyle: const TextStyle(
-                                          fontWeight: FontWeight.w600),
-                                      textColor: Theme.of(context)
-                                          .colorScheme
-                                          .onSecondaryContainer,
                                       leading: const Icon(Icons.info_outline),
                                       title: const Text(
                                           "Why your're seeing this post"),
                                       onTap: () {},
                                     ),
                                     ListTile(
-                                      titleTextStyle: const TextStyle(
-                                          fontWeight: FontWeight.w600),
-                                      textColor: Theme.of(context)
-                                          .colorScheme
-                                          .onSecondaryContainer,
                                       leading: const Icon(
                                           Icons.visibility_off_outlined),
                                       title: const Text("Not interested"),
                                       onTap: () {},
                                     ),
                                     ListTile(
-                                      titleTextStyle: const TextStyle(
-                                          fontWeight: FontWeight.w600),
-                                      textColor: Theme.of(context)
-                                          .colorScheme
-                                          .onSecondaryContainer,
                                       leading: const Icon(
                                           Icons.account_circle_outlined),
                                       title: const Text("About this account"),
                                       onTap: () {},
                                     ),
                                     ListTile(
-                                      titleTextStyle: const TextStyle(
-                                          fontWeight: FontWeight.w600),
-                                      textColor: Theme.of(context)
-                                          .colorScheme
-                                          .onSecondaryContainer,
                                       leading: const Icon(Icons.tune_outlined),
                                       title: const Text(
                                           "Manage suggested content"),
                                       onTap: () {},
                                     ),
                                     ListTile(
-                                      titleTextStyle: const TextStyle(
-                                          fontWeight: FontWeight.w600),
                                       iconColor:
                                           Theme.of(context).colorScheme.error,
                                       textColor:
@@ -193,23 +180,7 @@ class _MobilePostState extends State<MobilePost> {
               ? ImagePostWidget(imagePost: widget.post as ImagePostObject)
               : CarouselPostWidget(
                   imagePost: widget.post as CarouselPostObject),
-          const SizedBox(height: 10),
-          Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Text(
-                textAlign: TextAlign.left,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                widget.post.subTitle,
-                style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 0),
-              )),
-          const SizedBox(
-            height: 12,
-          ),
+          const SizedBox(height: 6),
           Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -286,7 +257,7 @@ class _MobilePostState extends State<MobilePost> {
                           width: 24,
                           errorWidget: (context, url, error) =>
                               const Icon(Icons.error),
-                          placeholderFadeInDuration: Durations.short1,
+                          placeholderFadeInDuration: const Duration(seconds: 0),
                           placeholder: (context, url) => Icon(
                               Icons.account_circle_rounded,
                               color: Theme.of(context)
@@ -305,7 +276,8 @@ class _MobilePostState extends State<MobilePost> {
                             width: 24,
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
-                            placeholderFadeInDuration: Durations.short1,
+                            placeholderFadeInDuration:
+                                const Duration(seconds: 0),
                             placeholder: (context, url) => Icon(
                                 Icons.account_circle_rounded,
                                 color: Theme.of(context)
@@ -320,6 +292,24 @@ class _MobilePostState extends State<MobilePost> {
                   ),
                   label: const Text("See who liked")),
               const Text("6.4K Replies")
+            ],
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  textAlign: TextAlign.left,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  widget.post.subTitle,
+                  style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 0),
+                ),
+              ),
             ],
           ),
         ],
@@ -528,7 +518,8 @@ class _CarouselPostWidgetState extends State<CarouselPostWidget> {
                                 CachedNetworkImage(
                                     errorWidget: (context, url, error) =>
                                         const Icon(Icons.error),
-                                    placeholderFadeInDuration: Durations.short1,
+                                    placeholderFadeInDuration:
+                                        const Duration(seconds: 0),
                                     progressIndicatorBuilder: (context, url,
                                             downloadProgress) =>
                                         Center(
@@ -594,7 +585,7 @@ class _ImagePostWidgetState extends State<ImagePostWidget> {
         tag: widget.imagePost.postId.toString(),
         child: CachedNetworkImage(
             errorWidget: (context, url, error) => const Icon(Icons.error),
-            placeholderFadeInDuration: Durations.short1,
+            placeholderFadeInDuration: const Duration(seconds: 0),
             progressIndicatorBuilder: (context, url, downloadProgress) =>
                 Center(
                   child: CircularProgressIndicator(

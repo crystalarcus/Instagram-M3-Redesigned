@@ -88,9 +88,12 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(20)),
                               child: CachedNetworkImage(
+                                  height: 36,
+                                  width: 36,
                                   errorWidget: (context, url, error) =>
                                       const Icon(Icons.error),
-                                  placeholderFadeInDuration: Durations.short1,
+                                  placeholderFadeInDuration:
+                                      const Duration(seconds: 0),
                                   placeholder: (context, url) => Icon(
                                       Icons.account_circle_rounded,
                                       color: Theme.of(context)
@@ -110,27 +113,28 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                       )),
                 )),
             SliverToBoxAdapter(
-                child: Container(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 12),
                   Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text("Stories",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w600)),
-                          const SizedBox(height: 40),
-                          TextButton(
-                              onPressed: () {
-                                context.push("/stories");
-                              },
-                              child: const Text("See all"))
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(left: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text("Stories",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w600)),
+                            const SizedBox(height: 40),
+                            TextButton(
+                                onPressed: () {
+                                  context.push("/stories");
+                                },
+                                child: const Text("See all"))
+                          ],
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -162,6 +166,8 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                                                 borderRadius:
                                                     BorderRadius.circular(30),
                                                 child: CachedNetworkImage(
+                                                    height: 64,
+                                                    width: 64,
                                                     errorWidget: (context, url,
                                                             error) =>
                                                         const Icon(Icons.error),
@@ -183,29 +189,13 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                                       ],
                                     ),
                                     const SizedBox(width: 20),
-                                    StoryWidget(
-                                        person: Person(
-                                            name: "Furina de Fontaine",
-                                            userName: "furina.sunshine",
-                                            pfpPath: "images/furina.png")),
+                                    StoryWidget(person: accounts[9].person),
                                     const SizedBox(width: 20),
-                                    StoryWidget(
-                                        person: Person(
-                                            name: "Raiden Shogun",
-                                            userName: "cook.with.shogun",
-                                            pfpPath: "images/raiden.png")),
+                                    StoryWidget(person: accounts[19].person),
                                     const SizedBox(width: 20),
-                                    StoryWidget(
-                                        person: Person(
-                                            name: "Navia",
-                                            userName: "ur_mom",
-                                            pfpPath: "images/navia.png")),
+                                    StoryWidget(person: accounts[18].person),
                                     const SizedBox(width: 20),
-                                    StoryWidget(
-                                        person: Person(
-                                            name: "Tartaglia",
-                                            userName: "not.a.child",
-                                            pfpPath: "images/childe.png")),
+                                    StoryWidget(person: accounts[5].person),
                                     // const StoryWidget(pfpPath: "images/hutao.png"),
                                   ],
                                 ))),
@@ -213,6 +203,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                       const SizedBox(height: 8),
                       const Divider(),
                       const Row(children: [
+                        SizedBox(width: 12),
                         Text("Explore",
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.w600)),
@@ -243,7 +234,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                   )
                 ],
               ),
-            ))
+            )
           ]),
         ));
   }
@@ -297,9 +288,11 @@ class _DesktopHomeScreenState extends State<DesktopHomeScreen> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: CachedNetworkImage(
+                      height: 64,
+                      width: 64,
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
-                      placeholderFadeInDuration: Durations.short1,
+                      placeholderFadeInDuration: const Duration(seconds: 0),
                       placeholder: (context, url) => Icon(
                           Icons.account_circle_rounded,
                           color:
@@ -440,9 +433,11 @@ Widget storiesSheet(context) => SizedBox(
                   ClipRRect(
                     borderRadius: BorderRadius.circular(40),
                     child: CachedNetworkImage(
+                        height: 64,
+                        width: 64,
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
-                        placeholderFadeInDuration: Durations.short1,
+                        placeholderFadeInDuration: const Duration(seconds: 0),
                         placeholder: (context, url) => Icon(
                             Icons.account_circle_rounded,
                             color:

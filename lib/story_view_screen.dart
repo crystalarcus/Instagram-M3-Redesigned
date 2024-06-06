@@ -87,7 +87,7 @@ class _StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                     child: CachedNetworkImage(
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
-                      placeholderFadeInDuration: Durations.short1,
+                      placeholderFadeInDuration: const Duration(seconds: 0),
                       placeholder: (context, url) => Icon(
                           Icons.account_circle_rounded,
                           color:
@@ -114,7 +114,7 @@ class _StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                       width: 45,
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
-                      placeholderFadeInDuration: Durations.short1,
+                      placeholderFadeInDuration: const Duration(seconds: 0),
                       placeholder: (context, url) => Icon(
                           Icons.account_circle_rounded,
                           color:

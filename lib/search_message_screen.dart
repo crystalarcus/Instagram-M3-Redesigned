@@ -94,7 +94,7 @@ class _SearchScreeMessagenState extends State<SearchMessageScreen> {
                     width: 50,
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
-                    placeholderFadeInDuration: Durations.short1,
+                    placeholderFadeInDuration: const Duration(seconds: 0),
                     placeholder: (context, url) => Icon(
                         Icons.account_circle_rounded,
                         color: Theme.of(context).colorScheme.onSurfaceVariant),
@@ -136,7 +136,7 @@ class SuggestedWidget extends StatelessWidget {
               height: size,
               width: size,
               errorWidget: (context, url, error) => const Icon(Icons.error),
-              placeholderFadeInDuration: Durations.short1,
+              placeholderFadeInDuration: const Duration(seconds: 0),
               placeholder: (context, url) => Icon(Icons.account_circle_rounded,
                   color: Theme.of(context).colorScheme.onSurfaceVariant),
               fit: BoxFit.contain,

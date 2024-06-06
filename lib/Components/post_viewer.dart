@@ -36,7 +36,7 @@ class ImagePostViewer extends StatelessWidget {
             tag: imageTag,
             child: CachedNetworkImage(
                 errorWidget: (context, url, error) => const Icon(Icons.error),
-                placeholderFadeInDuration: Durations.short1,
+                placeholderFadeInDuration: const Duration(seconds: 0),
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     Center(
                       child: CircularProgressIndicator(
@@ -91,7 +91,7 @@ class CarouselPostViewer extends StatelessWidget {
                             child: CachedNetworkImage(
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.error),
-                                placeholderFadeInDuration: Durations.short1,
+                                placeholderFadeInDuration: const Duration(seconds: 0),
                                 progressIndicatorBuilder:
                                     (context, url, downloadProgress) => Center(
                                           child: CircularProgressIndicator(
