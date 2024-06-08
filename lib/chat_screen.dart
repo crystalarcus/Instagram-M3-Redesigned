@@ -56,6 +56,8 @@ class _MobileChatScreenState extends State<MobileChatScreen> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
                 child: CachedNetworkImage(
+                    height: 45,
+                    width: 45,
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                     placeholderFadeInDuration: const Duration(seconds: 0),
@@ -65,8 +67,7 @@ class _MobileChatScreenState extends State<MobileChatScreen> {
                                   value: downloadProgress.progress),
                             ),
                     fit: BoxFit.contain,
-                    imageUrl:
-                        "https://drive.google.com/uc?export=view&id=${widget.person.pfpPath}"),
+                    imageUrl: widget.person.pfpPath),
               ),
             ),
             Column(
@@ -258,6 +259,8 @@ class _DesktopChatScreenState extends State<DesktopChatScreen> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
                 child: CachedNetworkImage(
+                    height: 36,
+                    width: 36,
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                     placeholderFadeInDuration: const Duration(seconds: 0),
@@ -481,11 +484,23 @@ class _InterlocutorChatState extends State<InterlocutorChat> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               !widget.isTopSame
-                  ? CircleAvatar(
-                      radius: 20,
-                      backgroundImage: AssetImage(widget.pfpPath),
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: CachedNetworkImage(
+                          height: 36,
+                          width: 36,
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          placeholderFadeInDuration: const Duration(seconds: 0),
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) => Center(
+                                    child: CircularProgressIndicator(
+                                        value: downloadProgress.progress),
+                                  ),
+                          fit: BoxFit.contain,
+                          imageUrl: widget.pfpPath),
                     )
-                  : const SizedBox(width: 40),
+                  : const SizedBox(width: 36),
               const SizedBox(width: 6),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -583,7 +598,7 @@ class _UserChatState extends State<UserChat> {
 
 class ReplyWidget extends StatelessWidget {
   const ReplyWidget({super.key, required this.reply});
-  final dynamic reply;
+  final Reply reply;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -591,7 +606,7 @@ class ReplyWidget extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(22),
           color: Theme.of(context).colorScheme.surfaceContainer),
-      child: Text(chatTexts[reply].text),
+      child: Text(reply.text),
     );
   }
 }

@@ -260,60 +260,66 @@ class _RootScreenState extends State<RootScreen>
               useRootNavigator: true,
               context: context,
               builder: (BuildContext context) {
-                return SizedBox(
-                    height: 125,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
+                return SafeArea(
+                    child: SizedBox(
+                        height: 125,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              IconButton.filledTonal(
-                                onPressed: () {},
-                                padding: const EdgeInsets.all(16),
-                                icon: const Icon(Icons.add_box_outlined),
-                                iconSize: 36,
+                              Column(
+                                children: [
+                                  IconButton.filledTonal(
+                                    onPressed: () {},
+                                    padding: const EdgeInsets.all(16),
+                                    icon: const Icon(Icons.add_box_outlined),
+                                    iconSize: 36,
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    "Post",
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  )
+                                ],
                               ),
-                              const SizedBox(height: 12),
-                              Text(
-                                "Post",
-                                style: GoogleFonts.manrope(
-                                    fontSize: 14, fontWeight: FontWeight.w600),
-                              )
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              IconButton.filledTonal(
-                                onPressed: () {},
-                                padding: const EdgeInsets.all(16),
-                                icon: const Icon(Icons.movie_creation_outlined),
-                                iconSize: 36,
+                              Column(
+                                children: [
+                                  IconButton.filledTonal(
+                                    onPressed: () {},
+                                    padding: const EdgeInsets.all(16),
+                                    icon: const Icon(
+                                        Icons.movie_creation_outlined),
+                                    iconSize: 36,
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    "Reel",
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  )
+                                ],
                               ),
-                              const SizedBox(height: 12),
-                              Text(
-                                "Reel",
-                                style: GoogleFonts.manrope(
-                                    fontSize: 14, fontWeight: FontWeight.w600),
-                              )
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              IconButton.filledTonal(
-                                onPressed: () {},
-                                padding: const EdgeInsets.all(16),
-                                icon: const Icon(Icons.cast_connected_outlined),
-                                iconSize: 36,
+                              Column(
+                                children: [
+                                  IconButton.filledTonal(
+                                    onPressed: () {},
+                                    padding: const EdgeInsets.all(16),
+                                    icon: const Icon(
+                                        Icons.cast_connected_outlined),
+                                    iconSize: 36,
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    "Live",
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  )
+                                ],
                               ),
-                              const SizedBox(height: 12),
-                              Text(
-                                "Live",
-                                style: GoogleFonts.manrope(
-                                    fontSize: 14, fontWeight: FontWeight.w600),
-                              )
-                            ],
-                          ),
-                        ]));
+                            ])));
               });
         },
         child: const Icon(Icons.add),
@@ -494,41 +500,41 @@ List<Person> myFollowersConst = [
 ];
 
 // Color getsurface {
-  //   CorePalette p = CorePalette.of(seedColor.value);
-  //   return Color(p.neutral.get(isDark() ? 6 : 98));
-  // }
+//   CorePalette p = CorePalette.of(seedColor.value);
+//   return Color(p.neutral.get(isDark() ? 6 : 98));
+// }
 
-  // Color getSurfaceDim() {
-  //   CorePalette p = CorePalette.of(seedColor.value);
-  //   return Color(p.neutral.get(isDark() ? 6 : 87));
-  // }
+// Color getSurfaceDim() {
+//   CorePalette p = CorePalette.of(seedColor.value);
+//   return Color(p.neutral.get(isDark() ? 6 : 87));
+// }
 
-  // Color getSurfaceBright() {
-  //   CorePalette p = CorePalette.of(seedColor.value);
-  //   return Color(p.neutral.get(isDark() ? 24 : 98));
-  // }
+// Color getSurfaceBright() {
+//   CorePalette p = CorePalette.of(seedColor.value);
+//   return Color(p.neutral.get(isDark() ? 24 : 98));
+// }
 
-  // Color getsurfaceContainerLowest {
-  //   CorePalette p = CorePalette.of(seedColor.value);
-  //   return Color(p.neutral.get(isDark() ? 4 : 100));
-  // }
+// Color getsurfaceContainerLowest {
+//   CorePalette p = CorePalette.of(seedColor.value);
+//   return Color(p.neutral.get(isDark() ? 4 : 100));
+// }
 
-  // Color getsurfaceContainerLow {
-  //   CorePalette p = CorePalette.of(seedColor.value);
-  //   return Color(p.neutral.get(isDark() ? 10 : 96));
-  // }
+// Color getsurfaceContainerLow {
+//   CorePalette p = CorePalette.of(seedColor.value);
+//   return Color(p.neutral.get(isDark() ? 10 : 96));
+// }
 
-  // Color getsurfaceContainer {
-  //   CorePalette p = CorePalette.of(seedColor.value);
-  //   return Color(p.neutral.get(isDark() ? 12 : 94));
-  // }
+// Color getsurfaceContainer {
+//   CorePalette p = CorePalette.of(seedColor.value);
+//   return Color(p.neutral.get(isDark() ? 12 : 94));
+// }
 
-  // Color getsurfaceContainerHigh {
-  //   CorePalette p = CorePalette.of(seedColor.value);
-  //   return Color(p.neutral.get(isDark() ? 17 : 92));
-  // }
+// Color getsurfaceContainerHigh {
+//   CorePalette p = CorePalette.of(seedColor.value);
+//   return Color(p.neutral.get(isDark() ? 17 : 92));
+// }
 
-  // Color getsurfaceContainerHighest {
-  //   CorePalette p = CorePalette.of(seedColor.value);
-  //   return Color(p.neutral.get(isDark() ? 22 : 90));
-  // }
+// Color getsurfaceContainerHighest {
+//   CorePalette p = CorePalette.of(seedColor.value);
+//   return Color(p.neutral.get(isDark() ? 22 : 90));
+// }

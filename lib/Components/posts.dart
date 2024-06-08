@@ -7,12 +7,19 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
-import 'package:redesigned/Components/comment_sheet.dart';
+// import 'package:redesigned/Components/comment_sheet.dart';
 import 'package:redesigned/Components/post_viewer.dart';
 
 class MobilePost extends StatefulWidget {
-  const MobilePost({super.key, required this.post});
+  const MobilePost({
+    super.key,
+    required this.post,
+    // required this.openComment,
+    required this.controller,
+  });
   final Post post;
+  // final Function openComment;
+  final DraggableScrollableController controller;
   @override
   State<MobilePost> createState() => _MobilePostState();
 }
@@ -200,15 +207,22 @@ class _MobilePostState extends State<MobilePost> {
                   height: 40,
                   child: IconButton(
                       onPressed: () {
-                        showModalBottomSheet(
-                            context: context,
-                            enableDrag: true,
-                            useRootNavigator: true,
-                            useSafeArea: true,
-                            showDragHandle: true,
-                            isScrollControlled: true,
-                            builder: (BuildContext context) =>
-                                const CommentSheet());
+                        setState(() {
+                          widget.controller.animateTo(
+                            0.8,
+                            duration: Durations.long1,
+                            curve: Easing.emphasizedDecelerate,
+                          );
+                        });
+                        // showModalBottomSheet(
+                        //     context: context,
+                        //     enableDrag: true,
+                        //     useRootNavigator: true,
+                        //     useSafeArea: true,
+                        //     showDragHandle: true,
+                        //     isScrollControlled: true,
+                        //     builder: (BuildContext context) =>
+                        //         const CommentSheet());
                       },
                       // label: const Text("2.3K"),
                       icon: Icon(MdiIcons.commentTextOutline))),
@@ -358,10 +372,20 @@ class _DesktopPostState extends State<DesktopPost> {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          CircleAvatar(
-                            radius: 24,
-                            backgroundImage:
-                                AssetImage(widget.post.person.pfpPath),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(24),
+                            child: CachedNetworkImage(
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                placeholderFadeInDuration:
+                                    const Duration(seconds: 0),
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) => Center(
+                                          child: CircularProgressIndicator(
+                                              value: downloadProgress.progress),
+                                        ),
+                                fit: BoxFit.contain,
+                                imageUrl: widget.post.person.pfpPath),
                           ),
                           const SizedBox(width: 8),
                           Column(

@@ -88,7 +88,7 @@ class Comment {
   final String text;
   final String dateTime;
   int likes;
-  List<Reply> replies;
+  List<CommentReply> replies;
   bool isLiked;
 
   Comment({
@@ -99,6 +99,23 @@ class Comment {
     this.likes = 0,
     this.replies = const [],
   });
+}
+
+class CommentReply {
+  CommentReply({
+    required this.person,
+    required this.text,
+    required this.dateTime,
+    required this.replyTo,
+    this.isLiked = false,
+    this.likes = 0,
+  });
+  final Person person;
+  final DateTime dateTime;
+  final String text;
+  final String replyTo;
+  bool isLiked;
+  int likes;
 }
 
 class Reply {

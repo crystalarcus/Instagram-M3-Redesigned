@@ -5,7 +5,24 @@ List<List<Comment>> comments = [
     Comment(
         person: accounts[25].person,
         text: "For Inazuma’s sake, someone please stop her",
-        dateTime: "8 min"),
+        dateTime: "8 min",
+        replies: <CommentReply>[
+          CommentReply(
+              replyTo: accounts[25].person.userName,
+              person: accounts[21].person,
+              text: "Ysss",
+              dateTime: DateTime(2024, 3, 4, 12, 24, 4)),
+          CommentReply(
+              replyTo: accounts[25].person.userName,
+              person: accounts[12].person,
+              text: "Mayb yess",
+              dateTime: DateTime(2024, 3, 4, 12, 24, 4)),
+          CommentReply(
+              replyTo: accounts[25].person.userName,
+              person: accounts[15].person,
+              text: "Agreed",
+              dateTime: DateTime(2024, 3, 4, 12, 24, 4)),
+        ]),
     Comment(
         person: accounts[20].person,
         text:
@@ -140,13 +157,13 @@ List<Chat> chats = [
       lastTime: "2 day"),
 ];
 
-
 List<Account> accounts = [
   Account(
       person: Person(
           name: "Aether",
           userName: "i.need.primos",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1t8ON-QsNgAC1ry7OHNzBbG1uLiLIjES2'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1t8ON-QsNgAC1ry7OHNzBbG1uLiLIjES2'),
       followers: [],
       following: [],
       posts: []),
@@ -154,13 +171,17 @@ List<Account> accounts = [
       person: Person(
           name: "Alhaitham",
           userName: "grand_sage",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1Y0QB4V0MeyoRUO0QQZu5qFMhT7ajlxzb'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1Y0QB4V0MeyoRUO0QQZu5qFMhT7ajlxzb'),
       followers: [],
       following: [],
       posts: []),
   Account(
       person: Person(
-          name: "Ayaka", userName: "am_i_ayaya", pfpPath: 'https://drive.google.com/uc?export=view&id=1dlzU80M9PEuPhX2qKo1QpvsWyaXIcv-F'),
+          name: "Ayaka",
+          userName: "am_i_ayaya",
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1dlzU80M9PEuPhX2qKo1QpvsWyaXIcv-F'),
       followers: [],
       following: [],
       posts: []),
@@ -168,7 +189,8 @@ List<Account> accounts = [
       person: Person(
           name: "Ayato",
           userName: "kamisato.ayato",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1dlzU80M9PEuPhX2qKo1QpvsWyaXIcv-F'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1dlzU80M9PEuPhX2qKo1QpvsWyaXIcv-F'),
       followers: [],
       following: [],
       posts: []),
@@ -176,7 +198,8 @@ List<Account> accounts = [
       person: Person(
           name: "Bennet",
           userName: "who.threw.that.stone",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1SiEfxr1q--HXdBy8q1ckx7IirlLt3R52'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1SiEfxr1q--HXdBy8q1ckx7IirlLt3R52'),
       followers: [],
       following: [],
       posts: []),
@@ -184,7 +207,8 @@ List<Account> accounts = [
       person: Person(
           name: "Childe",
           userName: "not.a.child",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1sp3oMTRkRXPRMXZfaRq6cRt3oNrNvwCt'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1sp3oMTRkRXPRMXZfaRq6cRt3oNrNvwCt'),
       followers: [],
       following: [],
       posts: []),
@@ -192,7 +216,8 @@ List<Account> accounts = [
       person: Person(
           name: "Chongyun",
           userName: "conqurer.of.demon.2",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1QD_kj1U4vstuKn1wBCWtzbrtlMYsG-7y'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1QD_kj1U4vstuKn1wBCWtzbrtlMYsG-7y'),
       followers: [],
       following: [],
       posts: []),
@@ -200,7 +225,8 @@ List<Account> accounts = [
       person: Person(
           name: "Eula",
           userName: "dance_with_claymore",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1C5XUQeqY8bvi2DE0KRi7zc_XIW3721C1'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1C5XUQeqY8bvi2DE0KRi7zc_XIW3721C1'),
       followers: [],
       following: [],
       posts: []),
@@ -208,7 +234,8 @@ List<Account> accounts = [
       person: Person(
           name: "Fischl",
           userName: "princess_purple",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1KSuYNIP2S9luQxptHYzOoKa8URJozIe1'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1KSuYNIP2S9luQxptHYzOoKa8URJozIe1'),
       followers: [],
       following: [],
       posts: []),
@@ -216,7 +243,8 @@ List<Account> accounts = [
       person: Person(
           name: "Furina de Fontaine",
           userName: "furina_sunshine",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1HNDR8qiIArymcwzzThjXPblRf04nnSMn'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1HNDR8qiIArymcwzzThjXPblRf04nnSMn'),
       bio: "Your Friendly Celebrity Archon of Teyvat",
       pronouns: "she/her",
       followers: ['cook.with.shogun', 'please_die_soon', 'princess_purple'],
@@ -226,7 +254,8 @@ List<Account> accounts = [
       person: Person(
           name: "Director  Hu",
           userName: "please_die_soon",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1CQm-RSOfQxlKrXTOHlj_5JqhsqLsu8rq'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1CQm-RSOfQxlKrXTOHlj_5JqhsqLsu8rq'),
       followers: [],
       following: [],
       posts: []),
@@ -234,7 +263,8 @@ List<Account> accounts = [
       person: Person(
           name: "Arataki Itto",
           userName: "the.one.and.oni",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1fuW9MzvqzgKl7Pt90v4eNUpMCRde1aGW'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1fuW9MzvqzgKl7Pt90v4eNUpMCRde1aGW'),
       followers: [],
       following: [],
       posts: []),
@@ -242,19 +272,26 @@ List<Account> accounts = [
       person: Person(
           name: "Kaedehara Kazuha",
           userName: "born_in_canada",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1_ItVD4thjd2pjrthRRwL3zOcRYncTKJV'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1_ItVD4thjd2pjrthRRwL3zOcRYncTKJV'),
       followers: [],
       following: [],
       posts: []),
   Account(
       person: Person(
-          name: "Keqing", userName: "ke_queen", pfpPath: 'https://drive.google.com/uc?export=view&id=11X_C6Kuddo4oN3NEBl9uyJ_rjEp0UDdN'),
+          name: "Keqing",
+          userName: "ke_queen",
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=11X_C6Kuddo4oN3NEBl9uyJ_rjEp0UDdN'),
       followers: [],
       following: [],
       posts: []),
   Account(
       person: Person(
-          name: "Lisa", userName: "library_momy", pfpPath: 'https://drive.google.com/uc?export=view&id=1ImyUUqXDNoOMAG-CQd6wAmCJpUS4F1nQ'),
+          name: "Lisa",
+          userName: "library_momy",
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1ImyUUqXDNoOMAG-CQd6wAmCJpUS4F1nQ'),
       followers: [],
       following: [],
       posts: []),
@@ -262,7 +299,8 @@ List<Account> accounts = [
       person: Person(
           name: "Lumine",
           userName: "prinzessin_von_abyss",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1WkCovKGcGiTR1IbeJVIb8q4I7jZSdAxl'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1WkCovKGcGiTR1IbeJVIb8q4I7jZSdAxl'),
       followers: [],
       following: [],
       posts: []),
@@ -270,7 +308,8 @@ List<Account> accounts = [
       person: Person(
           name: "Mona Megistus",
           userName: "hat_girl",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1BLZvqwu3Sah4NkisgGo1oMq-HSIpy2qV'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1BLZvqwu3Sah4NkisgGo1oMq-HSIpy2qV'),
       followers: [],
       following: [],
       posts: []),
@@ -278,13 +317,17 @@ List<Account> accounts = [
       person: Person(
           name: "Nahida",
           userName: "all_knowing_kid",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1FjyMwEPYPNPXkOBKMGRApIS9LHwHpGGe'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1FjyMwEPYPNPXkOBKMGRApIS9LHwHpGGe'),
       followers: [],
       following: [],
       posts: []),
   Account(
       person: Person(
-          name: "Navia", userName: "boss_girl", pfpPath: 'https://drive.google.com/uc?export=view&id=1SrM-csyz5iCWM3rzDGK_OVCJ83I1swN4'),
+          name: "Navia",
+          userName: "boss_girl",
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1SrM-csyz5iCWM3rzDGK_OVCJ83I1swN4'),
       followers: [],
       following: [],
       posts: []),
@@ -292,7 +335,8 @@ List<Account> accounts = [
       person: Person(
           name: "Raiden Shogun",
           userName: "cook.with.shogun",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1nnB-bR3zVtWpgrDfSDEyFM0vi0iVss1S'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1nnB-bR3zVtWpgrDfSDEyFM0vi0iVss1S'),
       followers: ['please_die_soon', 'princess_purple', 'furina_sunshine'],
       following: ['furina_sunshine'],
       posts: []),
@@ -300,7 +344,8 @@ List<Account> accounts = [
       person: Person(
           name: "Kujou Sara",
           userName: "crow.girl.sara",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1-Kbjq30deI8v3Hb5SZo-7mUGkx-4Te1z'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1-Kbjq30deI8v3Hb5SZo-7mUGkx-4Te1z'),
       followers: [],
       following: [],
       posts: []),
@@ -308,13 +353,17 @@ List<Account> accounts = [
       person: Person(
           name: "Shenhe",
           userName: "frozen_momy",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1FTdyeb7AQRE1GPxPCQNQPIw4lCN5p5r6'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1FTdyeb7AQRE1GPxPCQNQPIw4lCN5p5r6'),
       followers: [],
       following: [],
       posts: []),
   Account(
       person: Person(
-          name: "Skirk", userName: "skir7x", pfpPath: 'https://drive.google.com/uc?export=view&id=15hTDclZREA7NSTgiTEclmSEW3xZNz_YH'),
+          name: "Skirk",
+          userName: "skir7x",
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=15hTDclZREA7NSTgiTEclmSEW3xZNz_YH'),
       followers: [],
       following: [],
       posts: []),
@@ -322,7 +371,8 @@ List<Account> accounts = [
       person: Person(
           name: "Venti",
           userName: "alkahol.iz.nat.fo.kidz",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1foQW29-ihziU6MMFYY7mc0VxLCYGkT81'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1foQW29-ihziU6MMFYY7mc0VxLCYGkT81'),
       followers: [],
       following: [],
       posts: []),
@@ -330,7 +380,8 @@ List<Account> accounts = [
       person: Person(
           name: "Wanderer",
           userName: "eons_adrift",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1ip4pOCckeEwKwDPxDl-cfA09rWifMwyD'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1ip4pOCckeEwKwDPxDl-cfA09rWifMwyD'),
       followers: [],
       following: [],
       posts: []),
@@ -338,7 +389,8 @@ List<Account> accounts = [
       person: Person(
           name: "Xiao",
           userName: "conqurer_of_demons",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1u0z89yW1WxTUutqhQ-8DrcBlC1IAC5tI'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1u0z89yW1WxTUutqhQ-8DrcBlC1IAC5tI'),
       followers: [],
       following: [],
       posts: []),
@@ -346,7 +398,8 @@ List<Account> accounts = [
       person: Person(
           name: "Yae Miko",
           userName: "sussy_fox_lady",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1ECGhGr_tUXRlbPSOM0w8qa_OZ0krp9h7'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1ECGhGr_tUXRlbPSOM0w8qa_OZ0krp9h7'),
       followers: [],
       following: [],
       posts: []),
@@ -354,7 +407,8 @@ List<Account> accounts = [
       person: Person(
           name: "Yelan",
           userName: "got.those.arms",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1fTisKjCd5c_VEbSBgyIE0pissAajfVyk'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1fTisKjCd5c_VEbSBgyIE0pissAajfVyk'),
       followers: [],
       following: [],
       posts: []),
@@ -362,7 +416,8 @@ List<Account> accounts = [
       person: Person(
           name: "Zhongli",
           userName: "ceo_of_geo",
-          pfpPath: 'https://drive.google.com/uc?export=view&id=1JVAFXYHJXOTyRwoU9wtTlVOFm1w-I7_P'),
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1JVAFXYHJXOTyRwoU9wtTlVOFm1w-I7_P'),
       followers: [],
       following: [],
       posts: []),
@@ -389,22 +444,22 @@ Account getAccountFromUserName(String userName) {
 List<Story> myStories = [
   Story(
       duration: const Duration(seconds: 7),
-      pathToMedia: 'images/post/4.png',
+      pathToMedia: '1w35ptuh4ixOJK6tJLbpwArG5xEQ6dS47',
       type: StoryType.image,
       uploadTime: '23 min'),
   Story(
       duration: const Duration(seconds: 7),
-      pathToMedia: 'images/post/52.png',
+      pathToMedia: '10wPKtmDBC8ylKcqWplQ3LOtreucDkxAN',
       type: StoryType.image,
       uploadTime: '23 min'),
   Story(
       duration: const Duration(seconds: 7),
-      pathToMedia: 'images/post/51.png',
+      pathToMedia: '1swN0I0kJVE-YogucSzCcObVkdQ-ORnh2',
       type: StoryType.image,
       uploadTime: '23 min'),
   Story(
       duration: const Duration(seconds: 7),
-      pathToMedia: 'images/post/2.png',
+      pathToMedia: '1JpcQdKOF3N2MJe00fSvvjSxAvhdbLAo4',
       type: StoryType.image,
       uploadTime: '23 min')
 ];
@@ -481,5 +536,5 @@ List<Reel> reels = [
       playCount: 4231),
 ];
 
-
-const String linkToPfp = "https://drive.google.com/uc?export=view&id=1LB2B4h_hzLjZUb7AWAS8XNkrVa9JQ1yu";
+const String linkToPfp =
+    "https://drive.google.com/uc?export=view&id=1LB2B4h_hzLjZUb7AWAS8XNkrVa9JQ1yu";

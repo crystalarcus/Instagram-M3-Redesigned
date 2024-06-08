@@ -1,97 +1,137 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:redesigned/Components/Utils/ExpansionView.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
 
-class CommentSheet extends StatelessWidget {
-  const CommentSheet({super.key});
+class CommentSheet extends StatefulWidget {
+  const CommentSheet({super.key, required this.controller});
+  final ScrollController controller;
+  @override
+  State<CommentSheet> createState() => _CommentSheetState();
+}
+
+class _CommentSheetState extends State<CommentSheet> {
+  List<bool> isReplyOpen = List.filled(comments[0].length, false);
+
+  void expandComment(panelIndex) {
+    setState(() {
+      isReplyOpen[panelIndex] = !isReplyOpen[panelIndex];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BottomSheet(
-        onClosing: () {},
-        builder: (BuildContext context) => FractionallySizedBox(
-            heightFactor: 0.9,
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Row(children: [
-                SizedBox(
-                  width: 16,
+    return Container(
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surfaceContainerLow,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(25),
+            topRight: Radius.circular(25),
+          ),
+        ),
+        child: CustomScrollView(controller: widget.controller, slivers: [
+          SliverToBoxAdapter(
+            child: Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).hintColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
-                Text("Comments", style: TextStyle(fontSize: 18))
-              ]),
-              const SizedBox(height: 16),
-              Expanded(
-                child: ListView.separated(
-                  itemCount: comments[0].length,
-                  separatorBuilder: (context, index) => const Divider(),
-                  itemBuilder: (context, index) {
-                    Comment comment = comments[0][index];
-                    return CommentWidget(
-                      comment: Comment(
-                        person: comment.person,
-                        text: comment.text,
-                        dateTime: comment.dateTime,
-                        likes: comment.likes,
-                        // replies: [
-                        //   Reply(
-                        //       to: 'yaemiko',
-                        //       person: accounts[13].person,
-                        //       text: "Yess Lady Guji",
-                        //       dateTime: DateTime(2024, 2, 24, 3, 24, 22)),
-                        // ]
-                      ),
-                    );
-                  },
-                ),
+                height: 4,
+                width: 40,
+                margin: const EdgeInsets.symmetric(vertical: 10),
               ),
-              Container(
-                color: Theme.of(context).colorScheme.surfaceContainerHigh,
-                child: Row(
-                  children: <Widget>[
-                    const SizedBox(width: 12),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: CachedNetworkImage(
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                          placeholderFadeInDuration: const Duration(seconds: 0),
-                          placeholder: (context, url) => Icon(
-                              Icons.account_circle_rounded,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant),
-                          fit: BoxFit.contain,
-                          imageUrl: linkToPfp),
-                    ),
-                    const SizedBox(width: 12),
-                    const Expanded(
-                        child: TextField(
-                      decoration: InputDecoration(
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(vertical: 18),
-                        hintText: "Add a comment...",
-                      ),
-                    )),
-                    IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Symbols.send,
-                          size: 24,
-                          weight: 600,
-                        ))
-                  ],
+            ),
+          ),
+          const SliverAppBar(
+            backgroundColor: Colors.transparent,
+            title: Text('Comments'),
+            primary: false,
+            pinned: true,
+            centerTitle: false,
+          ),
+          SliverToBoxAdapter(
+            child: ExpansionViewList(
+                elevation: 0,
+                expandedHeaderPadding: EdgeInsets.zero,
+                materialGapSize: 1,
+                children: comments[0]
+                    .mapIndexed((index, comment) => ExpansionView(
+                        backgroundColor: Colors.transparent,
+                        isExpanded: isReplyOpen[index],
+                        headerBuilder: (context, isExpanded) => CommentWidget(
+                            expand: expandComment, comment: comment),
+                        body: ListView.separated(
+                            shrinkWrap: true,
+                            itemCount: comment.replies.length,
+                            separatorBuilder: (context, index) => Divider(
+                                  indent: 36,
+                                  endIndent: 12,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .outlineVariant,
+                                ),
+                            itemBuilder: (context, index) => CommentReplyWidget(
+                                reply: comment.replies[index]))))
+                    .toList()),
+          ),
+          SliverToBoxAdapter(
+              child: Container(
+            color: Theme.of(context).colorScheme.surfaceContainerHigh,
+            child: Row(
+              children: <Widget>[
+                const SizedBox(width: 12),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: CachedNetworkImage(
+                      height: 40,
+                      width: 40,
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      placeholderFadeInDuration: const Duration(seconds: 0),
+                      placeholder: (context, url) => Icon(
+                          Icons.account_circle_rounded,
+                          color:
+                              Theme.of(context).colorScheme.onSurfaceVariant),
+                      fit: BoxFit.contain,
+                      imageUrl: linkToPfp),
                 ),
-              )
-            ])));
+                const SizedBox(width: 12),
+                const Expanded(
+                    child: TextField(
+                  decoration: InputDecoration(
+                    isDense: true,
+                    contentPadding: EdgeInsets.symmetric(vertical: 18),
+                    hintText: "Add a comment...",
+                  ),
+                )),
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Symbols.send,
+                      size: 24,
+                      weight: 600,
+                    ))
+              ],
+            ),
+          ))
+        ]));
   }
 }
 
 class CommentWidget extends StatefulWidget {
-  const CommentWidget({super.key, required this.comment});
+  const CommentWidget({
+    super.key,
+    required this.comment,
+    required this.expand,
+  });
   final Comment comment;
+  final void Function(dynamic) expand;
   @override
   State<CommentWidget> createState() => _CommentWidgetState();
 }
@@ -99,8 +139,8 @@ class CommentWidget extends StatefulWidget {
 class _CommentWidgetState extends State<CommentWidget> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: double.maxFinite,
+    return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -123,6 +163,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                 )),
             Expanded(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -137,7 +178,8 @@ class _CommentWidgetState extends State<CommentWidget> {
                                 widget.comment.person.name,
                                 style: const TextStyle(fontSize: 12),
                               ),
-                              Text("${widget.comment.dateTime} min"),
+                              const SizedBox(width: 16),
+                              Text(widget.comment.dateTime),
                             ],
                           ),
                           const SizedBox(
@@ -162,12 +204,10 @@ class _CommentWidgetState extends State<CommentWidget> {
                               iconColor: WidgetStatePropertyAll(
                             widget.comment.isLiked
                                 ? Colors.red
-                                : Theme.of(context).colorScheme.onSurface,
+                                : Theme.of(context).colorScheme.primary,
                           )),
                           label: Text(
                             widget.comment.likes.toString(),
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.onSurface),
                           ),
                           onPressed: () {
                             setState(() {
@@ -180,29 +220,34 @@ class _CommentWidgetState extends State<CommentWidget> {
                               widget.comment.likes += 1;
                             });
                           },
-                          icon: Icon(widget.comment.isLiked
-                              ? Icons.favorite
-                              : Icons.favorite_outline)),
+                          icon: Icon(
+                            widget.comment.isLiked
+                                ? Icons.favorite
+                                : Icons.favorite_outline,
+                            size: 22,
+                          )),
                       const SizedBox(width: 8),
                       TextButton.icon(
-                          style: ButtonStyle(
-                              iconColor: WidgetStatePropertyAll(
-                            Theme.of(context).colorScheme.onSurface,
-                          )),
-                          label: Text(widget.comment.replies.length.toString(),
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onSurface)),
+                          label: const Text(
+                            "Reply",
+                          ),
                           onPressed: () {},
                           icon: Icon(
                             MdiIcons.replyOutline,
                             size: 24,
                           )),
-                      const Spacer(),
-                      IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.expand_more))
                     ],
-                  )
+                  ),
+                  const SizedBox(height: 4),
+                  if (widget.comment.replies.isNotEmpty)
+                    TextButton.icon(
+                        onPressed: () => widget.expand(0),
+                        iconAlignment: IconAlignment.end,
+                        label: Text(
+                            "See ${widget.comment.replies.length.toString()} replies"),
+                        icon: const Icon(
+                          Icons.expand_more,
+                        )),
                 ],
               ),
             ),
@@ -210,3 +255,97 @@ class _CommentWidgetState extends State<CommentWidget> {
         ));
   }
 }
+
+class CommentReplyWidget extends StatefulWidget {
+  const CommentReplyWidget({super.key, required this.reply});
+  final CommentReply reply;
+  @override
+  State<CommentReplyWidget> createState() => _CommentReplyWidgetState();
+}
+
+class _CommentReplyWidgetState extends State<CommentReplyWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(36, 8, 0, 0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(36),
+            child: CachedNetworkImage(
+              height: 36,
+              width: 36,
+              imageUrl: widget.reply.person.pfpPath,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                widget.reply.person.userName,
+                style: TextStyle(
+                    fontSize: 12,
+                    color: Theme.of(context).colorScheme.onSurface),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                widget.reply.text,
+                style: TextStyle(
+                    fontSize: 14,
+                    color: Theme.of(context).colorScheme.onSurface),
+              ),
+              Row(
+                children: [
+                  TextButton.icon(
+                      style: ButtonStyle(
+                          iconColor: WidgetStatePropertyAll(
+                        widget.reply.isLiked
+                            ? Colors.red
+                            : Theme.of(context).colorScheme.primary,
+                      )),
+                      label: Text(
+                        widget.reply.likes.toString(),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          if (widget.reply.isLiked) {
+                            widget.reply.isLiked = false;
+                            widget.reply.likes -= 1;
+                            return;
+                          }
+                          widget.reply.isLiked = true;
+                          widget.reply.likes += 1;
+                        });
+                      },
+                      icon: Icon(
+                        widget.reply.isLiked
+                            ? Icons.favorite
+                            : Icons.favorite_outline,
+                        size: 22,
+                      )),
+                  const SizedBox(width: 8),
+                  TextButton.icon(
+                      label: const Text(
+                        "Reply",
+                      ),
+                      onPressed: () {},
+                      icon: Icon(
+                        MdiIcons.replyOutline,
+                        size: 24,
+                      )),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+//  setState(() {
+                    //isReplyOpen[panelIndex] = isExpanded;
+                  //});

@@ -73,16 +73,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         label: Text(e)))),
               ])),
           header(context, "New"),
-          ...notifications[0].map(
-              (e) => NotifWidget(notification: e, textContent: e.textContent)),
+          ...notifications[0].map((e) => NotifWidget(notification: e)),
           // const Divider(),
           header(context, "Today"),
-          ...notifications[1].map(
-              (e) => NotifWidget(notification: e, textContent: e.textContent)),
+          ...notifications[1].map((e) => NotifWidget(notification: e)),
           // const Divider(),
           header(context, "Yesterday"),
-          ...notifications[2].map(
-              (e) => NotifWidget(notification: e, textContent: e.textContent)),
+          ...notifications[2].map((e) => NotifWidget(notification: e)),
         ]));
   }
 }
@@ -101,9 +98,7 @@ Widget header(BuildContext context, String text) {
 }
 
 class NotifWidget extends StatefulWidget {
-  const NotifWidget(
-      {super.key, required this.notification, required this.textContent});
-  final String textContent;
+  const NotifWidget({super.key, required this.notification});
   final Notif notification;
   @override
   State<NotifWidget> createState() => _NotifWidgetState();
@@ -183,7 +178,7 @@ class _NotifWidgetState extends State<NotifWidget> {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                widget.textContent,
+                                widget.notification.textContent,
                                 style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
@@ -249,8 +244,7 @@ class _NotifWidgetState extends State<NotifWidget> {
                                           width: 50,
                                           errorWidget: (context, url, error) =>
                                               const Icon(Icons.error),
-                                          placeholderFadeInDuration:
-                                              Durations.short1,
+                    placeholderFadeInDuration: const Duration(seconds: 0),
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
                                               Center(

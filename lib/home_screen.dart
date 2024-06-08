@@ -5,6 +5,7 @@ import 'package:material_symbols_icons/symbols.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
 import 'package:redesigned/Components/Utils/open_container.dart';
+import 'package:redesigned/Components/comment_sheet.dart';
 import 'package:redesigned/Components/posts.dart';
 import 'package:redesigned/main.dart';
 import 'package:redesigned/search_insta_screen.dart';
@@ -35,208 +36,237 @@ class MobileHomeScreen extends StatefulWidget {
 }
 
 class _MobileHomeScreenState extends State<MobileHomeScreen> {
+  final DraggableScrollableController commentController =
+      DraggableScrollableController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: null,
         backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
         body: SafeArea(
-          child: CustomScrollView(slivers: [
-            SliverAppBar(
-                toolbarHeight: 63,
-                forceMaterialTransparency: true,
-                floating: MainApp.of(context).isSearchFloating,
-                title: Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: SizedBox(
-                      height: 50,
-                      child: OpenContainer(
-                        closedElevation: 0,
-                        closedColor:
-                            Theme.of(context).colorScheme.primaryContainer,
-                        openColor:
-                            Theme.of(context).colorScheme.surfaceContainerLow,
-                        closedShape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(55)),
-                        useRootNavigator: true,
-                        closedBuilder: (context, action) => SearchBar(
-                          elevation: const WidgetStatePropertyAll(0),
-                          shadowColor:
-                              const WidgetStatePropertyAll(Colors.transparent),
-                          backgroundColor: WidgetStatePropertyAll(
-                              Theme.of(context)
-                                  .colorScheme
-                                  .surfaceContainerHighest),
-                          padding: const WidgetStatePropertyAll(
-                              EdgeInsets.symmetric(horizontal: 12)),
-                          leading: const Icon(
-                            Symbols.search,
-                            opticalSize: 24,
-                            weight: 400,
-                          ),
-                          trailing: <Widget>[
-                            Tooltip(
-                              message: 'Change brightness mode',
-                              child: IconButton(
-                                icon: const Icon(Icons.mic_none_outlined),
-                                onPressed: () {},
-                                selectedIcon:
-                                    const Icon(Icons.brightness_2_outlined),
-                              ),
+            child: Stack(
+          children: [
+            CustomScrollView(slivers: [
+              SliverAppBar(
+                  toolbarHeight: 63,
+                  forceMaterialTransparency: true,
+                  floating: MainApp.of(context).isSearchFloating,
+                  title: Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: SizedBox(
+                        height: 50,
+                        child: OpenContainer(
+                          closedElevation: 0,
+                          closedColor:
+                              Theme.of(context).colorScheme.primaryContainer,
+                          openColor:
+                              Theme.of(context).colorScheme.surfaceContainerLow,
+                          closedShape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(55)),
+                          useRootNavigator: true,
+                          closedBuilder: (context, action) => SearchBar(
+                            elevation: const WidgetStatePropertyAll(0),
+                            shadowColor: const WidgetStatePropertyAll(
+                                Colors.transparent),
+                            backgroundColor: WidgetStatePropertyAll(
+                                Theme.of(context)
+                                    .colorScheme
+                                    .surfaceContainerHighest),
+                            padding: const WidgetStatePropertyAll(
+                                EdgeInsets.symmetric(horizontal: 12)),
+                            leading: const Icon(
+                              Symbols.search,
+                              opticalSize: 24,
+                              weight: 400,
                             ),
-                            ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(20)),
-                              child: CachedNetworkImage(
-                                  height: 36,
-                                  width: 36,
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                  placeholderFadeInDuration:
-                                      const Duration(seconds: 0),
-                                  placeholder: (context, url) => Icon(
-                                      Icons.account_circle_rounded,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurfaceVariant),
-                                  fit: BoxFit.contain,
-                                  imageUrl: linkToPfp),
-                            )
-                          ],
-                          hintText: "Search Instagram",
-                          textStyle: const WidgetStatePropertyAll(
-                              TextStyle(height: 1.2)),
-                          onTap: () => {action()},
-                        ),
-                        openBuilder: (context, action) =>
-                            const SearchInstaScreen(),
-                      )),
-                )),
-            SliverToBoxAdapter(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 12),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 12),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text("Stories",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w600)),
-                            const SizedBox(height: 40),
-                            TextButton(
-                                onPressed: () {
-                                  context.push("/stories");
-                                },
-                                child: const Text("See all"))
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: SizedBox(
-                            height: 100,
-                            child: OverflowBox(
-                                maxWidth: widget.constraints.maxWidth,
-                                alignment: Alignment.topLeft,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: [
-                                    Column(
-                                      children: <Widget>[
-                                        InkWell(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            onTap: () {},
-                                            child: Container(
-                                              padding: const EdgeInsets.all(4),
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(40),
-                                                  border: Border.all(
-                                                      width: 2.8,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .primary)),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                child: CachedNetworkImage(
-                                                    height: 64,
-                                                    width: 64,
-                                                    errorWidget: (context, url,
-                                                            error) =>
-                                                        const Icon(Icons.error),
-                                                    placeholderFadeInDuration:
-                                                        Durations.short1,
-                                                    placeholder:
-                                                        (context, url) => Icon(
-                                                            Icons
-                                                                .account_circle_rounded,
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .colorScheme
-                                                                .onSurfaceVariant),
-                                                    fit: BoxFit.contain,
-                                                    imageUrl: linkToPfp),
-                                              ),
-                                            )),
-                                        const Text("Your Story")
-                                      ],
-                                    ),
-                                    const SizedBox(width: 20),
-                                    StoryWidget(person: accounts[9].person),
-                                    const SizedBox(width: 20),
-                                    StoryWidget(person: accounts[19].person),
-                                    const SizedBox(width: 20),
-                                    StoryWidget(person: accounts[18].person),
-                                    const SizedBox(width: 20),
-                                    StoryWidget(person: accounts[5].person),
-                                    // const StoryWidget(pfpPath: "images/hutao.png"),
-                                  ],
-                                ))),
-                      ),
-                      const SizedBox(height: 8),
-                      const Divider(),
-                      const Row(children: [
-                        SizedBox(width: 12),
-                        Text("Explore",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600)),
-                      ]),
-                      const SizedBox(height: 12),
-                      ListView.separated(
-                          separatorBuilder: (context, index) => const Padding(
-                                padding: EdgeInsets.only(top: 12),
-                                child: Divider(),
+                            trailing: <Widget>[
+                              Tooltip(
+                                message: 'Change brightness mode',
+                                child: IconButton(
+                                  icon: const Icon(Icons.mic_none_outlined),
+                                  onPressed: () {},
+                                  selectedIcon:
+                                      const Icon(Icons.brightness_2_outlined),
+                                ),
                               ),
-                          itemCount: posts.length,
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            Post p = posts[index];
-                            return MobilePost(
-                                post: p.type == PostType.image
-                                    ? p as ImagePostObject
-                                    : p as CarouselPostObject);
-                          }
-                          // posts
-                          //     .map((e) => e.type == PostType.carosel
-                          //         ? CarouselPost(post: e as CarouselPostObject)
-                          //         : ImagePost(postObject: e as ImagePostObject))
-                          //     .toList() ,
+                              ClipRRect(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(20)),
+                                child: CachedNetworkImage(
+                                    height: 36,
+                                    width: 36,
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                    placeholderFadeInDuration:
+                                        const Duration(seconds: 0),
+                                    placeholder: (context, url) => Icon(
+                                        Icons.account_circle_rounded,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurfaceVariant),
+                                    fit: BoxFit.contain,
+                                    imageUrl: linkToPfp),
+                              )
+                            ],
+                            hintText: "Search Instagram",
+                            textStyle: const WidgetStatePropertyAll(
+                                TextStyle(height: 1.2)),
+                            onTap: () => {action()},
                           ),
-                    ],
-                  )
-                ],
-              ),
-            )
-          ]),
-        ));
+                          openBuilder: (context, action) =>
+                              const SearchInstaScreen(),
+                        )),
+                  )),
+              SliverToBoxAdapter(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 12),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text("Stories",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600)),
+                              const SizedBox(height: 40),
+                              TextButton(
+                                  onPressed: () {
+                                    context.push("/stories");
+                                  },
+                                  child: const Text("See all"))
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: SizedBox(
+                              height: 100,
+                              child: OverflowBox(
+                                  maxWidth: widget.constraints.maxWidth,
+                                  alignment: Alignment.topLeft,
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: [
+                                      Column(
+                                        children: <Widget>[
+                                          InkWell(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              onTap: () {},
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.all(4),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            40),
+                                                    border: Border.all(
+                                                        width: 2.8,
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .primary)),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                  child: CachedNetworkImage(
+                                                      height: 64,
+                                                      width: 64,
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          const Icon(
+                                                              Icons.error),
+                                                      placeholderFadeInDuration:
+                                                          const Duration(
+                                                              seconds: 0),
+                                                      placeholder: (context,
+                                                              url) =>
+                                                          Icon(
+                                                              Icons
+                                                                  .account_circle_rounded,
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .onSurfaceVariant),
+                                                      fit: BoxFit.contain,
+                                                      imageUrl: linkToPfp),
+                                                ),
+                                              )),
+                                          const Text("Your Story")
+                                        ],
+                                      ),
+                                      const SizedBox(width: 20),
+                                      StoryWidget(person: accounts[9].person),
+                                      const SizedBox(width: 20),
+                                      StoryWidget(person: accounts[19].person),
+                                      const SizedBox(width: 20),
+                                      StoryWidget(person: accounts[18].person),
+                                      const SizedBox(width: 20),
+                                      StoryWidget(person: accounts[5].person),
+                                      // const StoryWidget(pfpPath: "images/hutao.png"),
+                                    ],
+                                  ))),
+                        ),
+                        const SizedBox(height: 8),
+                        const Divider(),
+                        const Row(children: [
+                          SizedBox(width: 12),
+                          Text("Explore",
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w600)),
+                        ]),
+                        const SizedBox(height: 12),
+                        ListView.separated(
+                            separatorBuilder: (context, index) => const Padding(
+                                  padding: EdgeInsets.only(top: 12),
+                                  child: Divider(),
+                                ),
+                            itemCount: posts.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              Post p = posts[index];
+                              return MobilePost(
+                                  controller: commentController,
+                                  post: p.type == PostType.image
+                                      ? p as ImagePostObject
+                                      : p as CarouselPostObject);
+                            }
+                            // posts
+                            //     .map((e) => e.type == PostType.carosel
+                            //         ? CarouselPost(post: e as CarouselPostObject)
+                            //         : ImagePost(postObject: e as ImagePostObject))
+                            //     .toList() ,
+                            ),
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ]),
+            DraggableScrollableSheet(
+                shouldCloseOnMinExtent: true,
+                controller: commentController,
+                minChildSize: 0.0,
+                initialChildSize: 0.0,
+                expand: true,
+                maxChildSize: 1.0,
+                builder: (BuildContext context, ScrollController controller) =>
+                    CommentSheet(
+                      controller: controller,
+                    ))
+          ],
+        )));
   }
 }
 

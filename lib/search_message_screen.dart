@@ -30,36 +30,37 @@ class _SearchScreeMessagenState extends State<SearchMessageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(72),
-        child: TextField(
-          style: const TextStyle(
-            height: 1.5,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
-          decoration: InputDecoration(
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
-              hintText: "Search Messages",
-              hintStyle: TextStyle(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-                height: 1.5,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-              ),
-              prefixIcon: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(Icons.arrow_back),
+        child: SafeArea(
+          child: TextField(
+            style: const TextStyle(
+              height: 1.5,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
+            decoration: InputDecoration(
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
+                hintText: "Search Messages",
+                hintStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  height: 1.5,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
                 ),
-              )),
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back),
+                  ),
+                )),
+          ),
         ),
       ),
       body: ListView(
@@ -115,7 +116,7 @@ class _SearchScreeMessagenState extends State<SearchMessageScreen> {
               ))
         ],
       ),
-    ));
+    );
   }
 }
 
