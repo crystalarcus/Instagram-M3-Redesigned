@@ -3,7 +3,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:redesigned/Components/Utils/ExpansionView.dart';
+import 'package:redesigned/Components/Utils/expansion_view.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
 
@@ -25,102 +25,93 @@ class _CommentSheetState extends State<CommentSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainerLow,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(25),
-            topRight: Radius.circular(25),
+    return ListView(controller: widget.controller, children: [
+      Center(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).hintColor,
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
+          height: 4,
+          width: 40,
+          margin: const EdgeInsets.symmetric(vertical: 10),
         ),
-        child: CustomScrollView(controller: widget.controller, slivers: [
-          SliverToBoxAdapter(
-            child: Center(
+      ),
+      const Row(
+        children: [
+          SizedBox(width: 16),
+          Text(
+            'Comments',
+            style: TextStyle(fontSize: 22),
+          ),
+        ],
+      ),
+      const SizedBox(height: 8),
+      ExpansionViewList(
+          elevation: 0,
+          expandedHeaderPadding: EdgeInsets.zero,
+          materialGapSize: 0,
+          children: comments[0]
+              .mapIndexed((index, comment) => ExpansionView(
+                  backgroundColor: Colors.transparent,
+                  isExpanded: isReplyOpen[index],
+                  headerBuilder: (context, isExpanded) =>
+                      CommentWidget(expand: expandComment, comment: comment),
+                  body: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: comment.replies.length,
+                      separatorBuilder: (context, index) => Divider(
+                            indent: 36,
+                            endIndent: 12,
+                            color: Theme.of(context).colorScheme.outlineVariant,
+                          ),
+                      itemBuilder: (context, index) =>
+                          CommentReplyWidget(reply: comment.replies[index]))))
+              .toList()),
+      Expanded(
+          child: Align(
+              alignment: Alignment.bottomCenter,
               child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).hintColor,
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                color: Theme.of(context).colorScheme.surfaceContainerHigh,
+                child: Row(
+                  children: <Widget>[
+                    const SizedBox(width: 12),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: CachedNetworkImage(
+                          height: 40,
+                          width: 40,
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          placeholderFadeInDuration: const Duration(seconds: 0),
+                          placeholder: (context, url) => Icon(
+                              Icons.account_circle_rounded,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant),
+                          fit: BoxFit.contain,
+                          imageUrl: linkToPfp),
+                    ),
+                    const SizedBox(width: 12),
+                    const Expanded(
+                        child: TextField(
+                      decoration: InputDecoration(
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(vertical: 18),
+                        hintText: "Add a comment...",
+                      ),
+                    )),
+                    IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Symbols.send,
+                          size: 24,
+                          weight: 600,
+                        ))
+                  ],
                 ),
-                height: 4,
-                width: 40,
-                margin: const EdgeInsets.symmetric(vertical: 10),
-              ),
-            ),
-          ),
-          const SliverAppBar(
-            backgroundColor: Colors.transparent,
-            title: Text('Comments'),
-            primary: false,
-            pinned: true,
-            centerTitle: false,
-          ),
-          SliverToBoxAdapter(
-            child: ExpansionViewList(
-                elevation: 0,
-                expandedHeaderPadding: EdgeInsets.zero,
-                materialGapSize: 1,
-                children: comments[0]
-                    .mapIndexed((index, comment) => ExpansionView(
-                        backgroundColor: Colors.transparent,
-                        isExpanded: isReplyOpen[index],
-                        headerBuilder: (context, isExpanded) => CommentWidget(
-                            expand: expandComment, comment: comment),
-                        body: ListView.separated(
-                            shrinkWrap: true,
-                            itemCount: comment.replies.length,
-                            separatorBuilder: (context, index) => Divider(
-                                  indent: 36,
-                                  endIndent: 12,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .outlineVariant,
-                                ),
-                            itemBuilder: (context, index) => CommentReplyWidget(
-                                reply: comment.replies[index]))))
-                    .toList()),
-          ),
-          SliverToBoxAdapter(
-              child: Container(
-            color: Theme.of(context).colorScheme.surfaceContainerHigh,
-            child: Row(
-              children: <Widget>[
-                const SizedBox(width: 12),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: CachedNetworkImage(
-                      height: 40,
-                      width: 40,
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                      placeholderFadeInDuration: const Duration(seconds: 0),
-                      placeholder: (context, url) => Icon(
-                          Icons.account_circle_rounded,
-                          color:
-                              Theme.of(context).colorScheme.onSurfaceVariant),
-                      fit: BoxFit.contain,
-                      imageUrl: linkToPfp),
-                ),
-                const SizedBox(width: 12),
-                const Expanded(
-                    child: TextField(
-                  decoration: InputDecoration(
-                    isDense: true,
-                    contentPadding: EdgeInsets.symmetric(vertical: 18),
-                    hintText: "Add a comment...",
-                  ),
-                )),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Symbols.send,
-                      size: 24,
-                      weight: 600,
-                    ))
-              ],
-            ),
-          ))
-        ]));
+              )))
+    ]);
   }
 }
 
@@ -137,6 +128,7 @@ class CommentWidget extends StatefulWidget {
 }
 
 class _CommentWidgetState extends State<CommentWidget> {
+  bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -241,12 +233,18 @@ class _CommentWidgetState extends State<CommentWidget> {
                   const SizedBox(height: 4),
                   if (widget.comment.replies.isNotEmpty)
                     TextButton.icon(
-                        onPressed: () => widget.expand(0),
+                        onPressed: () {
+                          widget.expand(0);
+                          setState(() {
+                            isExpanded = !isExpanded;
+                          });
+                        },
                         iconAlignment: IconAlignment.end,
-                        label: Text(
-                            "See ${widget.comment.replies.length.toString()} replies"),
-                        icon: const Icon(
-                          Icons.expand_more,
+                        label: Text(isExpanded
+                            ? "Hide replies"
+                            : "See ${widget.comment.replies.length.toString()} replies"),
+                        icon: Icon(
+                          isExpanded ? Icons.expand_less : Icons.expand_more,
                         )),
                 ],
               ),
@@ -280,7 +278,8 @@ class _CommentReplyWidgetState extends State<CommentReplyWidget> {
             ),
           ),
           const SizedBox(width: 12),
-          Column(
+          Expanded(
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -292,6 +291,7 @@ class _CommentReplyWidgetState extends State<CommentReplyWidget> {
               ),
               const SizedBox(height: 4),
               Text(
+                overflow: TextOverflow.clip,
                 widget.reply.text,
                 style: TextStyle(
                     fontSize: 14,
@@ -339,7 +339,7 @@ class _CommentReplyWidgetState extends State<CommentReplyWidget> {
                 ],
               ),
             ],
-          ),
+          )),
         ],
       ),
     );

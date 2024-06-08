@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
@@ -7,6 +8,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
+import 'package:redesigned/Components/comment_sheet.dart';
 // import 'package:redesigned/Components/comment_sheet.dart';
 import 'package:redesigned/Components/post_viewer.dart';
 
@@ -14,12 +16,9 @@ class MobilePost extends StatefulWidget {
   const MobilePost({
     super.key,
     required this.post,
-    // required this.openComment,
-    required this.controller,
   });
   final Post post;
   // final Function openComment;
-  final DraggableScrollableController controller;
   @override
   State<MobilePost> createState() => _MobilePostState();
 }
@@ -207,22 +206,25 @@ class _MobilePostState extends State<MobilePost> {
                   height: 40,
                   child: IconButton(
                       onPressed: () {
-                        setState(() {
-                          widget.controller.animateTo(
-                            0.8,
-                            duration: Durations.long1,
-                            curve: Easing.emphasizedDecelerate,
-                          );
-                        });
-                        // showModalBottomSheet(
-                        //     context: context,
-                        //     enableDrag: true,
-                        //     useRootNavigator: true,
-                        //     useSafeArea: true,
-                        //     showDragHandle: true,
-                        //     isScrollControlled: true,
-                        //     builder: (BuildContext context) =>
-                        //         const CommentSheet());
+                        showFlexibleBottomSheet(
+                            context: context,
+                            anchors: [0, 0.6, 1],
+                            bottomSheetBorderRadius:
+                                const BorderRadius.vertical(
+                                    top: Radius.circular(24)),
+                            maxHeight: 1,
+                            initHeight: 0.6,
+                            bottomSheetColor: Theme.of(context)
+                                .colorScheme
+                                .surfaceContainerLow,
+                            minHeight: 0,
+                            useRootScaffold: true,
+                            isSafeArea: true,
+                            builder: (BuildContext context,
+                                    ScrollController controller, double d) =>
+                                CommentSheet(
+                                  controller: controller,
+                                ));
                       },
                       // label: const Text("2.3K"),
                       icon: Icon(MdiIcons.commentTextOutline))),

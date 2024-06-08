@@ -509,7 +509,8 @@ class _InterlocutorChatState extends State<InterlocutorChat> {
                     height: widget.isTopSame ? 2 : 8,
                   ),
                   widget.chatText.repliedTo != null
-                      ? ReplyWidget(reply: widget.chatText.repliedTo)
+                      ? ReplyWidget(
+                          reply: chatTexts[widget.chatText.repliedTo].text)
                       : const SizedBox(),
                   SizedBox(height: widget.chatText.repliedTo != null ? 4 : 0),
                   ConstrainedBox(
@@ -598,7 +599,7 @@ class _UserChatState extends State<UserChat> {
 
 class ReplyWidget extends StatelessWidget {
   const ReplyWidget({super.key, required this.reply});
-  final Reply reply;
+  final String reply;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -606,7 +607,7 @@ class ReplyWidget extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(22),
           color: Theme.of(context).colorScheme.surfaceContainer),
-      child: Text(reply.text),
+      child: Text(reply),
     );
   }
 }

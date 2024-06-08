@@ -20,6 +20,16 @@ List<List<Comment>> comments = [
           CommentReply(
               replyTo: accounts[25].person.userName,
               person: accounts[15].person,
+              text: "This can be a serious thing if you think logically about it.",
+              dateTime: DateTime(2024, 3, 4, 12, 24, 4)),
+          CommentReply(
+              replyTo: accounts[25].person.userName,
+              person: accounts[16].person,
+              text: "Lmaooo 😭",
+              dateTime: DateTime(2024, 3, 4, 12, 24, 4)),
+          CommentReply(
+              replyTo: accounts[25].person.userName,
+              person: accounts[18].person,
               text: "Agreed",
               dateTime: DateTime(2024, 3, 4, 12, 24, 4)),
         ]),
