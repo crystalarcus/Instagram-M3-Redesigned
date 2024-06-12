@@ -11,6 +11,7 @@ import 'package:redesigned/Components/Utils/data.dart';
 import 'package:redesigned/Components/comment_sheet.dart';
 // import 'package:redesigned/Components/comment_sheet.dart';
 import 'package:redesigned/Components/post_viewer.dart';
+import 'package:redesigned/Components/share_sheet.dart';
 
 class MobilePost extends StatefulWidget {
   const MobilePost({
@@ -207,6 +208,7 @@ class _MobilePostState extends State<MobilePost> {
                   child: IconButton(
                       onPressed: () {
                         showFlexibleBottomSheet(
+                            useRootNavigator: true,
                             context: context,
                             anchors: [0, 0.6, 1],
                             bottomSheetBorderRadius:
@@ -231,7 +233,28 @@ class _MobilePostState extends State<MobilePost> {
               SizedBox(
                   height: 40,
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showFlexibleBottomSheet(
+                            useRootNavigator: true,
+                            context: context,
+                            anchors: [0, 0.6, 1],
+                            bottomSheetBorderRadius:
+                                const BorderRadius.vertical(
+                                    top: Radius.circular(24)),
+                            maxHeight: 1,
+                            initHeight: 0.6,
+                            bottomSheetColor: Theme.of(context)
+                                .colorScheme
+                                .surfaceContainerLow,
+                            minHeight: 0,
+                            useRootScaffold: true,
+                            isSafeArea: true,
+                            builder: (BuildContext context,
+                                    ScrollController controller, double d) =>
+                                ShareSheet(
+                                  controller: controller,
+                                ));
+                      },
                       // label: const Text("Share"),
                       icon: Icon(MdiIcons.sendVariantOutline))),
               const Spacer(),

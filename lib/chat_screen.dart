@@ -147,66 +147,69 @@ class _MobileChatScreenState extends State<MobileChatScreen> {
                             !chatTexts[index + 1].sentByUser,
                       )),
           )),
-          Padding(
-              padding: const EdgeInsets.all(6),
-              child: SizedBox(
-                  height: 56,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor:
-                            Theme.of(context).colorScheme.surfaceContainerHigh,
-                        isDense: true,
-                        hintText: "Message...",
-                        hintStyle: TextStyle(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant),
-                        prefixIcon: SizedBox(
-                          height: 48,
-                          width: 54,
-                          child: Align(
-                              alignment: Alignment.center,
-                              child: IconButton(
+          SafeArea(
+              child: Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: SizedBox(
+                      height: 56,
+                      child: TextField(
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Theme.of(context)
+                                .colorScheme
+                                .surfaceContainerHigh,
+                            isDense: true,
+                            hintText: "Message...",
+                            hintStyle: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant),
+                            prefixIcon: SizedBox(
+                              height: 48,
+                              width: 54,
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.camera_alt,
+                                        size: 24,
+                                      ))),
+                            ),
+                            suffixIcon: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
                                   onPressed: () {},
                                   icon: const Icon(
-                                    Icons.camera_alt,
+                                    Icons.attach_file_outlined,
                                     size: 24,
-                                  ))),
-                        ),
-                        suffixIcon: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.attach_file_outlined,
-                                size: 24,
-                              ),
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.emoji_emotions_outlined,
+                                    size: 24,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.mic,
+                                    size: 24,
+                                  ),
+                                ),
+                                const SizedBox(width: 4)
+                              ],
                             ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.emoji_emotions_outlined,
-                                size: 24,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.mic,
-                                size: 24,
-                              ),
-                            ),
-                            const SizedBox(width: 4)
-                          ],
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none)),
-                  )))
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide.none),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide.none)),
+                      ))))
         ],
       ),
     );

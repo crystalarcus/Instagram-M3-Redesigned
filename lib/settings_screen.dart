@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:redesigned/main.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:material_symbols_icons/symbols.dart';
+import 'package:redesigned/Settings%20SubScreens/activity_screen.dart';
+import 'package:redesigned/Settings%20SubScreens/interests_screen.dart';
+import 'package:redesigned/Settings%20SubScreens/notification_settings_screen.dart';
+import 'package:redesigned/Settings%20SubScreens/preferences_screen.dart';
+import 'package:redesigned/Settings%20SubScreens/privacy_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({
@@ -11,11 +17,8 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   int currentIndex = 0;
-  ThemeMode _themeMode = ThemeMode.system;
   @override
   Widget build(BuildContext context) {
-    _themeMode = MainApp.of(context).themeMode;
-    bool isSearchFloating = MainApp.of(context).isSearchFloating;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -25,105 +28,175 @@ class _SettingsScreenState extends State<SettingsScreen> {
               fontSize: 24, color: Theme.of(context).colorScheme.onSurface),
         ),
       ),
-      body: Column(
+      body: ListView(
         children: [
-          ListTile(
-            leading: Icon(MainApp.of(context).isDark()
-                ? Icons.dark_mode_outlined
-                : Icons.light_mode_outlined),
-            title: const Text("Theme"),
-            subtitle: Text(_themeMode == ThemeMode.dark
-                ? "Dark"
-                : _themeMode == ThemeMode.light
-                    ? "Light"
-                    : "System"),
-            onTap: () {
-              showGeneralDialog(
-                  context: context,
-                  transitionDuration: const Duration(milliseconds: 200),
-                  transitionBuilder: (context, anim1, anim2, child) {
-                    return FadeTransition(
-                      opacity: anim1,
-                      child: ScaleTransition(
-                        scale: CurvedAnimation(
-                            parent: anim1,
-                            curve: const Cubic(0.05, 0.7, 0.1, 1.0)),
-                        child: child,
-                      ),
-                    );
-                  },
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    return SimpleDialog(
-                      title: const Text("Choose Theme"),
-                      children: [
-                        RadioListTile(
-                            value: ThemeMode.system,
-                            groupValue: _themeMode,
-                            title: const Text(
-                              "System",
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            onChanged: (t) {
-                              setState(() {
-                                MainApp.of(context)
-                                    .changeTheme(ThemeMode.system);
-                                _themeMode = ThemeMode.system;
-                              });
-                            }),
-                        RadioListTile(
-                            value: ThemeMode.light,
-                            groupValue: _themeMode,
-                            title: const Text(
-                              "Light",
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            onChanged: (t) {
-                              setState(() {
-                                MainApp.of(context)
-                                    .changeTheme(ThemeMode.light);
-                                _themeMode = ThemeMode.light;
-                              });
-                            }),
-                        RadioListTile(
-                            value: ThemeMode.dark,
-                            groupValue: _themeMode,
-                            title: const Text(
-                              "Dark",
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            onChanged: (t) {
-                              setState(() {
-                                MainApp.of(context).changeTheme(ThemeMode.dark);
-                                _themeMode = ThemeMode.dark;
-                              });
-                            }),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text("Done"))
-                              ],
-                            ))
-                      ],
-                    );
-                  });
-            },
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: SearchBar(
+              padding:
+                  WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 16)),
+              leading: Icon(
+                Symbols.search,
+                weight: 600,
+              ),
+              elevation: WidgetStatePropertyAll(0),
+              hintText: "Search settings",
+            ),
           ),
-          SwitchListTile(
-              title: const Text("Floating Searchbar"),
-              secondary: const Icon(Icons.arrow_upward_rounded),
-              value: isSearchFloating,
-              onChanged: (bool value) {
-                setState(() {
-                  isSearchFloating = value;
-                  MainApp.of(context).isSearchFloating = value;
-                });
-              })
+          const SizedBox(height: 8),
+          ListTile(
+            titleTextStyle: TextStyle(
+                fontSize: 18,
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.w400),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ActivityScreen(),
+                  ));
+            },
+            leading: const Icon(Icons.data_usage_outlined),
+            title: const Text("Activity"),
+            subtitle: const Text("App usage and your activity"),
+          ),
+          ListTile(
+            titleTextStyle: TextStyle(
+                fontSize: 18,
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.w500),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PreferencesScreen(),
+                  ));
+            },
+            leading: const Icon(Icons.auto_awesome_outlined),
+            title: const Text("Preferences"),
+            subtitle: const Text("Theme, Language and more"),
+          ),
+          ListTile(
+            titleTextStyle: TextStyle(
+                fontSize: 18,
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.w500),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const NotificationSettingsScreen(),
+                  ));
+            },
+            leading: const Icon(Icons.notifications_outlined),
+            title: const Text("Notifications"),
+            subtitle: const Text("Manage app notifications"),
+          ),
+          ListTile(
+            titleTextStyle: TextStyle(
+                fontSize: 18,
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.w500),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PrivacyScreen(),
+                  ));
+            },
+            leading: const Icon(Icons.gpp_good_outlined),
+            title: const Text("Privacy and Secrecy"),
+            subtitle: const Text("Who can see your content"),
+          ),
+          ListTile(
+            titleTextStyle: TextStyle(
+                fontSize: 18,
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.w500),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const InterestsScreen(),
+                  ));
+            },
+            leading: Icon(MdiIcons.heartMultipleOutline),
+            title: const Text("Your Interests"),
+            subtitle: const Text("Control what you see"),
+          ),
+          ListTile(
+            titleTextStyle: TextStyle(
+                fontSize: 18,
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.w500),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            onTap: () {},
+            leading: const Icon(Icons.people_alt_outlined),
+            title: const Text("Interactions"),
+            subtitle: const Text("How others interact with you"),
+          ),
+          ListTile(
+            titleTextStyle: TextStyle(
+                fontSize: 18,
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.w500),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            onTap: () {},
+            leading: const Icon(Icons.pending_outlined),
+            title: const Text("Other"),
+            subtitle: const Text("Families, professional, payments and more"),
+          ),
+          ListTile(
+            titleTextStyle: TextStyle(
+                fontSize: 18,
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.w500),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            onTap: () {},
+            leading: const Icon(Icons.help_outline),
+            title: const Text("Support"),
+            subtitle: const Text("Help, support and account status"),
+          ),
+          ListTile(
+            titleTextStyle: TextStyle(
+                fontSize: 18,
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.w500),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            onTap: () {},
+            leading: const Icon(Icons.account_circle_outlined),
+            title: const Text("Account login"),
+            subtitle: const Text("Manages accounts on this device"),
+          ),
+          ListTile(
+            titleTextStyle: TextStyle(
+                fontSize: 18,
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.w500),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            onTap: () {},
+            leading: const Icon(Icons.info_outline),
+            title: const Text("About"),
+            subtitle: const Text("App info and credits"),
+          ),
+          /*
+        
+           */
         ],
       ),
     );

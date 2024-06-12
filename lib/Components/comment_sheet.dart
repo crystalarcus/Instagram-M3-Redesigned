@@ -25,93 +25,99 @@ class _CommentSheetState extends State<CommentSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(controller: widget.controller, children: [
-      Center(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).hintColor,
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
+    return Column(
+      children: [
+        Center(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).hintColor,
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            ),
+            height: 4,
+            width: 40,
+            margin: const EdgeInsets.symmetric(vertical: 10),
           ),
-          height: 4,
-          width: 40,
-          margin: const EdgeInsets.symmetric(vertical: 10),
         ),
-      ),
-      const Row(
-        children: [
-          SizedBox(width: 16),
-          Text(
-            'Comments',
-            style: TextStyle(fontSize: 22),
+        Expanded(
+            child: ListView(controller: widget.controller, children: [
+          const Row(
+            children: [
+              SizedBox(width: 16),
+              Text(
+                'Comments',
+                style: TextStyle(fontSize: 22),
+              ),
+            ],
           ),
-        ],
-      ),
-      const SizedBox(height: 8),
-      ExpansionViewList(
-          elevation: 0,
-          expandedHeaderPadding: EdgeInsets.zero,
-          materialGapSize: 0,
-          children: comments[0]
-              .mapIndexed((index, comment) => ExpansionView(
-                  backgroundColor: Colors.transparent,
-                  isExpanded: isReplyOpen[index],
-                  headerBuilder: (context, isExpanded) =>
-                      CommentWidget(expand: expandComment, comment: comment),
-                  body: ListView.separated(
-                      shrinkWrap: true,
-                      itemCount: comment.replies.length,
-                      separatorBuilder: (context, index) => Divider(
-                            indent: 36,
-                            endIndent: 12,
-                            color: Theme.of(context).colorScheme.outlineVariant,
-                          ),
-                      itemBuilder: (context, index) =>
-                          CommentReplyWidget(reply: comment.replies[index]))))
-              .toList()),
-      Expanded(
-          child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                color: Theme.of(context).colorScheme.surfaceContainerHigh,
-                child: Row(
-                  children: <Widget>[
-                    const SizedBox(width: 12),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: CachedNetworkImage(
-                          height: 40,
-                          width: 40,
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                          placeholderFadeInDuration: const Duration(seconds: 0),
-                          placeholder: (context, url) => Icon(
-                              Icons.account_circle_rounded,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant),
-                          fit: BoxFit.contain,
-                          imageUrl: linkToPfp),
+          const SizedBox(height: 8),
+          ExpansionViewList(
+              elevation: 0,
+              expandedHeaderPadding: EdgeInsets.zero,
+              materialGapSize: 0,
+              children: comments[0]
+                  .mapIndexed((index, comment) => ExpansionView(
+                      backgroundColor: Colors.transparent,
+                      isExpanded: isReplyOpen[index],
+                      headerBuilder: (context, isExpanded) => CommentWidget(
+                          expand: expandComment, comment: comment),
+                      body: ListView.separated(
+                          shrinkWrap: true,
+                          itemCount: comment.replies.length,
+                          separatorBuilder: (context, index) => Divider(
+                                indent: 36,
+                                endIndent: 12,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .outlineVariant,
+                              ),
+                          itemBuilder: (context, index) => CommentReplyWidget(
+                              reply: comment.replies[index]))))
+                  .toList()),
+        ])),
+        Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              color: Theme.of(context).colorScheme.surfaceContainerHigh,
+              child: Row(
+                children: <Widget>[
+                  const SizedBox(width: 12),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: CachedNetworkImage(
+                        height: 40,
+                        width: 40,
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        placeholderFadeInDuration: const Duration(seconds: 0),
+                        placeholder: (context, url) => Icon(
+                            Icons.account_circle_rounded,
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant),
+                        fit: BoxFit.contain,
+                        imageUrl: linkToPfp),
+                  ),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                      child: SafeArea(
+                          child: TextField(
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.symmetric(vertical: 18),
+                      hintText: "Add a comment...",
                     ),
-                    const SizedBox(width: 12),
-                    const Expanded(
-                        child: TextField(
-                      decoration: InputDecoration(
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(vertical: 18),
-                        hintText: "Add a comment...",
-                      ),
-                    )),
-                    IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Symbols.send,
-                          size: 24,
-                          weight: 600,
-                        ))
-                  ],
-                ),
-              )))
-    ]);
+                  ))),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Symbols.send,
+                        size: 24,
+                        weight: 600,
+                      ))
+                ],
+              ),
+            ))
+      ],
+    );
   }
 }
 
