@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:redesigned/Settings%20SubScreens/activity_screen.dart';
+import 'package:redesigned/Settings%20SubScreens/interactions_screen.dart';
 import 'package:redesigned/Settings%20SubScreens/interests_screen.dart';
 import 'package:redesigned/Settings%20SubScreens/notification_settings_screen.dart';
 import 'package:redesigned/Settings%20SubScreens/preferences_screen.dart';
@@ -141,7 +142,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 fontWeight: FontWeight.w500),
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const InteractionsScreen(),
+                  ));
+            },
             leading: const Icon(Icons.people_alt_outlined),
             title: const Text("Interactions"),
             subtitle: const Text("How others interact with you"),

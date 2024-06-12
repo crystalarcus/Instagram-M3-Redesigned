@@ -40,7 +40,13 @@ class _InterestsScreenState extends State<InterestsScreen> {
               const SizedBox(height: 12),
               ListItem(
                 title: "Muted accounts",
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MutedAccountsSceen(),
+                      ));
+                },
                 currentInfo: "You haven’t muted any account yet",
                 subtitle:
                     "If  you don't want to see someone's posts in your feed, see their stories  at the top of your feed or see incoming messages they send you",
@@ -49,7 +55,13 @@ class _InterestsScreenState extends State<InterestsScreen> {
               const SizedBox(height: 12),
               ListItem(
                 title: "Suggested content",
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SuggestedContentScreen(),
+                      ));
+                },
                 currentInfo: "You don’t have any suggested content",
                 subtitle:
                     "Content from accounts that you don’t follow. This content will be shown more in your feeds.",
@@ -268,6 +280,76 @@ class FavouritesItem extends StatelessWidget {
             ? OutlinedButton(onPressed: () {}, child: const Text("Remove"))
             : FilledButton.tonal(onPressed: () {}, child: const Text("Add")),
       ),
+    );
+  }
+}
+
+class MutedAccountsSceen extends StatelessWidget {
+  const MutedAccountsSceen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Muted Accounts"),
+      ),
+      body: const Center(
+        child: Text("You haven't muted any account yet."),
+      ),
+    );
+  }
+}
+
+class SuggestedContentScreen extends StatefulWidget {
+  const SuggestedContentScreen({super.key});
+
+  @override
+  State<SuggestedContentScreen> createState() => _SuggestedContentScreenState();
+}
+
+class _SuggestedContentScreenState extends State<SuggestedContentScreen> {
+  bool isSnoozed = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Suggested Content"),
+      ),
+      body: ListView(
+        children: [
+          SuggestedContentListItem(title: "Interested", onTap: () {}),
+          SuggestedContentListItem(title: "Not interested", onTap: () {}),
+          SuggestedContentListItem(
+              title: "Specific worlds and phrases", onTap: () {}),
+          SuggestedContentListItem(title: "Sensitive content", onTap: () {}),
+          const Divider(),
+          SwitchListTile(
+            value: isSnoozed,
+            onChanged: (value) {
+              setState(() {
+                isSnoozed = value;
+              });
+            },
+            title: const Text("Snooze suggested posts in feed"),
+            subtitle: const Text("Hide suggested posts in feed for 30 days"),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class SuggestedContentListItem extends StatelessWidget {
+  const SuggestedContentListItem(
+      {super.key, required this.title, required this.onTap});
+  final String title;
+  final void Function() onTap;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      title: Text(title),
+      onTap: onTap,
     );
   }
 }
