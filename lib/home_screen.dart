@@ -211,10 +211,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                       ]),
                       const SizedBox(height: 12),
                       ListView.separated(
-                          separatorBuilder: (context, index) => const Padding(
-                                padding: EdgeInsets.only(top: 12),
-                                child: Divider(),
-                              ),
+                          separatorBuilder: (context, index) => const Divider(),
                           itemCount: posts.length,
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,

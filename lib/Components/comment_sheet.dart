@@ -61,6 +61,7 @@ class _CommentSheetState extends State<CommentSheet> {
                       headerBuilder: (context, isExpanded) => CommentWidget(
                           expand: expandComment, comment: comment),
                       body: ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: comment.replies.length,
                           separatorBuilder: (context, index) => Divider(
@@ -98,14 +99,14 @@ class _CommentSheetState extends State<CommentSheet> {
                   ),
                   const SizedBox(width: 12),
                   const Expanded(
-                      child: SafeArea(
-                          child: TextField(
+                      child: TextField(
                     decoration: InputDecoration(
+                      border: InputBorder.none,
                       isDense: true,
                       contentPadding: EdgeInsets.symmetric(vertical: 18),
                       hintText: "Add a comment...",
                     ),
-                  ))),
+                  )),
                   IconButton(
                       onPressed: () {},
                       icon: const Icon(
@@ -115,7 +116,12 @@ class _CommentSheetState extends State<CommentSheet> {
                       ))
                 ],
               ),
-            ))
+            )),
+        Container(
+          color: Theme.of(context).colorScheme.surfaceContainerHigh,
+          width: double.maxFinite,
+          height: MediaQuery.of(context).padding.bottom,
+        )
       ],
     );
   }

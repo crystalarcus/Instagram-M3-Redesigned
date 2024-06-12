@@ -8,6 +8,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
+import 'package:redesigned/Components/Utils/save_post_sheet.dart';
 import 'package:redesigned/Components/comment_sheet.dart';
 // import 'package:redesigned/Components/comment_sheet.dart';
 import 'package:redesigned/Components/post_viewer.dart';
@@ -34,9 +35,7 @@ class _MobilePostState extends State<MobilePost> {
       child: Column(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(
-              left: 8,
-            ),
+            padding: const EdgeInsets.only(left: 8, top: 8, bottom: 12),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -180,17 +179,33 @@ class _MobilePostState extends State<MobilePost> {
               ],
             ),
           ),
-          const SizedBox(
-            height: 4,
-          ),
           widget.post.type == PostType.image
               ? ImagePostWidget(imagePost: widget.post as ImagePostObject)
               : CarouselPostWidget(
                   imagePost: widget.post as CarouselPostObject),
-          const SizedBox(height: 6),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  textAlign: TextAlign.left,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  widget.post.subTitle,
+                  style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 0),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
           Row(
             mainAxisSize: MainAxisSize.max,
             children: [
+              const SizedBox(width: 12),
               SelectButton(
                 isSelected: liked,
                 selectedColor: Colors.red,
@@ -203,9 +218,10 @@ class _MobilePostState extends State<MobilePost> {
                 selectedIcon: Icons.favorite,
                 unselectedIcon: Icons.favorite_outline,
               ),
+              const SizedBox(width: 12),
               SizedBox(
                   height: 40,
-                  child: IconButton(
+                  child: IconButton.filledTonal(
                       onPressed: () {
                         showFlexibleBottomSheet(
                             useRootNavigator: true,
@@ -230,9 +246,10 @@ class _MobilePostState extends State<MobilePost> {
                       },
                       // label: const Text("2.3K"),
                       icon: Icon(MdiIcons.commentTextOutline))),
+              const SizedBox(width: 12),
               SizedBox(
                   height: 40,
-                  child: IconButton(
+                  child: IconButton.filledTonal(
                       onPressed: () {
                         showFlexibleBottomSheet(
                             useRootNavigator: true,
@@ -260,8 +277,25 @@ class _MobilePostState extends State<MobilePost> {
               const Spacer(),
               SizedBox(
                   height: 40,
-                  child: IconButton(
-                    onPressed: () {},
+                  child: IconButton.filledTonal(
+                    onPressed: () {
+                      showFlexibleBottomSheet(
+                        useRootNavigator: true,
+                        isCollapsible: true,
+                        maxHeight: 1,
+                        initHeight: 1,
+                        isExpand: false,
+                        isSafeArea: true,
+                        bottomSheetBorderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(24)),
+                        context: context,
+                        builder:
+                            (context, scrollController, bottomSheetOffset) =>
+                                SavePostSheet(
+                          controller: scrollController,
+                        ),
+                      );
+                    },
                     icon: const Icon(Icons.bookmark_outline),
                   )
                   //  SelectButton(
@@ -279,73 +313,57 @@ class _MobilePostState extends State<MobilePost> {
               const SizedBox(width: 12)
             ],
           ),
+          const SizedBox(height: 12),
           Row(
             children: [
-              TextButton.icon(
+              TextButton(
                   onPressed: () {},
-                  icon: Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(24),
-                        child: CachedNetworkImage(
-                          height: 24,
-                          width: 24,
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                          placeholderFadeInDuration: const Duration(seconds: 0),
-                          placeholder: (context, url) => Icon(
-                              Icons.account_circle_rounded,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant),
-                          fit: BoxFit.contain,
-                          imageUrl: accounts[21].person.pfpPath,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 3, left: 3),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(24),
-                          child: CachedNetworkImage(
-                            height: 24,
-                            width: 24,
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
-                            placeholderFadeInDuration:
-                                const Duration(seconds: 0),
-                            placeholder: (context, url) => Icon(
-                                Icons.account_circle_rounded,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onSurfaceVariant),
-                            fit: BoxFit.contain,
-                            imageUrl: accounts[24].person.pfpPath,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  label: const Text("23.5K Likes")),
+                  // icon: Stack(
+                  //   children: [
+                  //     ClipRRect(
+                  //       borderRadius: BorderRadius.circular(24),
+                  //       child: CachedNetworkImage(
+                  //         height: 24,
+                  //         width: 24,
+                  //         errorWidget: (context, url, error) =>
+                  //             const Icon(Icons.error),
+                  //         placeholderFadeInDuration: const Duration(seconds: 0),
+                  //         placeholder: (context, url) => Icon(
+                  //             Icons.account_circle_rounded,
+                  //             color: Theme.of(context)
+                  //                 .colorScheme
+                  //                 .onSurfaceVariant),
+                  //         fit: BoxFit.contain,
+                  //         imageUrl: accounts[21].person.pfpPath,
+                  //       ),
+                  //     ),
+                  //     Padding(
+                  //       padding: const EdgeInsets.only(top: 3, left: 3),
+                  //       child: ClipRRect(
+                  //         borderRadius: BorderRadius.circular(24),
+                  //         child: CachedNetworkImage(
+                  //           height: 24,
+                  //           width: 24,
+                  //           errorWidget: (context, url, error) =>
+                  //               const Icon(Icons.error),
+                  //           placeholderFadeInDuration:
+                  //               const Duration(seconds: 0),
+                  //           placeholder: (context, url) => Icon(
+                  //               Icons.account_circle_rounded,
+                  //               color: Theme.of(context)
+                  //                   .colorScheme
+                  //                   .onSurfaceVariant),
+                  //           fit: BoxFit.contain,
+                  //           imageUrl: accounts[24].person.pfpPath,
+                  //         ),
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
+
+                  child: const Text("23.5K Likes")),
               const SizedBox(height: 4),
               const Text("6.4K Replies")
-            ],
-          ),
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  textAlign: TextAlign.left,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  widget.post.subTitle,
-                  style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 0),
-                ),
-              ),
             ],
           ),
         ],
@@ -688,7 +706,7 @@ class _SelectButtonState extends State<SelectButton>
   Widget build(BuildContext context) {
     return SizedBox(
         height: 40,
-        child: IconButton(
+        child: IconButton.filledTonal(
           onPressed: onTap,
           // label: Text(widget.title),
           icon: AnimatedScale(

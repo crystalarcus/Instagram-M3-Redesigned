@@ -217,6 +217,12 @@ class _RootScreenState extends State<RootScreen>
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       systemNavigationBarColor: Colors.transparent,
+      // systemNavigationBarIconBrightness: MainApp.of(context).themeMode ==
+      //             ThemeMode.dark ||
+      //         (MainApp.of(context).themeMode == ThemeMode.dark &&
+      //             MediaQuery.platformBrightnessOf(context) == Brightness.dark)
+      //     ? Brightness.light
+      //     : Brightness.dark,
       statusBarColor: Colors.transparent,
       systemNavigationBarContrastEnforced: false,
       systemStatusBarContrastEnforced: false,
