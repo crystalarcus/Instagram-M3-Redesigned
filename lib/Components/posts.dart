@@ -118,8 +118,12 @@ class _MobilePostState extends State<MobilePost> {
                                                     onPressed: () {},
                                                     icon: const Icon(Icons
                                                         .play_circle_outline),
-                                                    label:
-                                                        const Text("Remix"))),
+                                                    label: const Text(
+                                                      "Remix",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ))),
                                             const SizedBox(
                                               width: 16,
                                             ),
@@ -130,43 +134,43 @@ class _MobilePostState extends State<MobilePost> {
                                                     onPressed: () {},
                                                     icon: const Icon(
                                                         Icons.qr_code),
-                                                    label:
-                                                        const Text("QR Code"))),
+                                                    label: const Text(
+                                                      "QR Code",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ))),
                                           ],
                                         )),
                                     const Divider(),
-                                    ListTile(
+                                    ListItem(
                                       leading: const Icon(Icons.info_outline),
-                                      title: const Text(
-                                          "Why your're seeing this post"),
+                                      title: "Why your're seeing this post",
                                       onTap: () {},
                                     ),
-                                    ListTile(
+                                    ListItem(
                                       leading: const Icon(
                                           Icons.visibility_off_outlined),
-                                      title: const Text("Not interested"),
+                                      title: "Not interested",
                                       onTap: () {},
                                     ),
-                                    ListTile(
+                                    ListItem(
                                       leading: const Icon(
                                           Icons.account_circle_outlined),
-                                      title: const Text("About this account"),
+                                      title: "About this account",
                                       onTap: () {},
                                     ),
-                                    ListTile(
+                                    ListItem(
                                       leading: const Icon(Icons.tune_outlined),
-                                      title: const Text(
-                                          "Manage suggested content"),
+                                      title: "Manage suggested content",
                                       onTap: () {},
                                     ),
-                                    ListTile(
-                                      iconColor:
-                                          Theme.of(context).colorScheme.error,
-                                      textColor:
+                                    ListItem(
+                                      color:
                                           Theme.of(context).colorScheme.error,
                                       leading:
                                           const Icon(Icons.warning_amber_sharp),
-                                      title: const Text("Report this post"),
+                                      title: "Report this post",
                                       onTap: () {},
                                     ),
                                   ],
@@ -368,6 +372,33 @@ class _MobilePostState extends State<MobilePost> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ListItem extends StatelessWidget {
+  const ListItem({
+    super.key,
+    required this.title,
+    required this.onTap,
+    required this.leading,
+    this.color,
+  });
+  final Color? color;
+  final String title;
+  final void Function() onTap;
+  final Widget leading;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: leading,
+      title: Text(title),
+      iconColor: color,
+      onTap: onTap,
+      titleTextStyle: GoogleFonts.manrope(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: color ?? Theme.of(context).colorScheme.onSurface),
     );
   }
 }

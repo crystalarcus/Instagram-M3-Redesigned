@@ -253,7 +253,8 @@ class _MessageScreenDesktopState extends State<MessageScreenDesktop> {
                                   width: 40,
                                   errorWidget: (context, url, error) =>
                                       const Icon(Icons.error),
-                                  placeholderFadeInDuration: const Duration(seconds: 0),
+                                  placeholderFadeInDuration:
+                                      const Duration(seconds: 0),
                                   placeholder: (context, url) => Icon(
                                       Icons.account_circle_rounded,
                                       color: Theme.of(context)
@@ -499,30 +500,16 @@ class ChatWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Name
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      Text(
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        chat.person.name,
-                        style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 0),
-                      ),
-                      const SizedBox(width: 8),
-                      Container(
-                        height: 8,
-                        width: 8,
-                        decoration: BoxDecoration(
-                            color: chat.isActive
-                                ? Theme.of(context).colorScheme.error
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(20)),
-                      )
-                    ],
+                  Text(
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    chat.person.name,
+                    style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 0),
                   ),
+
                   const SizedBox(height: 4),
                   // Message
                   Text(

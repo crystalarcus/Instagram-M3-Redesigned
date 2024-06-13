@@ -88,13 +88,3 @@ class _SavePostSheetState extends State<SavePostSheet> {
   }
 }
 
-class ListItem extends StatelessWidget {
-  const ListItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-    );
-  }
-}

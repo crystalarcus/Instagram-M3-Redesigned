@@ -8,8 +8,8 @@ class StoryWidget extends StatelessWidget {
   const StoryWidget({required this.person, super.key});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 80),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 76),
       child: Column(
         children: <Widget>[
           InkWell(
@@ -49,13 +49,17 @@ class StoryWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40),
                     border: Border.all(
-                        width: 2.8,
+                        width: 2.4,
                         color: Theme.of(context).colorScheme.primary)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.outline)),
                   child: CachedNetworkImage(
-                    height: 65,
-                    width: 65,
+                    height: 60,
+                    width: 60,
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                     placeholderFadeInDuration: const Duration(seconds: 0),

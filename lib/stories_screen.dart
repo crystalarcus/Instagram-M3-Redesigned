@@ -20,14 +20,14 @@ class StoriesScreen extends StatefulWidget {
 
 class _StoriesScreenState extends State<StoriesScreen> {
   List li = [
-    ["furina.sunshine", "Furina de Fontaine", "images/furina.png", 4],
-    ["cook.with.shogun", "Raiden Shogun", "images/raiden.png", 0],
-    ["please_die_soon", "Director Hu", "images/hutao.png", 2],
-    ["guji_yae", "Yae Miko", "images/yaemiko.png", 0],
-    ["alcohol.is.not.for.kidz", "Whos This Guy", "images/venti.png", 3],
-    ["i_love_boba", "Kamisato Ayato", "images/ayato.png", 1],
-    ["the.bull.chucker", "Arataki Itto", "images/itto.png", 0],
-    ["not.a.child", "Tartaglia", "images/childe.png", 0],
+    [accounts[09].person, 4],
+    [accounts[19].person, 0],
+    [accounts[10].person, 2],
+    [accounts[24].person, 0],
+    [accounts[25].person, 3],
+    [accounts[15].person, 1],
+    [accounts[17].person, 0],
+    [accounts[22].person, 0],
   ];
   @override
   Widget build(BuildContext context) {
@@ -92,10 +92,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
               const Divider(),
               Column(
                 children: li
-                    .map((e) => StoryTile(
-                        person:
-                            Person(name: e[1], userName: e[0], pfpPath: e[2]),
-                        notifNum: e[3]))
+                    .map((e) => StoryTile(person: e[0], notifNum: e[1]))
                     .toList(),
               )
             ],
@@ -120,18 +117,14 @@ class _StoryWidget extends State<StoryTile> {
         visualDensity: const VisualDensity(vertical: 4),
         onTap: () {
           context.push('/storyview',
-              extra: StoryGroup(
-                  person: Person(
-                      name: 'Raiden Shogun',
-                      userName: 'cook.with.shogun',
-                      pfpPath: 'images/raiden.png'),
-                  stories: [
-                    Story(
-                        duration: const Duration(seconds: 7),
-                        pathToMedia: 'images/post/11.png',
-                        type: StoryType.image,
-                        uploadTime: "47 min")
-                  ]));
+              extra: StoryGroup(person: widget.person, stories: [
+                Story(
+                    duration: const Duration(seconds: 7),
+                    pathToMedia:
+                        "https://drive.google.com/uc?export=view&id=${posts[0].coverImagePath}",
+                    type: StoryType.image,
+                    uploadTime: "47 min")
+              ]));
         },
         leading: Container(
           padding: const EdgeInsets.all(4),

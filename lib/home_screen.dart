@@ -49,11 +49,11 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                 title: Padding(
                   padding: const EdgeInsets.only(top: 8),
                   child: SizedBox(
-                      height: 50,
+                      height: 55,
                       child: OpenContainer(
                         closedElevation: 0,
                         closedColor:
-                            Theme.of(context).colorScheme.primaryContainer,
+                            Theme.of(context).colorScheme.surfaceContainer,
                         openColor:
                             Theme.of(context).colorScheme.surfaceContainerLow,
                         closedShape: RoundedRectangleBorder(
@@ -68,7 +68,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                                   .colorScheme
                                   .surfaceContainerHighest),
                           padding: const WidgetStatePropertyAll(
-                              EdgeInsets.symmetric(horizontal: 12)),
+                              EdgeInsets.symmetric(horizontal: 16)),
                           leading: const Icon(
                             Symbols.search,
                             opticalSize: 24,
@@ -103,6 +103,13 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                                   imageUrl: linkToPfp),
                             )
                           ],
+                          hintStyle: WidgetStatePropertyAll(TextStyle(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
+                              fontSize: 16,
+                              letterSpacing: 0.5,
+                              fontWeight: FontWeight.w500)),
                           hintText: "Search Instagram",
                           textStyle: const WidgetStatePropertyAll(
                               TextStyle(height: 1.2)),
@@ -126,7 +133,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                           children: [
                             const Text("Stories",
                                 style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w600)),
+                                    fontSize: 16, fontWeight: FontWeight.w600)),
                             const SizedBox(height: 40),
                             TextButton(
                                 onPressed: () {
@@ -166,8 +173,8 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                                                 borderRadius:
                                                     BorderRadius.circular(30),
                                                 child: CachedNetworkImage(
-                                                    height: 64,
-                                                    width: 64,
+                                                    height: 60,
+                                                    width: 60,
                                                     errorWidget: (context, url,
                                                             error) =>
                                                         const Icon(Icons.error),
@@ -205,9 +212,9 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                       const Divider(),
                       const Row(children: [
                         SizedBox(width: 12),
-                        Text("Explore",
+                        Text("Explore Posts",
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600)),
+                                fontSize: 16, fontWeight: FontWeight.w600)),
                       ]),
                       const SizedBox(height: 12),
                       ListView.separated(

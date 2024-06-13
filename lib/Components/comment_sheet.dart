@@ -242,7 +242,6 @@ class _CommentWidgetState extends State<CommentWidget> {
                           )),
                     ],
                   ),
-                  const SizedBox(height: 4),
                   if (widget.comment.replies.isNotEmpty)
                     TextButton.icon(
                         onPressed: () {

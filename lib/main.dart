@@ -90,11 +90,6 @@ final _router = GoRouter(routes: [
       })),
 ]);
 
-// Future<void> requestPermissions() async {
-//   await Permission.storage.isGranted
-//       ? await Permission.storage.request()
-//       : null;
-// }
 
 void main() {
   // requestPermissions();
@@ -164,12 +159,12 @@ class _MainAppState extends State<MainApp> {
   }
 
   TextTheme textTheme = const TextTheme(
-    bodySmall: TextStyle(fontWeight: FontWeight.w500),
-    bodyMedium: TextStyle(fontWeight: FontWeight.w500),
-    bodyLarge: TextStyle(fontWeight: FontWeight.w500),
-    labelSmall: TextStyle(fontWeight: FontWeight.w500),
-    labelMedium: TextStyle(fontWeight: FontWeight.w500),
-    labelLarge: TextStyle(fontWeight: FontWeight.w500),
+    // bodySmall: TextStyle(fontWeight: FontWeight.w500),
+    // bodyMedium: TextStyle(fontWeight: FontWeight.w500),
+    // bodyLarge: TextStyle(fontWeight: FontWeight.w500),
+    // labelSmall: TextStyle(fontWeight: FontWeight.w500),
+    // labelMedium: TextStyle(fontWeight: FontWeight.w500),
+    // labelLarge: TextStyle(fontWeight: FontWeight.w500),
   );
 
   @override
