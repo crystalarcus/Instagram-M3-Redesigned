@@ -227,7 +227,11 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                             return MobilePost(
                                 post: p.type == PostType.image
                                     ? p as ImagePostObject
-                                    : p as CarouselPostObject);
+                                    :
+                                    // p.type == PostType.carosel?
+                                    p as CarouselPostObject
+                                // : p as ReelPostObject
+                                );
                           }
                           // posts
                           //     .map((e) => e.type == PostType.carosel

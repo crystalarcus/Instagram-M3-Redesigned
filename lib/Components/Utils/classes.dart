@@ -69,6 +69,25 @@ class ImagePostObject extends Post {
   String imagePath;
 }
 
+class ReelPostObject extends Post {
+  ReelPostObject(
+      {required super.person,
+      required super.type,
+      required super.dateTime,
+      required super.postId,
+      required super.subTitle,
+      required this.sourcePath,
+      super.likes = 0,
+      super.isLiked = false,
+      super.saved = false,
+      required super.aspectRatio,
+      super.comments = const [],
+      super.tags})
+      : super(coverImagePath: sourcePath);
+  String sourcePath;
+}
+
+//1xqwEhw6qg-Vq9zvHGlt87_GRWqQprg-s
 class Person {
   final String name;
   final String userName;
@@ -347,6 +366,17 @@ List<Post> posts = <Post>[
     type: PostType.carosel,
     dateTime: DateTime(2024, 3, 24, 4, 25, 34),
   ),
+  // ReelPostObject(
+  //   aspectRatio: 0.9375,
+  //   postId: 001,
+  //   person: accounts[26].person,
+  //   subTitle:
+  //       "Threw him in the Abyss again, getting too reckless, needs some punishment.",
+  //   sourcePath: "1w35ptuh4ixOJK6tJLbpwArG5xEQ6dS47",
+  //   type: PostType.reel,
+  //   dateTime: DateTime(2024, 3, 16, 5, 24, 54),
+  // ),
+
   ImagePostObject(
     postId: 002,
     aspectRatio: 1,

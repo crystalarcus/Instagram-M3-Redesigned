@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+// import 'package:media_kit/media_kit.dart';
+// import 'package:media_kit_video/media_kit_video.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
 import 'package:redesigned/Components/Utils/save_post_sheet.dart';
@@ -185,8 +187,10 @@ class _MobilePostState extends State<MobilePost> {
           ),
           widget.post.type == PostType.image
               ? ImagePostWidget(imagePost: widget.post as ImagePostObject)
+              // : widget.post.type == PostType.carosel
               : CarouselPostWidget(
                   imagePost: widget.post as CarouselPostObject),
+          // : ReelPost(post: widget.post as ReelPostObject),
           const SizedBox(height: 10),
           Row(
             children: [
@@ -693,6 +697,38 @@ class _ImagePostWidgetState extends State<ImagePostWidget> {
     );
   }
 }
+
+// class ReelPost extends StatefulWidget {
+//   const ReelPost({super.key, required this.post});
+//   final ReelPostObject post;
+//   @override
+//   State<ReelPost> createState() => _ReelPostState();
+// }
+
+// class _ReelPostState extends State<ReelPost> {
+//   late final Player player;
+//   late final VideoController videoController = VideoController(player);
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     player.open(Media(widget.post.sourcePath));
+//   }
+
+//   @override
+//   void dispose() {
+//     player.dispose();
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       width: MediaQuery.sizeOf(context).width,
+//       child: Video(controller: videoController),
+//     );
+//   }
+// }
 
 class SelectButton extends StatefulWidget {
   const SelectButton({
