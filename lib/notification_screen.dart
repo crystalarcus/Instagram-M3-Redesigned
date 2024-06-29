@@ -153,15 +153,18 @@ class _NotifWidgetState extends State<NotifWidget> {
                             children: [
                               Row(
                                 children: [
-                                  Text(
-                                    widget.notification.notifier.userName,
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        letterSpacing: 0.2,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onSurfaceVariant),
+                                  Expanded(
+                                    child: Text(
+                                      widget.notification.notifier.userName,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          letterSpacing: 0.2,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurfaceVariant),
+                                    ),
                                   ),
                                   const SizedBox(width: 12),
                                   Text(
@@ -244,7 +247,8 @@ class _NotifWidgetState extends State<NotifWidget> {
                                           width: 50,
                                           errorWidget: (context, url, error) =>
                                               const Icon(Icons.error),
-                    placeholderFadeInDuration: const Duration(seconds: 0),
+                                          placeholderFadeInDuration:
+                                              const Duration(seconds: 0),
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
                                               Center(

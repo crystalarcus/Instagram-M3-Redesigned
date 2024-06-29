@@ -1,4 +1,4 @@
 {
-    "cmake.sourceDirectory": "/home/crystal/code/flutter/Instagram-M3-Redesigned/linux",
-    "cmake.configureOnOpen": true
+    "cmake.sourceDirectory": "/home/crystal/code/instagram/linux",
+    "cmake.configureOnOpen": false
 }

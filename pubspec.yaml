@@ -35,6 +35,8 @@ dependencies:
   scrollable_positioned_list: ^0.3.8
   side_sheet: ^1.0.4
   transparent_image: ^2.0.1
+  video_player: ^2.8.7
+  visibility_detector: ^0.4.0+2
 
 dev_dependencies:
   flutter_test:

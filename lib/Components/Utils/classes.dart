@@ -114,8 +114,8 @@ class Comment {
     required this.person,
     required this.text,
     required this.dateTime,
-    this.isLiked = false,
     this.likes = 0,
+    this.isLiked = false,
     this.replies = const [],
   });
 }
@@ -366,19 +366,18 @@ List<Post> posts = <Post>[
     type: PostType.carosel,
     dateTime: DateTime(2024, 3, 24, 4, 25, 34),
   ),
-  // ReelPostObject(
-  //   aspectRatio: 0.9375,
-  //   postId: 001,
-  //   person: accounts[26].person,
-  //   subTitle:
-  //       "Threw him in the Abyss again, getting too reckless, needs some punishment.",
-  //   sourcePath: "1w35ptuh4ixOJK6tJLbpwArG5xEQ6dS47",
-  //   type: PostType.reel,
-  //   dateTime: DateTime(2024, 3, 16, 5, 24, 54),
-  // ),
-
-  ImagePostObject(
+  ReelPostObject(
+    aspectRatio: 3 / 4,
     postId: 002,
+    person: accounts[22].person,
+    subTitle:
+        "Threw him in the Abyss again, getting too reckless, needs some punishment.",
+    sourcePath: "1n6UUe6Yk1ZTB5DKP55lP6CNZia7_r7KE",
+    type: PostType.reel,
+    dateTime: DateTime(2024, 3, 16, 5, 24, 54),
+  ),
+  ImagePostObject(
+    postId: 003,
     aspectRatio: 1,
     person: accounts[9].person,
     subTitle: "Behold my pleasing asthetics",
@@ -397,7 +396,7 @@ List<Post> posts = <Post>[
       "1O5rHhl8yg5XhPWdhddAu1Bw2VRyrWH43",
     ],
     dateTime: DateTime(2024, 2, 23, 3, 43, 21),
-    postId: 003,
+    postId: 004,
     subTitle:
         "Trying out the Art of Cooking. Miko once said she likes Fried Tofu. So I thought I should make some and invite all Inazuma.",
     tags: [
@@ -421,7 +420,7 @@ List<Post> posts = <Post>[
     ],
   ),
   ImagePostObject(
-    postId: 004,
+    postId: 005,
     person: accounts[10].person,
     subTitle:
         "Now you can pre-register your death burial at Wangshen Funeral Parlor and get quick burial on your death ! Happy dying !",
@@ -444,7 +443,7 @@ List<Post> posts = <Post>[
   ),
   ImagePostObject(
     aspectRatio: 0.9375,
-    postId: 005,
+    postId: 006,
     person: accounts[22].person,
     subTitle:
         "Threw him in the Abyss again, getting too reckless, needs some punishment.",

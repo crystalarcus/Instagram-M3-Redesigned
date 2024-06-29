@@ -224,14 +224,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             Post p = posts[index];
-                            return MobilePost(
-                                post: p.type == PostType.image
-                                    ? p as ImagePostObject
-                                    :
-                                    // p.type == PostType.carosel?
-                                    p as CarouselPostObject
-                                // : p as ReelPostObject
-                                );
+                            return MobilePost(post: p);
                           }
                           // posts
                           //     .map((e) => e.type == PostType.carosel

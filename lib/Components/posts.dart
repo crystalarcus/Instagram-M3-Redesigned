@@ -15,6 +15,8 @@ import 'package:redesigned/Components/comment_sheet.dart';
 // import 'package:redesigned/Components/comment_sheet.dart';
 import 'package:redesigned/Components/post_viewer.dart';
 import 'package:redesigned/Components/share_sheet.dart';
+import 'package:video_player/video_player.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class MobilePost extends StatefulWidget {
   const MobilePost({
@@ -187,9 +189,10 @@ class _MobilePostState extends State<MobilePost> {
           ),
           widget.post.type == PostType.image
               ? ImagePostWidget(imagePost: widget.post as ImagePostObject)
-              // : widget.post.type == PostType.carosel
-              : CarouselPostWidget(
-                  imagePost: widget.post as CarouselPostObject),
+              : widget.post.type == PostType.carosel
+                  ? CarouselPostWidget(
+                      imagePost: widget.post as CarouselPostObject)
+                  : ReelPost(post: widget.post as ReelPostObject),
           // : ReelPost(post: widget.post as ReelPostObject),
           const SizedBox(height: 10),
           Row(
@@ -437,8 +440,10 @@ class _DesktopPostState extends State<DesktopPost> {
                 ? ImagePostWidget(
                     imagePost: widget.post as ImagePostObject,
                   )
-                : CarouselPostWidget(
-                    imagePost: widget.post as CarouselPostObject),
+                : widget.post.type == PostType.carosel
+                    ? CarouselPostWidget(
+                        imagePost: widget.post as CarouselPostObject)
+                    : ReelPost(post: widget.post as ReelPostObject),
           ),
           Expanded(
               child: Padding(
@@ -698,37 +703,77 @@ class _ImagePostWidgetState extends State<ImagePostWidget> {
   }
 }
 
-// class ReelPost extends StatefulWidget {
-//   const ReelPost({super.key, required this.post});
-//   final ReelPostObject post;
-//   @override
-//   State<ReelPost> createState() => _ReelPostState();
-// }
+class ReelPost extends StatefulWidget {
+  const ReelPost({super.key, required this.post});
+  final ReelPostObject post;
+  @override
+  State<ReelPost> createState() => _ReelPostState();
+}
 
-// class _ReelPostState extends State<ReelPost> {
-//   late final Player player;
-//   late final VideoController videoController = VideoController(player);
+class _ReelPostState extends State<ReelPost> {
+  late VideoPlayerController controller;
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     player.open(Media(widget.post.sourcePath));
-//   }
+  @override
+  void initState() {
+    super.initState();
+    controller = VideoPlayerController.networkUrl(Uri.parse(
+        "https://drive.google.com/uc?export=view&id=${widget.post.sourcePath}"))
+      ..initialize().then((_) {
+        //  // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+        setState(() {
+          controller.play();
+          controller.setVolume(0);
+        });
+      });
+  }
 
-//   @override
-//   void dispose() {
-//     player.dispose();
-//     super.dispose();
-//   }
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       width: MediaQuery.sizeOf(context).width,
-//       child: Video(controller: videoController),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.sizeOf(context).width,
+      child: Center(
+        child: AspectRatio(
+            aspectRatio: widget.post.aspectRatio,
+            child: Stack(
+              children: [
+                VisibilityDetector(
+                    key: ObjectKey(widget.key),
+                    child: VideoPlayer(controller),
+                    onVisibilityChanged: (vibility) {
+                      setState(() {
+                        vibility.visibleFraction > 0.5
+                            ? controller.play()
+                            : controller.pause();
+                      });
+                    }),
+                Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: IconButton.filledTonal(
+                        visualDensity: VisualDensity.compact,
+                        onPressed: () {},
+                        icon: const Icon(
+                          size: 16,
+                          Icons.volume_up_outlined,
+                        )),
+                  ),
+                  VideoProgressIndicator(controller,
+                      colors: VideoProgressColors(
+                          playedColor: Theme.of(context).colorScheme.primary),
+                      allowScrubbing: true)
+                ]),
+              ],
+            )),
+      ),
+    );
+  }
+}
 
 class SelectButton extends StatefulWidget {
   const SelectButton({
