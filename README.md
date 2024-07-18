@@ -1,5 +1,6 @@
 ## Instagram M3 Redesigned
 #### A Flutter project
+*Currently under development*
 
 [Figma Design link](https://www.figma.com/file/F4b8moLStOKWqxYNdkV4o4/Instagram-(-M3-Redesigned-)?type=design&node-id=599%3A3245&mode=design&t=q77Ht4m4iaf7yEPA-1)
 
