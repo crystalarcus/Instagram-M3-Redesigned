@@ -102,6 +102,9 @@ class ExpansionView implements ExpansionPanel {
   /// Defaults to [ThemeData.cardColor].
   @override
   final Color? backgroundColor;
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
 /// An expansion panel that allows for radio-like functionality.

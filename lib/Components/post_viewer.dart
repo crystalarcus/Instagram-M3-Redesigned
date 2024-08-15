@@ -91,7 +91,8 @@ class CarouselPostViewer extends StatelessWidget {
                             child: CachedNetworkImage(
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.error),
-                                placeholderFadeInDuration: const Duration(seconds: 0),
+                                placeholderFadeInDuration:
+                                    const Duration(seconds: 0),
                                 progressIndicatorBuilder:
                                     (context, url, downloadProgress) => Center(
                                           child: CircularProgressIndicator(
@@ -106,10 +107,12 @@ class CarouselPostViewer extends StatelessWidget {
                 initialPage: initPage,
                 viewportFraction: 1,
                 slideIndicator: CircularWaveSlideIndicator(
-                  indicatorRadius: 4.8,
-                  indicatorBackgroundColor:
-                      const Color.fromARGB(98, 190, 190, 190),
-                  currentIndicatorColor: Colors.white,
+                  slideIndicatorOptions: const SlideIndicatorOptions(
+                    indicatorRadius: 4.8,
+                    indicatorBackgroundColor:
+                        Color.fromARGB(98, 190, 190, 190),
+                    currentIndicatorColor: Colors.white,
+                  ),
                 ),
                 floatingIndicator: false,
                 showIndicator: true,

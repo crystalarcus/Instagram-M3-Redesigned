@@ -646,13 +646,14 @@ class _CarouselPostWidgetState extends State<CarouselPostWidget> {
                     aspectRatio: widget.imagePost.aspectRatio,
                     indicatorMargin: 4,
                     slideIndicator: CircularWaveSlideIndicator(
+                        slideIndicatorOptions: SlideIndicatorOptions(
                       indicatorRadius: 3,
                       itemSpacing: 12,
                       indicatorBackgroundColor:
                           Theme.of(context).colorScheme.surfaceContainerHigh,
                       currentIndicatorColor:
                           Theme.of(context).colorScheme.primary,
-                    ),
+                    )),
                     floatingIndicator: true,
                     showIndicator: true,
                   ),
