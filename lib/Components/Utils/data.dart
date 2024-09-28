@@ -492,7 +492,7 @@ List<ChatText> chatTexts = [
       repliedTo: 12,
       sentByUser: true),
   ChatText(text: "byee", time: "8:26", textid: 12),
-  ChatText(text: "Okayy than, see ya tomrrow", time: "8:25", textid: 11),
+  ChatText(text: "Okayy than, see ya tomorrow", time: "8:25", textid: 11),
   ChatText(
       text: "Alr, I will call them all",
       time: "8:25",

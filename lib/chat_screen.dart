@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 // import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
@@ -14,15 +15,16 @@ class MobileChatScreen extends StatefulWidget {
 }
 
 class _MobileChatScreenState extends State<MobileChatScreen> {
+  List<ChatText> chats = chatTexts;
   late final ItemScrollController controller;
   bool isScrolling = false;
-
   void goToChat(int id) {
     controller.scrollTo(index: id, duration: Durations.medium1);
   }
-
+  late final TextEditingController textEditingController;
   @override
   void initState() {
+    textEditingController = TextEditingController();
     controller = ItemScrollController();
     super.initState();
   }
@@ -100,44 +102,13 @@ class _MobileChatScreenState extends State<MobileChatScreen> {
                 reverse: true,
                 itemScrollController: controller,
                 itemCount: chatTexts.length,
-                itemBuilder: (context, index) => chatTexts[index].sentByUser
+                itemBuilder: (context, index) => chats[index].sentByUser
                     ? UserChat(
+                        onLongPress: () {},
                         isTopSame: index < chatTexts.length - 1 &&
                             chatTexts[index + 1].sentByUser,
                         chatText: chatTexts[index],
                       )
-                    // ChatTextWidget(
-                    //     scrollTo: goToChat,
-                    //     chatText: chatTexts[index],
-                    //     borderRadius: BorderRadius.only(
-                    //       topLeft: chatTexts[index].sentByUser ||
-                    //               (index > 0 && chatTexts[index - 1].sentByUser)
-                    //           ? const Radius.circular(24)
-                    //           : const Radius.circular(8),
-                    //       topRight: chatTexts[index].sentByUser &&
-                    //               (index > 0 && chatTexts[index - 1].sentByUser)
-                    //           ? const Radius.circular(8)
-                    //           : const Radius.circular(24),
-                    //       bottomLeft: chatTexts[index].sentByUser
-                    //           ? const Radius.circular(24)
-                    //           : const Radius.circular(8),
-                    //       bottomRight: chatTexts[index].sentByUser
-                    //           ? const Radius.circular(8)
-                    //           : const Radius.circular(24),
-                    //     ),
-                    //     vertPadding: EdgeInsets.only(
-                    //       top: (index > 0 &&
-                    //               chatTexts[index - 1].sentByUser ==
-                    //                   chatTexts[index].sentByUser)
-                    //           ? 1
-                    //           : 12,
-                    //       bottom: (index < chatTexts.length - 1 &&
-                    //               chatTexts[index + 1].sentByUser ==
-                    //                   chatTexts[index].sentByUser)
-                    //           ? 1
-                    //           : 12,
-                    //     ),
-                    //   )
                     : InterlocutorChat(
                         isBottomSame:
                             index > 1 && !chatTexts[index - 1].sentByUser,
@@ -153,6 +124,12 @@ class _MobileChatScreenState extends State<MobileChatScreen> {
                   child: SizedBox(
                       height: 56,
                       child: TextField(
+                        onChanged: (text){
+                          setState(() {
+                            textEditingController.text = text;
+                          });
+                        },
+                        controller: textEditingController,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: Theme.of(context)
@@ -193,13 +170,24 @@ class _MobileChatScreenState extends State<MobileChatScreen> {
                                     size: 24,
                                   ),
                                 ),
-                                IconButton(
+                                textEditingController.text==""?   IconButton(
                                   onPressed: () {},
                                   icon: const Icon(
                                     Icons.mic,
                                     size: 24,
                                   ),
-                                ),
+                                ):IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      chats.insert(0,ChatText(text: textEditingController.text,sentByUser: true, time: "7:24 pm", textid: chats.length));
+                                      textEditingController.text = "";
+                                    });
+                                  },
+                                  icon: const Icon(
+                                    Icons.send_outlined,
+                                    size: 24,
+                                  ),
+                                ) ,
                                 const SizedBox(width: 4)
                               ],
                             ),
@@ -309,6 +297,7 @@ class _DesktopChatScreenState extends State<DesktopChatScreen> {
                 itemCount: chatTexts.length,
                 itemBuilder: (context, index) => chatTexts[index].sentByUser
                     ? UserChat(
+                        onLongPress: () {},
                         isTopSame: index < chatTexts.length - 1 &&
                             chatTexts[index + 1].sentByUser,
                         chatText: chatTexts[index],
@@ -548,9 +537,14 @@ class _InterlocutorChatState extends State<InterlocutorChat> {
 }
 
 class UserChat extends StatefulWidget {
-  const UserChat({super.key, required this.chatText, required this.isTopSame});
+  const UserChat(
+      {super.key,
+      required this.chatText,
+      required this.isTopSame,
+      required this.onLongPress});
   final ChatText chatText;
   final bool isTopSame;
+  final void Function() onLongPress;
   @override
   State<UserChat> createState() => _UserChatState();
 }
@@ -569,29 +563,70 @@ class _UserChatState extends State<UserChat> {
             ConstrainedBox(
               constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width - 120),
-              child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(24),
-                        bottomLeft: const Radius.circular(24),
-                        topRight: widget.isTopSame
-                            ? const Radius.circular(8)
-                            : const Radius.circular(24),
-                        bottomRight: const Radius.circular(8),
-                      ),
-                      color: Theme.of(context).colorScheme.primary),
-                  child: Text(
-                    widget.chatText.text,
-                    style: chatTextStyle.apply(
-                      color: Theme.of(context).colorScheme.onPrimary,
+              child: MenuAnchor(
+                  menuChildren: [
+                    MenuItemButton(
+                      trailingIcon: const Icon(Symbols.reply),
+                      child: const Text("Reply"),
+                      onPressed: () {},
                     ),
-                  ),
-                ),
-              ),
+                    MenuItemButton(
+                      trailingIcon: const Icon(Icons.send_outlined),
+                      child: const Text("Forward"),
+                      onPressed: () {},
+                    ),
+                    MenuItemButton(
+                      trailingIcon: const Icon(Icons.copy_outlined),
+                      child: const Text("Copy"),
+                      onPressed: () {},
+                    ),
+                    MenuItemButton(
+                      trailingIcon: const Icon(Icons.bookmark_add_outlined),
+                      child: const Text("Save reply"),
+                      onPressed: () {},
+                    ),
+                    MenuItemButton(
+                      trailingIcon: const Icon(Icons.delete_outline),
+                      child: const Text("Delete for you"),
+                      onPressed: () {},
+                    ),MenuItemButton(
+                      trailingIcon: const Icon(Icons.keyboard_return_outlined),
+                      child: const Text("Unsend"),
+                      onPressed: () {},
+                    ),
+                  ],
+                  builder: (context, menuController, child) {
+                    return GestureDetector(
+                      onTap: () {},
+                      onLongPress: () {
+                        if (menuController.isOpen) {
+                          menuController.close();
+                        } else {
+                          menuController.open();
+                        }
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 14),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: const Radius.circular(24),
+                              bottomLeft: const Radius.circular(24),
+                              topRight: widget.isTopSame
+                                  ? const Radius.circular(8)
+                                  : const Radius.circular(24),
+                              bottomRight: const Radius.circular(8),
+                            ),
+                            color: Theme.of(context).colorScheme.primary),
+                        child: Text(
+                          widget.chatText.text,
+                          style: chatTextStyle.apply(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
             )
           ],
         )
