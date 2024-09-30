@@ -99,35 +99,27 @@ class _MessageScreenMobileState extends State<MessageScreenMobile> {
       body: ListView(
         children: [
           // Subheader Notes
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-            child: Text(
-              "Notes",
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          //   child: Text(
+          //     "Notes",
+          //     style: TextStyle(
+          //         fontWeight: FontWeight.w500,
+          //         color: Theme.of(context).colorScheme.onSurfaceVariant),
+          //   ),
+          // ),
 
           // NotesList
-          SizedBox(
-              height: 140,
-              child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: notes
-                      .map((e) => NoteWidget(
-                            note: e,
-                          ))
-                      .toList())),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
-            child: Text(
-              "Chats",
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant),
-            ),
-          ),
+          // SizedBox(
+          //     height: 140,
+          //     child: ListView(
+          //         scrollDirection: Axis.horizontal,
+          //         children: notes
+          //             .map((e) => NoteWidget(
+          //                   note: e,
+          //                 ))
+          //             .toList())),
+
           SizedBox(
             height: 60,
             child: ListView(
@@ -447,23 +439,23 @@ class ChatWidget extends StatelessWidget {
           ),
           ListTile(
             onTap: () {},
-            leading: const Icon(Icons.pin_drop_outlined),
-            title: const Text("Pin"),
-          ),
-          ListTile(
-            onTap: () {},
-            leading: const Icon(Symbols.delete_outline),
-            title: const Text("Delete"),
+            leading: const Icon(Icons.archive_outlined),
+            title: const Text("Archive"),
           ),
           ListTile(
             onTap: () {},
             leading: const Icon(Icons.message_outlined),
             title: const Text("Mute Messages"),
           ),
+          // ListTile(
+          //   onTap: () {},
+          //   leading: const Icon(Icons.phone_outlined),
+          //   title: const Text("Mute Calls"),
+          // ),
           ListTile(
             onTap: () {},
-            leading: const Icon(Icons.phone_outlined),
-            title: const Text("Mute Calls"),
+            leading: const Icon(Symbols.delete_outline),
+            title: const Text("Delete"),
           ),
         ],
       );

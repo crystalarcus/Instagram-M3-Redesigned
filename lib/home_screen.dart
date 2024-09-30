@@ -110,7 +110,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                               fontSize: 16,
                               letterSpacing: 0.5,
                               fontWeight: FontWeight.w500)),
-                          hintText: "Search Instagram",
+                          hintText: "Search Flow",
                           textStyle: const WidgetStatePropertyAll(
                               TextStyle(height: 1.2)),
                           onTap: () => {action()},
@@ -126,112 +126,37 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                   const SizedBox(height: 12),
                   Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 12),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 12),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text("Stories",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w600)),
-                            const SizedBox(height: 40),
-                            TextButton(
-                                onPressed: () {
-                                  context.push("/stories");
-                                },
-                                child: const Text("See all"))
-                          ],
+                          children: [],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: SizedBox(
-                            height: 100,
-                            child: OverflowBox(
-                                maxWidth: widget.constraints.maxWidth,
-                                alignment: Alignment.topLeft,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: [
-                                    Column(
-                                      children: <Widget>[
-                                        InkWell(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            onTap: () {},
-                                            child: Container(
-                                              padding: const EdgeInsets.all(4),
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(40),
-                                                  border: Border.all(
-                                                      width: 2.8,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .primary)),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                child: CachedNetworkImage(
-                                                    height: 60,
-                                                    width: 60,
-                                                    errorWidget: (context, url,
-                                                            error) =>
-                                                        const Icon(Icons.error),
-                                                    placeholderFadeInDuration:
-                                                        const Duration(
-                                                            seconds: 0),
-                                                    placeholder:
-                                                        (context, url) => Icon(
-                                                            Icons
-                                                                .account_circle_rounded,
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .colorScheme
-                                                                .onSurfaceVariant),
-                                                    fit: BoxFit.contain,
-                                                    imageUrl: linkToPfp),
-                                              ),
-                                            )),
-                                        const Text("Your Story")
-                                      ],
-                                    ),
-                                    const SizedBox(width: 20),
-                                    StoryWidget(person: accounts[9].person),
-                                    const SizedBox(width: 20),
-                                    StoryWidget(person: accounts[19].person),
-                                    const SizedBox(width: 20),
-                                    StoryWidget(person: accounts[18].person),
-                                    const SizedBox(width: 20),
-                                    StoryWidget(person: accounts[5].person),
-                                    // const StoryWidget(pfpPath: "images/hutao.png"),
-                                  ],
-                                ))),
-                      ),
                       const SizedBox(height: 8),
-                      const Divider(),
-                      const Row(children: [
-                        SizedBox(width: 12),
-                        Text("Explore Posts",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600)),
-                      ]),
-                      const SizedBox(height: 12),
-                      ListView.separated(
-                          separatorBuilder: (context, index) => const Divider(),
-                          itemCount: posts.length,
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            Post p = posts[index];
-                            return MobilePost(post: p);
-                          }
-                          // posts
-                          //     .map((e) => e.type == PostType.carosel
-                          //         ? CarouselPost(post: e as CarouselPostObject)
-                          //         : ImagePost(postObject: e as ImagePostObject))
-                          //     .toList() ,
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                        ),
+                        child: ListView.separated(
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
+                                  height: 12,
+                                ),
+                            itemCount: posts.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              Post p = posts[index];
+                              return MobilePost(post: p);
+                            }
+                            // posts
+                            //     .map((e) => e.type == PostType.carosel
+                            //         ? CarouselPost(post: e as CarouselPostObject)
+                            //         : ImagePost(postObject: e as ImagePostObject))
+                            //     .toList() ,
+                            ),
+                      ),
                     ],
                   )
                 ],

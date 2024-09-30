@@ -34,8 +34,10 @@ class _MobilePostState extends State<MobilePost> {
   bool saved = false;
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(14)),
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(14)),
+          color: Theme.of(context).colorScheme.surfaceContainerLow),
       child: Column(
         children: <Widget>[
           Padding(
@@ -595,73 +597,102 @@ class CarouselPostWidget extends StatefulWidget {
 }
 
 class _CarouselPostWidgetState extends State<CarouselPostWidget> {
-  int currentPage = 0;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
-              transitionDuration: Durations.medium1,
-              pageBuilder: (context, animation, secondAnimtion) =>
-                  FadeTransition(
-                    opacity: animation,
-                    child: CarouselPostViewer(
-                        initPage: currentPage,
-                        imageTag: widget.imagePost.postId.toString(),
-                        post: widget.imagePost),
-                  )));
-        },
-        child: Hero(
-            tag: widget.imagePost.postId.toString(),
-            child: Stack(
-              children: [
-                FlutterCarousel(
-                  items: widget.imagePost.imagePaths
-                      .map((e) => Builder(
-                            builder: (BuildContext context) =>
-                                CachedNetworkImage(
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
-                                    placeholderFadeInDuration:
-                                        const Duration(seconds: 0),
-                                    progressIndicatorBuilder: (context, url,
-                                            downloadProgress) =>
-                                        Center(
-                                          child: CircularProgressIndicator(
-                                              value: downloadProgress.progress),
-                                        ),
-                                    fit: BoxFit.contain,
-                                    imageUrl:
-                                        "https://drive.google.com/uc?export=view&id=$e"),
-                          ))
-                      .toList(),
-                  options: CarouselOptions(
-                    initialPage: currentPage,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        currentPage = index;
-                      });
-                    },
-                    viewportFraction: 1,
-                    aspectRatio: widget.imagePost.aspectRatio,
-                    indicatorMargin: 4,
-                    slideIndicator: CircularWaveSlideIndicator(
-                        slideIndicatorOptions: SlideIndicatorOptions(
-                      indicatorRadius: 3,
-                      itemSpacing: 12,
-                      indicatorBackgroundColor:
-                          Theme.of(context).colorScheme.surfaceContainerHigh,
-                      currentIndicatorColor:
-                          Theme.of(context).colorScheme.primary,
-                    )),
-                    floatingIndicator: true,
-                    showIndicator: true,
-                  ),
-                ),
-                // const Align(
-                // alignment: Alignment.bottomRight, child: Text("2/3")),
-              ],
-            )));
+    return Hero(
+        tag: widget.imagePost.postId.toString(),
+        child: Stack(
+          children: [
+            // FlutterCarousel(
+            //   items: widget.imagePost.imagePaths
+            //       .map((e) => Builder(
+            //             builder: (BuildContext context) =>
+            //                 CachedNetworkImage(
+            //                     errorWidget: (context, url, error) =>
+            //                         const Icon(Icons.error),
+            //                     placeholderFadeInDuration:
+            //                         const Duration(seconds: 0),
+            //                     progressIndicatorBuilder: (context, url,
+            //                             downloadProgress) =>
+            //                         Center(
+            //                           child: CircularProgressIndicator(
+            //                               value: downloadProgress.progress),
+            //                         ),
+            //                     fit: BoxFit.contain,
+            //                     imageUrl:
+            //                         "https://drive.google.com/uc?export=view&id=$e"),
+            //           ))
+            //       .toList(),
+            //   options: CarouselOptions(
+            //     initialPage: currentPage,
+            //     onPageChanged: (index, reason) {
+            //       setState(() {
+            //         currentPage = index;
+            //       });
+            //     },
+            //     viewportFraction: 1,
+            //     aspectRatio: widget.imagePost.aspectRatio,
+            //     indicatorMargin: 4,
+            //     slideIndicator: CircularWaveSlideIndicator(
+            //         slideIndicatorOptions: SlideIndicatorOptions(
+            //       indicatorRadius: 3,
+            //       itemSpacing: 12,
+            //       indicatorBackgroundColor:
+            //           Theme.of(context).colorScheme.surfaceContainerHigh,
+            //       currentIndicatorColor:
+            //           Theme.of(context).colorScheme.primary,
+            //     )),
+            //     floatingIndicator: true,
+            //     showIndicator: true,
+            //   ),
+            // ),
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                  maxHeight: (1 / widget.imagePost.aspectRatio) *
+                      (MediaQuery.of(context).size.width - 80)),
+              child: CarouselView(
+                onTap: (int i) {
+                  Navigator.of(context, rootNavigator: true).push(
+                      PageRouteBuilder(
+                          transitionDuration: Durations.medium1,
+                          pageBuilder: (context, animation, secondAnimtion) =>
+                              FadeTransition(
+                                opacity: animation,
+                                child: CarouselPostViewer(
+                                    initPage: i,
+                                    imageTag:
+                                        widget.imagePost.postId.toString(),
+                                    post: widget.imagePost),
+                              )));
+                },
+                itemSnapping: true,
+                itemExtent: widget.imagePost.aspectRatio *
+                    (MediaQuery.of(context).size.width - 80),
+                shrinkExtent: (1 / widget.imagePost.aspectRatio) *
+                    (MediaQuery.of(context).size.width - 80),
+                children: widget.imagePost.imagePaths
+                    .map((e) => Builder(
+                          builder: (BuildContext context) => CachedNetworkImage(
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                              placeholderFadeInDuration:
+                                  const Duration(seconds: 0),
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) => Center(
+                                        child: CircularProgressIndicator(
+                                            value: downloadProgress.progress),
+                                      ),
+                              fit: BoxFit.cover,
+                              imageUrl:
+                                  "https://drive.google.com/uc?export=view&id=$e"),
+                        ))
+                    .toList(),
+              ),
+            ),
+            // const Align(
+            // alignment: Alignment.bottomRight, child: Text("2/3")),
+          ],
+        ));
   }
 }
 
@@ -675,30 +706,37 @@ class ImagePostWidget extends StatefulWidget {
 class _ImagePostWidgetState extends State<ImagePostWidget> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
-            transitionDuration: Durations.medium1,
-            pageBuilder: (context, animation, secondAnimtion) => FadeTransition(
-                  opacity: animation,
-                  child: ImagePostViewer(
-                      imageTag: widget.imagePost.postId.toString(),
-                      image: widget.imagePost.imagePath),
-                )));
-      },
-      child: Hero(
-        tag: widget.imagePost.postId.toString(),
-        child: CachedNetworkImage(
-            errorWidget: (context, url, error) => const Icon(Icons.error),
-            placeholderFadeInDuration: const Duration(seconds: 0),
-            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                Center(
-                  child: CircularProgressIndicator(
-                      value: downloadProgress.progress),
-                ),
-            fit: BoxFit.contain,
-            imageUrl:
-                "https://drive.google.com/uc?export=view&id=${widget.imagePost.imagePath}"),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 6),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(24),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
+                transitionDuration: Durations.medium1,
+                pageBuilder: (context, animation, secondAnimtion) =>
+                    FadeTransition(
+                      opacity: animation,
+                      child: ImagePostViewer(
+                          imageTag: widget.imagePost.postId.toString(),
+                          image: widget.imagePost.imagePath),
+                    )));
+          },
+          child: Hero(
+            tag: widget.imagePost.postId.toString(),
+            child: CachedNetworkImage(
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                placeholderFadeInDuration: const Duration(seconds: 0),
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Center(
+                      child: CircularProgressIndicator(
+                          value: downloadProgress.progress),
+                    ),
+                fit: BoxFit.contain,
+                imageUrl:
+                    "https://drive.google.com/uc?export=view&id=${widget.imagePost.imagePath}"),
+          ),
+        ),
       ),
     );
   }
@@ -736,9 +774,15 @@ class _ReelPostState extends State<ReelPost> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.sizeOf(context).width,
-      child: Center(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      child: Container(
+        clipBehavior: Clip.hardEdge,
+        alignment: Alignment.center,
+        width: MediaQuery.sizeOf(context).width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: AspectRatio(
             aspectRatio: widget.post.aspectRatio,
             child: Stack(

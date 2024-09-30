@@ -90,7 +90,6 @@ final _router = GoRouter(routes: [
       })),
 ]);
 
-
 void main() {
   // requestPermissions();
   runApp(const MainApp());
@@ -159,13 +158,13 @@ class _MainAppState extends State<MainApp> {
   }
 
   TextTheme textTheme = const TextTheme(
-    // bodySmall: TextStyle(fontWeight: FontWeight.w500),
-    // bodyMedium: TextStyle(fontWeight: FontWeight.w500),
-    // bodyLarge: TextStyle(fontWeight: FontWeight.w500),
-    // labelSmall: TextStyle(fontWeight: FontWeight.w500),
-    // labelMedium: TextStyle(fontWeight: FontWeight.w500),
-    // labelLarge: TextStyle(fontWeight: FontWeight.w500),
-  );
+      // bodySmall: TextStyle(fontWeight: FontWeight.w500),
+      // bodyMedium: TextStyle(fontWeight: FontWeight.w500),
+      // bodyLarge: TextStyle(fontWeight: FontWeight.w500),
+      // labelSmall: TextStyle(fontWeight: FontWeight.w500),
+      // labelMedium: TextStyle(fontWeight: FontWeight.w500),
+      // labelLarge: TextStyle(fontWeight: FontWeight.w500),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -402,7 +401,7 @@ class _RootScreenState extends State<RootScreen>
                 context.go('/');
                 break;
               case 1:
-                context.go('/reels');
+                context.go('/stories');
               case 2:
                 context.go('/messages');
                 break;
