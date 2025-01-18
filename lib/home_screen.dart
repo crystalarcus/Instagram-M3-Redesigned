@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:redesigned/Components/Utils/classes.dart';
 import 'package:redesigned/Components/Utils/data.dart';
@@ -10,7 +9,6 @@ import 'package:redesigned/main.dart';
 import 'package:redesigned/search_insta_screen.dart';
 import 'package:redesigned/stories_screen.dart';
 import 'package:side_sheet/side_sheet.dart';
-import 'Components/story_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -415,7 +413,7 @@ enum Filters { Popular, Arts, Music, Funny, Cats, Cooking, Memes }
 List li = [
   ["furina.sunshine", "Furina de Fontaine", "images/furina.png", 4],
   ["cook.with.shogun", "Raiden Shogun", "images/raiden.png", 0],
-  ["please_die_soon", "Director Hu", "images/hutao.png", 2],
+  ["director_hu54", "Director Hu", "images/hutao.png", 2],
   ["guji_yae", "Yae Miko", "images/yaemiko.png", 0],
   ["alcohol.is.not.for.kidz", "Whos This Guy", "images/venti.png", 3],
   ["i_love_boba", "Kamisato Ayato", "images/ayato.png", 1],

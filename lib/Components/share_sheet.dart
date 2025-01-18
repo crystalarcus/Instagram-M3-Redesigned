@@ -130,7 +130,7 @@ class _ShareSheetState extends State<ShareSheet> {
 }
 
 const List<String> recentSent = [
-  "please_die_soon",
+  "director_hu54",
   "furina_sunshine",
   "cook.with.shogun",
   "not.a.child",

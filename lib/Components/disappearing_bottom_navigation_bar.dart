@@ -56,7 +56,7 @@ class DisappearingBottomNavigationBar extends StatelessWidget {
                 child: const Icon(Icons.notifications_outlined),
               ),
               selectedIcon: const Icon(Icons.notifications),
-              label: "Notification",
+              label: "Alerts",
             ),
             const NavigationDestination(
               icon: Icon(Icons.settings_outlined),

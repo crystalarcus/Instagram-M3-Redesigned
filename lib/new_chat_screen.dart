@@ -145,7 +145,8 @@ class _NewChatScreenState extends State<NewChatScreen> {
                                               errorWidget:
                                                   (context, url, error) =>
                                                       const Icon(Icons.error),
-                    placeholderFadeInDuration: const Duration(seconds: 0),
+                                              placeholderFadeInDuration:
+                                                  const Duration(seconds: 0),
                                               placeholder: (context, url) => Icon(
                                                   Icons.account_circle_rounded,
                                                   color: Theme.of(context)
@@ -221,22 +222,11 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
       participants.add(getAccountFromUserName(element).person);
     }
     return Scaffold(
-        persistentFooterButtons: [
-          SizedBox(
-            height: 45,
-            child: FilledButton(
-                onPressed: () {}, child: const Text("Create Group")),
-          ),
-          SizedBox(
-            height: 45,
-            child: OutlinedButton(
-                onPressed: () {},
-                child: const Text(
-                  "Continue",
-                  textAlign: TextAlign.center,
-                )),
-          ),
-        ],
+        floatingActionButton: SizedBox(
+          height: 45,
+          child:
+              FilledButton(onPressed: () {}, child: const Text("Create Group")),
+        ),
         appBar: AppBar(
           title: const Text("New Group"),
           toolbarHeight: 64,
@@ -265,6 +255,9 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
               ),
               const SizedBox(height: 12),
               Wrap(
+                  spacing: 8,
+                  runSpacing: 16,
+                  alignment: WrapAlignment.spaceBetween,
                   children:
                       participants.map((e) => MemberWidget(person: e)).toList())
             ],
@@ -287,6 +280,8 @@ class MemberWidget extends StatelessWidget {
           ClipRRect(
               borderRadius: BorderRadius.circular(size),
               child: CachedNetworkImage(
+                  height: 80,
+                  width: 80,
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                   placeholderFadeInDuration: const Duration(seconds: 0),
                   placeholder: (context, url) => Icon(
@@ -300,7 +295,7 @@ class MemberWidget extends StatelessWidget {
             child: Text(
               overflow: TextOverflow.ellipsis,
               person.name,
-              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
           )
         ],

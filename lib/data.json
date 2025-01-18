@@ -12,7 +12,27 @@
                 "attr": "https://www.freepik.com/free-video/rear-view-little-blonde-girl-painting-lectern-window-home-2_171980#fromView=resource_detail&position=1&from_element=related_resources"
         },
         {
-                "beautiful_girl":"https://img.freepik.com/free-photo/style-portrait-young-trendy-girl-walking-along-street_231208-13407.jpg?t=st=1713778555~exp=1713782155~hmac=dbf0a5b83535eca5a2de3d2075f2100360d3b2e578687c6e49da8c69133ddcce&w=360",
-                "attr":"https://www.freepik.com/free-photo/style-portrait-young-trendy-girl-walking-along-street_20384781.htm#fromView=search&page=1&position=40&uuid=998a10bd-c2b7-44d5-8da8-2c89edc2276c"
+                "beautiful_girl": "https://img.freepik.com/free-photo/style-portrait-young-trendy-girl-walking-along-street_231208-13407.jpg?t=st=1713778555~exp=1713782155~hmac=dbf0a5b83535eca5a2de3d2075f2100360d3b2e578687c6e49da8c69133ddcce&w=360",
+                "attr": "https://www.freepik.com/free-photo/style-portrait-young-trendy-girl-walking-along-street_20384781.htm#fromView=search&page=1&position=40&uuid=998a10bd-c2b7-44d5-8da8-2c89edc2276c"
+        },
+        {
+                "nature": "https://www.freepik.com/free-video/dense-clouds-mountain-valley-sunset_1741881#fromView=search&page=1&position=2&uuid=334e4ac5-8deb-4a2c-909a-d9decb44403e"
+        },
+        {
+                "architecture": [
+                        "https://www.freepik.com/free-ai-image/neo-brutalism-inspired-building_94954297.htm?log-in=google#fromView=search&page=1&position=11&uuid=0be870d0-1b7e-45f1-aae8-78fe590a205f&query=architecture",
+                        "https://www.freepik.com/pikaso/embed?image=https%3A%2F%2Fimg.freepik.com%2Ffree-photo%2F3d-rendering-house-model_23-2150799627.jpg%3Ft%3Dst%3D1737179899~exp%3D1737183499~hmac%3Df68f94bb25a81d4550291d05ff8e3424c5775fe37ca390b70f8f69dd1b614d6b%26w%3D2000&location=download_popover&resourceType=photo&title=3d%20rendering%20of%20house%20model&tool=expand#from_element=resource_detail",
+                        "https://www.freepik.com/free-ai-image/blending-futuristic-building-seamlessly-into-desert-landscape_138548656.htm#fromView=search&page=1&position=20&uuid=6d6ec13a-40d4-4b4f-9cee-e5706b15deae&query=architecutre"
+                ]
+        },
+        {
+                "food": [
+                        "https://www.freepik.com/free-photo/fried-rice-with-minced-pork-tomato-carrot-cucumber-plate_10725342.htm#from_view=detail_alsolike",
+                        "https://www.freepik.com/free-photo/fried-rice-with-minced-pork-tomato-carrot-cucumber-plate_10725327.htm#fromView=search&page=1&position=2&uuid=372d74f6-ad20-41ce-b177-708e8462bf91&query=fried+rice",
+                        "https://www.freepik.com/free-photo/fried-rice-with-minced-pork-tomato-carrot-cucumber-plate_10725324.htm#fromView=search&page=1&position=1&uuid=372d74f6-ad20-41ce-b177-708e8462bf91&query=fried+rice"
+                ]
+        },
+        {
+                "city":"https://www.freepik.com/pikaso/expand?image=https%3A%2F%2Fimg.freepik.com%2Ffree-photo%2Fskyline-night-view-city-urban-building_1150-2360.jpg%3Ft%3Dst%3D1737187489~exp%3D1737191089~hmac%3D3ce18fd8821756c241cd7a3cb092de23be75c54c358313d49f91f0ee15e09a9c%26w%3D2000%26cachebuster%3D1737187500920"
         }
 ]

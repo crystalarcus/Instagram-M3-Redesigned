@@ -20,7 +20,8 @@ List<List<Comment>> comments = [
           CommentReply(
               replyTo: accounts[25].person.userName,
               person: accounts[15].person,
-              text: "This can be a serious thing if you think logically about it.",
+              text:
+                  "This can be a serious thing if you think logically about it.",
               dateTime: DateTime(2024, 3, 4, 12, 24, 4)),
           CommentReply(
               replyTo: accounts[25].person.userName,
@@ -170,8 +171,8 @@ List<Chat> chats = [
 List<Account> accounts = [
   Account(
       person: Person(
-          name: "Aether",
-          userName: "i.need.primos",
+          name: "Ethan Brown",
+          userName: "EthanB_7",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1t8ON-QsNgAC1ry7OHNzBbG1uLiLIjES2'),
       followers: [],
@@ -179,8 +180,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Alhaitham",
-          userName: "grand_sage",
+          name: "Lucas Anderson",
+          userName: "lucas_ands1",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1Y0QB4V0MeyoRUO0QQZu5qFMhT7ajlxzb'),
       followers: [],
@@ -197,8 +198,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Ayato",
-          userName: "kamisato.ayato",
+          name: "Jacob Miller",
+          userName: "jack_mil_25",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1dlzU80M9PEuPhX2qKo1QpvsWyaXIcv-F'),
       followers: [],
@@ -206,8 +207,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Bennet",
-          userName: "who.threw.that.stone",
+          name: "Liam Jones",
+          userName: "this.is.liam123",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1SiEfxr1q--HXdBy8q1ckx7IirlLt3R52'),
       followers: [],
@@ -215,8 +216,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Childe",
-          userName: "not.a.child",
+          name: "Christian Thompson",
+          userName: "chris_t71",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1sp3oMTRkRXPRMXZfaRq6cRt3oNrNvwCt'),
       followers: [],
@@ -224,8 +225,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Chongyun",
-          userName: "conqurer.of.demon.2",
+          name: "Matthew Evans",
+          userName: "evans_mat",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1QD_kj1U4vstuKn1wBCWtzbrtlMYsG-7y'),
       followers: [],
@@ -233,8 +234,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Eula",
-          userName: "dance_with_claymore",
+          name: "Chloe Johnson",
+          userName: "j_chloe",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1C5XUQeqY8bvi2DE0KRi7zc_XIW3721C1'),
       followers: [],
@@ -242,28 +243,29 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Fischl",
-          userName: "princess_purple",
+          name: "Archie White",
+          userName: "archie_white7",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1KSuYNIP2S9luQxptHYzOoKa8URJozIe1'),
+      bio: "Shaping spaces, one sketch at a time.",
       followers: [],
       following: [],
       posts: []),
   Account(
       person: Person(
-          name: "Furina de Fontaine",
-          userName: "furina_sunshine",
+          name: "Sylvia Sunshine",
+          userName: "sylvieshine9",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1HNDR8qiIArymcwzzThjXPblRf04nnSMn'),
       bio: "Your Friendly Celebrity Archon of Teyvat",
       pronouns: "she/her",
-      followers: ['cook.with.shogun', 'please_die_soon', 'princess_purple'],
+      followers: ['cook.with.shogun', 'director_hu54', 'princess_purple'],
       following: ['cook.with.shogun'],
       posts: []),
   Account(
       person: Person(
           name: "Director  Hu",
-          userName: "please_die_soon",
+          userName: "director_hu54",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1CQm-RSOfQxlKrXTOHlj_5JqhsqLsu8rq'),
       followers: [],
@@ -271,8 +273,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Arataki Itto",
-          userName: "the.one.and.oni",
+          name: "David Young",
+          userName: "its_davy_young",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1fuW9MzvqzgKl7Pt90v4eNUpMCRde1aGW'),
       followers: [],
@@ -280,8 +282,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Kaedehara Kazuha",
-          userName: "born_in_canada",
+          name: "Joseph Martinez",
+          userName: "m_jose_4",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1_ItVD4thjd2pjrthRRwL3zOcRYncTKJV'),
       followers: [],
@@ -289,8 +291,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Keqing",
-          userName: "ke_queen",
+          name: "Emily Davis",
+          userName: "emyy_3_davy",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=11X_C6Kuddo4oN3NEBl9uyJ_rjEp0UDdN'),
       followers: [],
@@ -298,8 +300,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Lisa",
-          userName: "library_momy",
+          name: "Sarah Jones",
+          userName: "sarah.is.here3",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1ImyUUqXDNoOMAG-CQd6wAmCJpUS4F1nQ'),
       followers: [],
@@ -307,8 +309,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Lumine",
-          userName: "prinzessin_von_abyss",
+          name: "Olivia Brown",
+          userName: "olivia_brow23",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1WkCovKGcGiTR1IbeJVIb8q4I7jZSdAxl'),
       followers: [],
@@ -316,8 +318,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Mona Megistus",
-          userName: "hat_girl",
+          name: "Sophia Rodriguez",
+          userName: "your_sophie_here",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1BLZvqwu3Sah4NkisgGo1oMq-HSIpy2qV'),
       followers: [],
@@ -325,8 +327,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Nahida",
-          userName: "all_knowing_kid",
+          name: "Eleanor Vance",
+          userName: "iam_ellie_vance",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1FjyMwEPYPNPXkOBKMGRApIS9LHwHpGGe'),
       followers: [],
@@ -334,35 +336,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Navia",
-          userName: "boss_girl",
-          pfpPath:
-              'https://drive.google.com/uc?export=view&id=1SrM-csyz5iCWM3rzDGK_OVCJ83I1swN4'),
-      followers: [],
-      following: [],
-      posts: []),
-  Account(
-      person: Person(
-          name: "Raiden Shogun",
-          userName: "cook.with.shogun",
-          pfpPath:
-              'https://drive.google.com/uc?export=view&id=1nnB-bR3zVtWpgrDfSDEyFM0vi0iVss1S'),
-      followers: ['please_die_soon', 'princess_purple', 'furina_sunshine'],
-      following: ['furina_sunshine'],
-      posts: []),
-  Account(
-      person: Person(
-          name: "Kujou Sara",
-          userName: "crow.girl.sara",
-          pfpPath:
-              'https://drive.google.com/uc?export=view&id=1-Kbjq30deI8v3Hb5SZo-7mUGkx-4Te1z'),
-      followers: [],
-      following: [],
-      posts: []),
-  Account(
-      person: Person(
-          name: "Shenhe",
-          userName: "frozen_momy",
+          name: "Emma Wilson",
+          userName: "emma_wil71",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1FTdyeb7AQRE1GPxPCQNQPIw4lCN5p5r6'),
       followers: [],
@@ -370,10 +345,37 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Skirk",
-          userName: "skir7x",
+          name: "My cook book",
+          userName: "cook.with.jane",
           pfpPath:
-              'https://drive.google.com/uc?export=view&id=15hTDclZREA7NSTgiTEclmSEW3xZNz_YH'),
+              'https://drive.google.com/uc?export=view&id=1nnB-bR3zVtWpgrDfSDEyFM0vi0iVss1S'),
+      followers: ['director_hu54', 'princess_purple', 'furina_sunshine'],
+      following: ['furina_sunshine'],
+      posts: []),
+  Account(
+      person: Person(
+          name: "Madison White",
+          userName: "maddie_white_79",
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1-Kbjq30deI8v3Hb5SZo-7mUGkx-4Te1z'),
+      followers: [],
+      following: [],
+      posts: []),
+  Account(
+      person: Person(
+          name: "Jenna Liebert",
+          userName: "i.am.jenny.ig",
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1SrM-csyz5iCWM3rzDGK_OVCJ83I1swN4'),
+      followers: [],
+      following: [],
+      posts: []),
+  Account(
+      person: Person(
+          name: "Sofia Garcia",
+          userName: "sofia_garxcia",
+          pfpPath:
+              'https://drive.google.com/uc?export=view&id=1ECGhGr_tUXRlbPSOM0w8qa_OZ0krp9h7'),
       followers: [],
       following: [],
       posts: []),
@@ -388,7 +390,7 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Wanderer",
+          name: "Walt Z",
           userName: "eons_adrift",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1ip4pOCckeEwKwDPxDl-cfA09rWifMwyD'),
@@ -406,17 +408,17 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Yae Miko",
-          userName: "sussy_fox_lady",
+          name: "Hannah Smith",
+          userName: "hannah_smi_34",
           pfpPath:
-              'https://drive.google.com/uc?export=view&id=1ECGhGr_tUXRlbPSOM0w8qa_OZ0krp9h7'),
+              'https://drive.google.com/uc?export=view&id=15hTDclZREA7NSTgiTEclmSEW3xZNz_YH'),
       followers: [],
       following: [],
       posts: []),
   Account(
       person: Person(
-          name: "Yelan",
-          userName: "got.those.arms",
+          name: "Helen Lightheart",
+          userName: "is.this.helen.32",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1fTisKjCd5c_VEbSBgyIE0pissAajfVyk'),
       followers: [],
@@ -424,8 +426,8 @@ List<Account> accounts = [
       posts: []),
   Account(
       person: Person(
-          name: "Zhongli",
-          userName: "ceo_of_geo",
+          name: "Zhang Cheng",
+          userName: "mr.zhang",
           pfpPath:
               'https://drive.google.com/uc?export=view&id=1JVAFXYHJXOTyRwoU9wtTlVOFm1w-I7_P'),
       followers: [],

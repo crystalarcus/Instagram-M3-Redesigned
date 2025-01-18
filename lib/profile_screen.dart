@@ -78,7 +78,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     width: 50,
                                     errorWidget: (context, url, error) =>
                                         const Icon(Icons.error),
-                                    placeholderFadeInDuration: const Duration(seconds: 0),
+                                    placeholderFadeInDuration:
+                                        const Duration(seconds: 0),
                                     placeholder: (context, url) => Icon(
                                         Icons.account_circle_rounded,
                                         color: Theme.of(context)
@@ -506,8 +507,8 @@ class _FollowsState extends State<Follows> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.push('/profile/false/false',
-            extra: [widget.person, followersList]);
+        context.push('/profile/true',
+            extra: getAccountFromUserName(widget.person.userName));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),

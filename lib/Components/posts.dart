@@ -1,7 +1,6 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -14,6 +13,7 @@ import 'package:redesigned/Components/Utils/save_post_sheet.dart';
 import 'package:redesigned/Components/comment_sheet.dart';
 // import 'package:redesigned/Components/comment_sheet.dart';
 import 'package:redesigned/Components/post_viewer.dart';
+import 'package:redesigned/Components/profile_bottomsheet.dart';
 import 'package:redesigned/Components/share_sheet.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -49,7 +49,13 @@ class _MobilePostState extends State<MobilePost> {
                     onTap: () {
                       Account acc =
                           getAccountFromUserName(widget.post.person.userName);
-                      context.push('/profile/true', extra: acc);
+                      showModalBottomSheet(
+                          showDragHandle: true,
+                          useRootNavigator: true,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return ProfileBottomsheet(acc: acc);
+                          });
                     },
                     child: Row(
                       children: [
@@ -150,20 +156,14 @@ class _MobilePostState extends State<MobilePost> {
                                         )),
                                     const Divider(),
                                     ListItem(
-                                      leading: const Icon(Icons.info_outline),
-                                      title: "Why your're seeing this post",
-                                      onTap: () {},
-                                    ),
-                                    ListItem(
                                       leading: const Icon(
                                           Icons.visibility_off_outlined),
                                       title: "Not interested",
                                       onTap: () {},
                                     ),
                                     ListItem(
-                                      leading: const Icon(
-                                          Icons.account_circle_outlined),
-                                      title: "About this account",
+                                      leading: const Icon(Icons.error_outline),
+                                      title: "About this post",
                                       onTap: () {},
                                     ),
                                     ListItem(
@@ -600,99 +600,57 @@ class _CarouselPostWidgetState extends State<CarouselPostWidget> {
   @override
   Widget build(BuildContext context) {
     return Hero(
-        tag: widget.imagePost.postId.toString(),
-        child: Stack(
-          children: [
-            // FlutterCarousel(
-            //   items: widget.imagePost.imagePaths
-            //       .map((e) => Builder(
-            //             builder: (BuildContext context) =>
-            //                 CachedNetworkImage(
-            //                     errorWidget: (context, url, error) =>
-            //                         const Icon(Icons.error),
-            //                     placeholderFadeInDuration:
-            //                         const Duration(seconds: 0),
-            //                     progressIndicatorBuilder: (context, url,
-            //                             downloadProgress) =>
-            //                         Center(
-            //                           child: CircularProgressIndicator(
-            //                               value: downloadProgress.progress),
-            //                         ),
-            //                     fit: BoxFit.contain,
-            //                     imageUrl:
-            //                         "https://drive.google.com/uc?export=view&id=$e"),
-            //           ))
-            //       .toList(),
-            //   options: CarouselOptions(
-            //     initialPage: currentPage,
-            //     onPageChanged: (index, reason) {
-            //       setState(() {
-            //         currentPage = index;
-            //       });
-            //     },
-            //     viewportFraction: 1,
-            //     aspectRatio: widget.imagePost.aspectRatio,
-            //     indicatorMargin: 4,
-            //     slideIndicator: CircularWaveSlideIndicator(
-            //         slideIndicatorOptions: SlideIndicatorOptions(
-            //       indicatorRadius: 3,
-            //       itemSpacing: 12,
-            //       indicatorBackgroundColor:
-            //           Theme.of(context).colorScheme.surfaceContainerHigh,
-            //       currentIndicatorColor:
-            //           Theme.of(context).colorScheme.primary,
-            //     )),
-            //     floatingIndicator: true,
-            //     showIndicator: true,
-            //   ),
-            // ),
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                  maxHeight: (1 / widget.imagePost.aspectRatio) *
-                      (MediaQuery.of(context).size.width - 80)),
-              child: CarouselView(
-                onTap: (int i) {
-                  Navigator.of(context, rootNavigator: true).push(
-                      PageRouteBuilder(
-                          transitionDuration: Durations.medium1,
-                          pageBuilder: (context, animation, secondAnimtion) =>
-                              FadeTransition(
-                                opacity: animation,
-                                child: CarouselPostViewer(
-                                    initPage: i,
-                                    imageTag:
-                                        widget.imagePost.postId.toString(),
-                                    post: widget.imagePost),
-                              )));
-                },
-                itemSnapping: true,
-                itemExtent: widget.imagePost.aspectRatio *
-                    (MediaQuery.of(context).size.width - 80),
-                shrinkExtent: (1 / widget.imagePost.aspectRatio) *
-                    (MediaQuery.of(context).size.width - 80),
-                children: widget.imagePost.imagePaths
-                    .map((e) => Builder(
-                          builder: (BuildContext context) => CachedNetworkImage(
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                              placeholderFadeInDuration:
-                                  const Duration(seconds: 0),
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) => Center(
-                                        child: CircularProgressIndicator(
-                                            value: downloadProgress.progress),
-                                      ),
-                              fit: BoxFit.cover,
-                              imageUrl:
-                                  "https://drive.google.com/uc?export=view&id=$e"),
-                        ))
-                    .toList(),
-              ),
-            ),
-            // const Align(
-            // alignment: Alignment.bottomRight, child: Text("2/3")),
-          ],
-        ));
+      tag: widget.imagePost.postId.toString(),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+            // maxWidth: (widget.imagePost.aspectRatio *
+            //     (MediaQuery.of(context).size.width - 80)),
+            maxHeight: (1 / widget.imagePost.aspectRatio) *
+                (MediaQuery.of(context).size.width - 80)),
+        child: CarouselView(
+          onTap: (int i) {
+            Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
+                transitionDuration: Durations.medium1,
+                pageBuilder: (context, animation, secondAnimtion) =>
+                    FadeTransition(
+                      opacity: animation,
+                      child: CarouselPostViewer(
+                          initPage: i,
+                          imageTag: widget.imagePost.postId.toString(),
+                          post: widget.imagePost),
+                    )));
+          },
+          itemSnapping: true,
+          itemExtent: widget.imagePost.aspectRatio *
+              (MediaQuery.of(context).size.width - 40),
+          shrinkExtent: (1 / widget.imagePost.aspectRatio) *
+              (MediaQuery.of(context).size.width - 40),
+          children: widget.imagePost.imagePaths
+              .map((e) => Builder(
+                    builder: (BuildContext context) => CachedNetworkImage(
+                        height: 1 /
+                            widget.imagePost.aspectRatio *
+                            (MediaQuery.of(context).size.width - 40),
+                        width: widget.imagePost.aspectRatio *
+                            (MediaQuery.of(context).size.width - 40),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        placeholderFadeInDuration: const Duration(seconds: 0),
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) => Center(
+                                  child: CircularProgressIndicator(
+                                      value: downloadProgress.progress),
+                                ),
+                        fit: BoxFit.cover,
+                        imageUrl:
+                            "https://drive.google.com/uc?export=view&id=$e"),
+                  ))
+              .toList(),
+        ),
+      ),
+      // const Align(
+      // alignment: Alignment.bottomRight, child: Text("2/3")),
+    );
   }
 }
 
@@ -707,7 +665,7 @@ class _ImagePostWidgetState extends State<ImagePostWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 6),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
         child: GestureDetector(
